@@ -1,0 +1,30 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: Ngoc Do Minh -->
+ 
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="basicstruts2" extends="struts-default">
+        <action name="login" class="App.LoginAction" method="checkLogin">
+            <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
+        </action>
+        <action name="redirect">
+            <result>/Member/member.jsp</result>
+        </action>
+        <action name="logOut" class="App.LoginAction" method="logOut">
+            <result name="LOGOUTSUCCESS">/index.jsp</result>
+        </action>
+        <action name="returnIndex">
+            <result>/index.jsp</result>
+        </action>
+        <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
+            <result name="ADMINLOGINSUCCESS">/Admin/admin.jsp</result>
+            <result name="ADMINLOGINFAILED">
+                <param name="location">/index.jsp</param>
+                <param name="msg">${$msg}</param>
+            </result>
+        </action>
+    </package>
+</struts>
