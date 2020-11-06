@@ -23,7 +23,7 @@ public class LoginDataProcess {
         Connection connection = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=DemoDoAn";
+            String url = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BTEC4rumDB";
             String user = "sa";
             String password = "anhyeuem";
             try {
@@ -39,7 +39,7 @@ public class LoginDataProcess {
     public boolean checkLogin(String userEmail)
     {
         boolean isLogin = false;
-        String sqlQuery = "SELECT * FROM tblUser WHERE userEmail = ?";
+        String sqlQuery = "SELECT * FROM tblUser WHERE accountEmail = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);
@@ -74,7 +74,7 @@ public class LoginDataProcess {
     public boolean addUser(String userEmail, String userFullName, String userAddress, String userAvatar)
     {
         int isAdded = 0;
-        String sqlQuery = "INSERT INTO tblUser VALUES (?, null, ?, 3, ?, ?, CURRENT_TIMESTAMP, null, null)";
+        String sqlQuery = "INSERT INTO tblUser VALUES (?, null, null, ?, ?, 3, 1, null, ?, null, null, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);

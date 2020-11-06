@@ -25,7 +25,6 @@
         <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
-        <script src="assets/libs/js/dashboard-ecommerce.js"></script>
         <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
     </head>
     <style type="text/css" media="screen">
@@ -211,7 +210,6 @@
             <div class="nav-left-sidebar sidebar-dark">
                 <div class="menu-list">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="d-xl-none d-lg-none" href="#">Manage</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -221,8 +219,8 @@
                                     <h4>Menu</h4>
                                 </li>
                                 <li class="nav-item" style="width: 220px;">
-                                    <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-arrow-alt-circle-right"></i>Manage post/comment<span class="badge badge-success">2</span></a>
-                                    <div id="submenu-1" class="collapse submenu" style="">
+                                    <a class="nav-link" href="#" data-toggle="collapse" data-toggle="tab" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-arrow-alt-circle-right"></i>Manage post/comment<span class="badge badge-success">2</span></a>
+                                    <div id="submenu-1" class="collapse submenu">
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
                                                 <a class="nav-link" id="managePost" data-toggle="tab" href="#listPost" role="tab" aria-controls="listPost" aria-selected="false"><i class="fas fa-arrow-alt-circle-down"></i>Manage post</a>
@@ -770,19 +768,13 @@
             <!-- bootstap bundle js -->
             <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
             <!-- slimscroll js -->
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
             <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
             <!-- main js -->
             <script src="assets/libs/js/main-js.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
             <!-- chart chartist js -->
-            <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-            <!-- sparkline js -->
-            <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-            <!-- morris js -->
-            <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-            <!-- chart c3 js -->
-            <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-            <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-            <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
                                             jQuery(document).ready(function ($) {
                                                 $(".clickable-row").click(function () {
