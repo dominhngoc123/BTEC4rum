@@ -217,7 +217,7 @@
                     <div class="post-comment-box" id="post-comment-box">
                         <!-- comment form action-->
                         <div class="post-author-info avt-move">
-                            <a onclick="pop()"><img src="resources/img/pic.png" alt=""></a>
+                            <a onclick="pop()"><img src="include/resources/img/pic.png" alt=""></a>
                         </div>
                         <form action="" method="POST" class="cmt-form">
                             <textarea name="" id="" required placeholder="Add your comment here..."></textarea>
