@@ -163,7 +163,7 @@
                     </div>
                     <div class="post-author">
                         <div class="post-author-info">
-                            <a onclick="pop()"><img src="resources/img/pic.png" alt=""></a>
+                            <a onclick="pop()"><img src="include/resources/img/pic.png" alt=""></a>
                         </div>
                         <ul>
                             <li><span onclick="pop()" class="post-author-name">Doe John</span></li>
