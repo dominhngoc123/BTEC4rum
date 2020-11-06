@@ -189,10 +189,10 @@
                         <ul class="main-nav">
                             <li><a href="#">Information Technology</a></li>
                             <li><a href="#">Graphic design</a></li>
-                            <li><a href="#">Business administration</a></li>
-                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Business administration</a></li>                            
                             <li><a href="#">Other</a></li>
                             <li><a href="#">About</a></li>
+                            <li><a href="#">Take quiz</a></li>
                         </ul>
                     </div>
                 </nav>

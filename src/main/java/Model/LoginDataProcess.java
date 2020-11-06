@@ -39,7 +39,7 @@ public class LoginDataProcess {
     public boolean checkLogin(String userEmail)
     {
         boolean isLogin = false;
-        String sqlQuery = "SELECT * FROM tblUser WHERE accountEmail = ?";
+        String sqlQuery = "SELECT * FROM tblAccount WHERE accountEmail = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);
@@ -56,7 +56,7 @@ public class LoginDataProcess {
     public boolean checkAdminAccount(String userName, String password)
     {
         boolean isLogin = false;
-        String sqlQuery = "SELECT * FROM tblUser WHERE _username = ? AND _password = ?";
+        String sqlQuery = "SELECT * FROM tblAccount WHERE _username = ? AND _password = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userName);
@@ -74,7 +74,7 @@ public class LoginDataProcess {
     public boolean addUser(String userEmail, String userFullName, String userAddress, String userAvatar)
     {
         int isAdded = 0;
-        String sqlQuery = "INSERT INTO tblUser VALUES (?, null, null, ?, ?, 3, 1, null, ?, null, null, CURRENT_TIMESTAMP)";
+        String sqlQuery = "INSERT INTO tblAccount VALUES (?, null, null, ?, ?, 3, 1, null, ?, null, null, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);
