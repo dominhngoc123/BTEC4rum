@@ -220,7 +220,7 @@
                             <a onclick="pop()"><img src="include/resources/img/pic.png" alt=""></a>
                         </div>
                         <form action="" method="POST" class="cmt-form">
-                            <textarea name="" id="" required placeholder="Add your comment here..."></textarea>
+                            <textarea name="" required placeholder="Add your comment here..."></textarea>
                             <div class="cmt-btn-post">
                                 <button type="submit">Post</button>
                             </div>
@@ -265,7 +265,7 @@
                                             <div class="comment-footer">
                                                 <div class="comment-form">
                                                     <form action="" method="POST">
-                                                        <textarea class="form-control" name="" id="" required
+                                                        <textarea class="form-control" name="" required
                                                                   placeholder="Add your comment here..." cols=""
                                                                   rows=""></textarea>
                                                         <div class="pull-right send-button">
@@ -312,7 +312,7 @@
                                                 <div class="comment-footer">
                                                     <div class="comment-form">
                                                         <form action="" method="POST">
-                                                            <textarea class="form-control" name="" id="" required
+                                                            <textarea class="form-control" name="" required
                                                                       placeholder="Add your comment here..." cols=""
                                                                       rows=""></textarea>
                                                             <div class="pull-right send-button">
@@ -360,7 +360,7 @@
                                                 <div class="comment-footer">
                                                     <div class="comment-form">
                                                         <form action="" method="POST">
-                                                            <textarea class="form-control" name="" id="" required
+                                                            <textarea class="form-control" name="" required
                                                                       placeholder="Add your comment here..." cols=""
                                                                       rows=""></textarea>
                                                             <div class="pull-right send-button">
@@ -409,7 +409,7 @@
                                             <div class="comment-footer">
                                                 <div class="comment-form">
                                                     <form action="" method="POST">
-                                                        <textarea class="form-control" name="" id="" required
+                                                        <textarea class="form-control" name="" required
                                                                   placeholder="Add your comment here..." cols=""
                                                                   rows=""></textarea>
                                                         <div class="pull-right send-button">

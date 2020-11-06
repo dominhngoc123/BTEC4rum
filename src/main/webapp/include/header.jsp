@@ -13,6 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BTEC FPT Forum</title>
+        <link rel="icon" type="image/png" href="include/resources/img/title_logo_BTEC.png" />
         <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
         <!--===============================================================================================-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
