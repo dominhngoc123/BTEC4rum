@@ -7,7 +7,7 @@
     <display-name>BTEC Forum</display-name>
     <session-config>
         <session-timeout>
-            40
+            1
         </session-timeout>
     </session-config>
     <welcome-file-list>

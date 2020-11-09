@@ -44,9 +44,16 @@
             var avatar = profile.getImageUrl();
 //            alert("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
             location.assign("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
+        };
+        function test()
+        {
+            alert("OK");
+            gapi.auth2.getAuthInstance().disconnect();
         }
+        ;
     </script>
-    <body class="login">
+    <body class="login" <s:if test="#session.login != true">onload="test()"</s:if>>
+        <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
         <img class="logo" height="80" width="208" src="https://btec.fpt.edu.vn/wp-content/uploads/2017/12/2017-Btec-01-354.png" alt="BTEC Forum">
         <form class="vertical-form sign-in" id="sign-in" action="adminLogin.action" accept-charset="UTF-8" method="post">
             <legend>Log In</legend><p style="color: red;"><s:property value="msg"/></p>
