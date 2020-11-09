@@ -7,15 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>BTEC FPT Forum - Login</title>
         <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
-        <!--===============================================================================================-->
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="CSS/LoginPageCSS/LoginPage.css"/>
     </head>
@@ -42,17 +39,11 @@
             var name = profile.getName();
             var email = profile.getEmail();
             var avatar = profile.getImageUrl();
-//            alert("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
+            alert("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
             location.assign("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
-        };
-        function test()
-        {
-            alert("OK");
-            gapi.auth2.getAuthInstance().disconnect();
         }
-        ;
     </script>
-    <body class="login" <s:if test="#session.login != true">onload="test()"</s:if>>
+    <body class="login">
         <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
         <img class="logo" height="80" width="208" src="https://btec.fpt.edu.vn/wp-content/uploads/2017/12/2017-Btec-01-354.png" alt="BTEC Forum">
         <form class="vertical-form sign-in" id="sign-in" action="adminLogin.action" accept-charset="UTF-8" method="post">
@@ -72,4 +63,6 @@
                     </p>
                 </div>-->
     </body>
+    <!--===============================================================================================-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </html>
