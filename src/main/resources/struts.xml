@@ -20,11 +20,14 @@
             <result>/index.jsp</result>
         </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
-            <result name="ADMINLOGINSUCCESS">/Admin/admin.jsp</result>
+            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminLoadUserData</result>
             <result name="ADMINLOGINFAILED">
                 <param name="location">/index.jsp</param>
                 <param name="msg">${$msg}</param>
             </result>
+        </action>
+        <action name="adminLoadUserData" class="App.UserAction" method="getData">
+            <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
         </action>
     </package>
 </struts>

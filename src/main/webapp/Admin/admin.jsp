@@ -4,6 +4,7 @@
     Author     : Ngoc Do Minh
 --%>
 
+<%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!doctype html>
@@ -25,7 +26,7 @@
         <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
-        <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+        <title>BTEC Forum - admin page</title>
     </head>
     <style type="text/css" media="screen">
         .form-control {
@@ -636,34 +637,22 @@
                             <table class="table table-responsive-sm fixed_header table-borderless table-fixed mb-0" id="ddj5" cellspacing="0" width="100%">
                                 <thead class="thead-light fixed_thead">
                                     <tr>
-                                        <th onclick="sortTable(5, 0)">Account name</th>
-                                        <th onclick="sortTable(5, 1)">Account description</th>
-                                        <th onclick="sortTable(5, 2)">Added date</th>
+                                        <th onclick="sortTable(5, 0)"></th>
+                                        <th onclick="sortTable(5, 1)">Email</th>
+                                        <th onclick="sortTable(5, 2)">Fullname</th>
                                         <th colspan="2" style="text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable5">
-                                    <tr>
-                                        <td>IT</td>
-                                        <td>Information technology</td>
-                                        <td>11/06/1993</td>
-                                        <td><a href="#" class="btn btn-primary">Update</a></td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Graphic Design</td>
-                                        <td>Information technology</td>
-                                        <td>11/06/1993</td>
-                                        <td><a href="#" class="btn btn-primary">Update</a></td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other</td>
-                                        <td>Other topic</td>
-                                        <td>10/20/2020</td>
-                                        <td><a href="#" class="btn btn-primary">Update</a></td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                    <s:iterator value="listAllUser">
+                                        <tr>
+                                            <td></td>
+                                            <td><s:property value="accountEmail"/></td>
+                                            <td><s:property value="userFullName"/></td>
+                                            <td><a href="#" class="btn btn-primary">Update</a></td>
+                                            <td><a href="#" class="btn btn-danger">Delete</a></td>
+                                        </tr>
+                                    </s:iterator>
                                 </tbody>
                             </table>
                         </div>
