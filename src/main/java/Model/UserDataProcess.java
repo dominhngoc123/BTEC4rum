@@ -167,4 +167,18 @@ public class UserDataProcess {
         }
         return isDelete;
     }
+    public boolean blockUser(String accountEmail) {
+        boolean isBlock = false;
+        String sqlQuery = "UPDATE tblAccount SET _status = 0 WHERE accountEmail = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, accountEmail);
+            isBlock = (preparedStatement.executeUpdate() > 0);
+            preparedStatement.close();
+            getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isBlock;
+    }
 }

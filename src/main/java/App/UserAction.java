@@ -15,6 +15,7 @@ import java.util.List;
  * @author Ngoc Do Minh
  */
 public class UserAction extends ActionSupport {
+
     private String accountEmail;
     private String _username;
     private String _password;
@@ -123,15 +124,23 @@ public class UserAction extends ActionSupport {
     public void setListAllUser(List<User> listAllUser) {
         this.listAllUser = listAllUser;
     }
-    
+
     public UserAction() {
     }
-    
-    public String getData()
-    {
+
+    public String getData() {
         UserDataProcess userDataProcess = new UserDataProcess();
         listAllUser = userDataProcess.getData();
         return "LISTALLACCOUNT";
     }
-    
+
+    public String blockUser() {
+        UserDataProcess userDataProcess = new UserDataProcess();
+        if (userDataProcess.blockUser(accountEmail))
+        {
+            return "BLOCKSUCCESS";
+        }
+        return "BLOCKFAILED";
+    }
+
 }

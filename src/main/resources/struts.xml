@@ -29,5 +29,9 @@
         <action name="adminLoadUserData" class="App.UserAction" method="getData">
             <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
         </action>
+        <action name="adminBlockUser" class="App.UserAction" method="blockUser">
+            <result name="BLOCKSUCCESS">/Admin/admin.jsp</result>
+            <result name="BLOCKSUCCESS">/Error.jsp</result>
+        </action>
     </package>
 </struts>
