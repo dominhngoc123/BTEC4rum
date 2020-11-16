@@ -70,7 +70,13 @@ public class UserDataProcess {
         }
         return listUser;
     }
-
+    public static void main(String[] args) {
+        UserDataProcess u = new UserDataProcess();
+        List<User> l = u.getData();
+        for (User ls: l) {
+            System.out.println(ls.getStatus());
+        }
+    }
     public List<User> searchUserByName(String searchContent) {
         List<User> listUser = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblAccount WHERE userFullName LIKE '%?%'";
@@ -167,9 +173,17 @@ public class UserDataProcess {
         }
         return isDelete;
     }
-    public boolean blockUser(String accountEmail) {
+    public boolean blockUser(String accountEmail, int status) {
         boolean isBlock = false;
-        String sqlQuery = "UPDATE tblAccount SET _status = 0 WHERE accountEmail = ?";
+        String sqlQuery;
+        if (status == 1)
+        {
+            sqlQuery = "UPDATE tblAccount SET _status = 0 WHERE accountEmail = ?";
+        }
+        else
+        {
+            sqlQuery = "UPDATE tblAccount SET _status = 1 WHERE accountEmail = ?";
+        }
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, accountEmail);

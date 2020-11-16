@@ -66,7 +66,7 @@
         }
 
         .scroll-table {
-            height: 500px;
+            height: 600px;
             overflow-y: scroll;
             overflow-x: hidden; 
         }
@@ -79,6 +79,22 @@
             cursor: pointer;
         }
     </style>
+    <script type="text/javascript">
+        function alertAdminBlocUser(accountEmail)
+        {
+            return confirm("Do you want to block user with email:" + accountEmail);
+        }
+        ;
+        function alertAdminUnblocUser(accountEmail)
+        {
+            return confirm("Do you want to unblock user with email:" + accountEmail);
+        }
+        ;
+        function test()
+        {
+            return confirm("OK?");
+        }
+    </script>
     <body>
         <!-- ============================================================== -->
         <!-- main wrapper -->
@@ -634,20 +650,29 @@
                             <table class="table table-responsive-sm fixed_header table-borderless table-fixed mb-0" id="ddj5" cellspacing="0" width="100%">
                                 <thead class="thead-light fixed_thead">
                                     <tr>
-                                        <th onclick="sortTable(5, 0)"></th>
-                                        <th onclick="sortTable(5, 1)">Email</th>
-                                        <th onclick="sortTable(5, 2)">Fullname</th>
+                                        <th onclick="sortTable(5, 0)">Email</th>
+                                        <th onclick="sortTable(5, 1)">Fullname</th>
+                                        <th onclick="sortTable(5, 2)">Date added</th>
+                                        <th onclick="sortTable(5, 3)">Status</th>
                                         <th colspan="2" style="text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable5">
                                     <s:iterator value="listAllUser">
                                         <tr>
-                                            <td></td>
-                                            <td><s:property value="accountEmail"/></td>
+                                            <td style="width: 50px;"><s:property value="accountEmail"/></td>
                                             <td><s:property value="userFullName"/></td>
-                                            <td><a href="#" class="btn btn-primary">Update</a></td>
-                                            <td><a href="#" class="btn btn-danger">Delete</a></td>
+                                            <td><s:property value="dateAdded"/></td>
+                                            <td><s:if test="status==1">Available</s:if><s:else>Block</s:else></td>
+                                                <td><a href="#" class="btn btn-primary">Update</a></td>
+                                                <td>
+                                                <s:if test="status==1">
+                                                    <a href="adminBlockUser.action?accountEmail=<s:property value="accountEmail"/>&status=<s:property value="status"/>" class="btn btn-danger" onclick="adminBlockUser('<s:property value="accountEmail"/>')">Block</a>
+                                                </s:if>
+                                                <s:else>
+                                                    <a href="adminBlockUser.action?accountEmail=<s:property value="accountEmail"/>&status=<s:property value="status"/>" class="btn btn-info" onclick="return test()">Unblock</a>
+                                                </s:else>
+                                            </td>
                                         </tr>
                                     </s:iterator>
                                 </tbody>
@@ -759,8 +784,6 @@
             <!-- main js -->
             <script src="assets/libs/js/main-js.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
-            <!-- chart chartist js -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
                                             jQuery(document).ready(function ($) {
                                                 $(".clickable-row").click(function () {

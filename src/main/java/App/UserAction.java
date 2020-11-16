@@ -17,12 +17,12 @@ import java.util.List;
 public class UserAction extends ActionSupport {
 
     private String accountEmail;
-    private String _username;
-    private String _password;
+    private String username;
+    private String password;
     private String userFullName;
     private String userAddress;
-    private int _role;
-    private int _status;
+    private int role;
+    private int status;
     private String userAvatar;
     private int userGender;
     private String userDescription;
@@ -38,19 +38,19 @@ public class UserAction extends ActionSupport {
     }
 
     public String getUsername() {
-        return _username;
+        return username;
     }
 
-    public void setUsername(String _username) {
-        this._username = _username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
-        return _password;
+        return password;
     }
 
-    public void setPassword(String _password) {
-        this._password = _password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserFullName() {
@@ -70,19 +70,19 @@ public class UserAction extends ActionSupport {
     }
 
     public int getRole() {
-        return _role;
+        return role;
     }
 
-    public void setRole(int _role) {
-        this._role = _role;
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public int getStatus() {
-        return _status;
+        return status;
     }
 
-    public void setStatus(int _status) {
-        this._status = _status;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getUserAvatar() {
@@ -136,11 +136,10 @@ public class UserAction extends ActionSupport {
 
     public String blockUser() {
         UserDataProcess userDataProcess = new UserDataProcess();
-        if (userDataProcess.blockUser(accountEmail))
+        if (userDataProcess.blockUser(accountEmail, status))
         {
             return "BLOCKSUCCESS";
         }
         return "BLOCKFAILED";
     }
-
 }

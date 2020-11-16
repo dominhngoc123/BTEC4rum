@@ -11,12 +11,12 @@ package Entity;
  */
 public class User {
     private String accountEmail;
-    private String _username;
-    private String _password;
+    private String username;
+    private String password;
     private String userFullName;
     private String userAddress;
-    private String _role;
-    private String _status;
+    private String role;
+    private String status;
     private String userDoB;
     private String userAvatar;
     private String userGender;
@@ -26,14 +26,14 @@ public class User {
     public User() {
     }
 
-    public User(String accountEmail, String _username, String _password, String userFullName, String userAddress, String _role, String _status, String userDoB, String userAvatar, String userGender, String userDescription, String dateAdded) {
+    public User(String accountEmail, String username, String password, String userFullName, String userAddress, String role, String status, String userDoB, String userAvatar, String userGender, String userDescription, String dateAdded) {
         this.accountEmail = accountEmail;
-        this._username = _username;
-        this._password = _password;
+        this.username = username;
+        this.password = password;
         this.userFullName = userFullName;
         this.userAddress = userAddress;
-        this._role = _role;
-        this._status = _status;
+        this.role = role;
+        this.status = status;
         this.userDoB = userDoB;
         this.userAvatar = userAvatar;
         this.userGender = userGender;
@@ -50,19 +50,19 @@ public class User {
     }
 
     public String getUsername() {
-        return _username;
+        return username;
     }
 
-    public void setUsername(String _username) {
-        this._username = _username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
-        return _password;
+        return password;
     }
 
-    public void setPassword(String _password) {
-        this._password = _password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserFullName() {
@@ -82,19 +82,19 @@ public class User {
     }
 
     public String getRole() {
-        return _role;
+        return role;
     }
 
-    public void setRole(String _role) {
-        this._role = _role;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getStatus() {
-        return _status;
+        return status;
     }
 
-    public void setStatus(String _status) {
-        this._status = _status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUserDoB() {

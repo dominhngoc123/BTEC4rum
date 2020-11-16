@@ -5,7 +5,6 @@
 <!-- Author: Ngoc Do Minh -->
  
 <struts>
-    <constant name="struts.devMode" value="true" />
     <package name="basicstruts2" extends="struts-default">
         <action name="login" class="App.LoginAction" method="checkLogin">
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
@@ -30,8 +29,11 @@
             <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
         </action>
         <action name="adminBlockUser" class="App.UserAction" method="blockUser">
-            <result name="BLOCKSUCCESS">/Admin/admin.jsp</result>
-            <result name="BLOCKSUCCESS">/Error.jsp</result>
+            <result name="BLOCKSUCCESS" type="redirectAction">adminLoadUserData</result>
+            <result name="BLOCFAILED">/Error.jsp</result>
+        </action>
+        <action name="newPost">
+            <result>/newPost.jsp</result>
         </action>
     </package>
 </struts>
