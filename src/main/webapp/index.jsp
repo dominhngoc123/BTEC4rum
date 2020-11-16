@@ -39,8 +39,8 @@
             var name = profile.getName();
             var email = profile.getEmail();
             var avatar = profile.getImageUrl();
-            alert("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
-            location.assign("login.action?userEmail=" + email + "&userName=" + name + "&userAvatar=" + avatar);
+            alert("login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
+            location.assign("login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
         }
     </script>
     <body class="login">

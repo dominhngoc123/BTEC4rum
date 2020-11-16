@@ -157,7 +157,7 @@
             </div>
             <div class="content-right">
                 <div class="post">
-                    <a href="post.html">
+                    <a href="CreateNewPost">
                         Post <i class="fas fa-pen-nib"></i>
                     </a>
                 </div>

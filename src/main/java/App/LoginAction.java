@@ -5,6 +5,7 @@
  */
 package App;
 
+import Entity.User;
 import Model.LoginDataProcess;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
@@ -18,11 +19,84 @@ import org.apache.struts2.interceptor.SessionAware;
 public class LoginAction extends ActionSupport implements SessionAware {
 
     SessionMap<String, Object> sessionMap;
-    String userEmail;
-    String adminUsername;
-    String adminPassword;
-    String userAvatar;
-    String msg;
+    private String userEmail;
+    private String adminUsername;
+    private String adminPassword;
+    private String userFullName;
+    private String userAddress;
+    private String userRole;
+    private String userStatus;
+    private String userDoB;
+    private String userAvatar;
+    private String userGender;
+    private String userDescription;
+    private String userPhonenumber;
+    private String dateAdded;
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getUserDoB() {
+        return userDoB;
+    }
+
+    public void setUserDoB(String userDoB) {
+        this.userDoB = userDoB;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
+    }
+
+    public String getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(String dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+    private String msg;
 
     public String getMsg() {
         return msg;
@@ -47,7 +121,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }
-    String userName;
 
     public String getUserEmail() {
         return userEmail;
@@ -57,20 +130,20 @@ public class LoginAction extends ActionSupport implements SessionAware {
         this.userEmail = userEmail;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getUserAvatar() {
         return userAvatar;
     }
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public String getUserPhonenumber() {
+        return userPhonenumber;
+    }
+
+    public void setUserPhonenumber(String userPhonenumber) {
+        this.userPhonenumber = userPhonenumber;
     }
 
     public LoginAction() {
@@ -85,12 +158,39 @@ public class LoginAction extends ActionSupport implements SessionAware {
             return "LOGINSUCCESS";
         }
         LoginDataProcess loginDataProcess = new LoginDataProcess();
-        if (!loginDataProcess.checkLogin(userEmail)) {
-            loginDataProcess.addUser(userEmail, userName, "", userAvatar);
+        User user = loginDataProcess.checkLogin(userEmail);
+        if (user.getAccountEmail() == null) {
+            loginDataProcess.addUser(userEmail, userFullName, "", userAvatar);
+            userRole = "3";
+            userStatus = "1";
+        } else {
+            userEmail = user.getAccountEmail();
+            adminUsername = user.getUsername();
+            adminPassword = user.getPassword();
+            userFullName = user.getUserFullName();
+            userAddress = user.getUserAddress();
+            userRole = user.getRole();
+            userStatus = user.getStatus();
+            userDoB = user.getUserDoB();
+            userAvatar = user.getUserAvatar();
+            userGender = user.getUserGender();
+            userDescription = user.getUserDescription();
+            dateAdded = user.getDateAdded();
+            userPhonenumber = user.getUserPhonenumber();
         }
-        sessionMap.put("userEmail", userEmail);
-        sessionMap.put("userName", userName);
+        sessionMap.put("accountEmail", userEmail);
+        sessionMap.put("adminUsername", adminUsername);
+        sessionMap.put("adminPassword", adminPassword);
+        sessionMap.put("userFullName", userFullName);
+        sessionMap.put("userAddress", userAddress);
+        sessionMap.put("userRole", userRole);
+        sessionMap.put("userStatus", userStatus);
+        sessionMap.put("userDoB", userDoB);
         sessionMap.put("userAvatar", userAvatar);
+        sessionMap.put("userGender", userGender);
+        sessionMap.put("userDescription", userDescription);
+        sessionMap.put("dateAdded", dateAdded);
+        sessionMap.put("userPhonenumber", userPhonenumber);
         return "LOGINSUCCESS";
     }
 

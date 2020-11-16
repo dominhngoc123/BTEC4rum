@@ -78,25 +78,25 @@
                 <img src="<s:property value="#session.userAvatar"/>" alt="">
             </div>
             <div class="name"><s:property value="#session.userName"/></div>
-            <div class="desc">Developer & Designer</div>
-            <div class="sm">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-github"></a>
-                <a href="#" class="fab fa-youtube"></a>
+            <div class="desc"><s:if test="#session.userDescription == null">This people is lazy. He/She do not write anything about his/herself</s:if><s:else><s:property value="#session.userDescription"/></s:else></div>
+                <div class="sm">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-github"></a>
+                    <a href="#" class="fab fa-youtube"></a>
+                </div>
+                <a href="#" class="contact-btn">Contact Me</a>
             </div>
-            <a href="#" class="contact-btn">Contact Me</a>
-        </div>
 
-        <div class="card-header-right">
-            <a onclick="pop()" class="close" style="color: white;"><i class="fas fa-times"></i></a>
-            <table class="info-detail">
-                <tr>
-                    <td>
-                        <h6>Name</h6>
-                    </td>
-                    <td>
-                        <p><s:property value="#session.userName"/></p>
+            <div class="card-header-right">
+                <a onclick="pop()" class="close" style="color: white;"><i class="fas fa-times"></i></a>
+                <table class="info-detail">
+                    <tr>
+                        <td>
+                            <h6>Name</h6>
+                        </td>
+                        <td>
+                                <p><s:property value="#session.userFullName"/></p>
                     </td>
                 </tr>
                 <tr>
@@ -104,7 +104,7 @@
                         <h6>Date of birth</h6>
                     </td>
                     <td>
-                        <p></p>
+                        <p><s:property value="#session.userDoB"/></p>
                     </td>
                 </tr>
                 <tr>
@@ -112,15 +112,15 @@
                         <h6>Gender</h6>
                     </td>
                     <td>
-                        <p></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h6>Address</h6>
-                    </td>
-                    <td>
-                        <p></p>
+                        <p><s:if test="#session.userGender==1">Female</s:if><s:elseif test="#session.userGender==2">Male</s:elseif><s:else>Other</s:else></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6>Address</h6>
+                        </td>
+                        <td>
+                                    <p><s:property value="#session.userAddress"/></p>
                     </td>
                 </tr>
                 <tr>
@@ -128,7 +128,7 @@
                         <h6>Phone Number</h6>
                     </td>
                     <td>
-                        <p></p>
+                        <p><s:property value="#session.userPhonenumber"/></p>
                     </td>
                 </tr>
                 <tr>
@@ -171,8 +171,8 @@
                     </div>
                     <input type="file" class="edit-pic-title">
                 </div>
-                <div class="update-name">John Doe</div>
-                <div class="update-desc"><textarea type="text" class="input-update-desc" cols="35" rows="4">Description</textarea>
+                <div class="update-name"><s:property value="#session.userFullName"/></div>
+                <div class="update-desc"><textarea type="text" class="input-update-desc" rows="3"><s:if test="#session.userDescription == null">This people is lazy. He/She do not write anything about his/herself</s:if><s:else><s:property value="#session.userDescription"/></s:else></textarea>
                 </div>
             </div>
 
@@ -184,7 +184,7 @@
                             <h6>Name</h6>
                         </td>
                         <td>
-                            <input type="text" class="input-update-profile" placeholder="Input your name">
+                            <input type="text" class="input-update-profile" placeholder="Input your name" value="<s:property value="#session.userFullName"/>">
                         </td>
                     </tr>
                     <tr>
@@ -192,7 +192,7 @@
                             <h6>Date of birth</h6>
                         </td>
                         <td>
-                            <input type="date" class="input-update-profile">
+                            <input type="date" class="input-update-profile" value="<s:property value="#session.userDoB"/>">
                         </td>
                     </tr>
                     <tr>
@@ -201,9 +201,9 @@
                         </td>
                         <td>
                             <select name="" id="" class="input-update-profile" style="border: none;">
-                                <option value="">Male</option>
-                                <option value="">Female</option>
-                                <option value="">Other</option>
+                                <option value="1" <s:if test="#session.userGender == 1">selected</s:if>>Female</option>
+                                <option value="2" <s:if test="#session.userGender == 2">selected</s:if>>Male</option>
+                                <option value="3" <s:if test="#session.userGender == 3">selected</s:if>>Other</option>
                             </select>
                         </td>
                     </tr>
@@ -212,7 +212,7 @@
                             <h6>Address</h6>
                         </td>
                         <td>
-                            <input type="text" class="input-update-profile" placeholder="Input your address">
+                            <input type="text" class="input-update-profile" <s:if test="#session.userAddress == null">placeholder="Enter your address"</s:if><s:else>value="<s:property value="#session.userAddress"/>"</s:else>>
                         </td>
                     </tr>
                     <tr>
@@ -220,7 +220,7 @@
                             <h6>Phone Number</h6>
                         </td>
                         <td>
-                            <input type="number" class="input-update-profile" placeholder="Input your phone number">
+                            <input type="number" class="input-update-profile" <s:if test="#session.userPhonenumber == null">placeholder="Enter your phonenumber"</s:if><s:else>value="<s:property value="#session.userPhonenumber"/>"</s:else>>
                         </td>
                     </tr>
                     <tr>
@@ -241,7 +241,7 @@
         // popup profile
         var c = 0;
         function pop() {
-            if (c === 0) {
+            if (c == 0) {
                 document.getElementById("popup").style.display = "block";
                 c = 1;
             } else {
@@ -252,7 +252,7 @@
         // popup update profile
         var d = 0;
         function pop2() {
-            if (d === 0) {
+            if (d == 0) {
                 document.getElementById("update-popup").style.display = "block";
                 d = 1;
             } else {
@@ -267,11 +267,11 @@
         }
     </script>
     <script type="text/javascript" src="include/resources/js/jquery-3.3.1.min.js"></script>
-    <!--===============================================================================================-->
+    <!--================================================================-->
     <script src="include/resources/js/scripindex.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <!--===============================================================================================-->
+    <!--================================================================-->
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
 </html>

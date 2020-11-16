@@ -32,8 +32,12 @@
             <result name="BLOCKSUCCESS" type="redirectAction">adminLoadUserData</result>
             <result name="BLOCFAILED">/Error.jsp</result>
         </action>
-        <action name="newPost">
+        <action name="CreateNewPost">
             <result>/newPost.jsp</result>
+        </action>
+        <action name="AddNewPost" class="App.PostAction" method="addNewPost">
+            <result name="USERADDPOSTSUCCESS">/index.jsp</result>
+            <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
     </package>
 </struts>

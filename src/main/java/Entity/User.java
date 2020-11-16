@@ -21,12 +21,13 @@ public class User {
     private String userAvatar;
     private String userGender;
     private String userDescription;
-    private String dateAdded; 
+    private String dateAdded;
+    private String userPhonenumber;
 
     public User() {
     }
 
-    public User(String accountEmail, String username, String password, String userFullName, String userAddress, String role, String status, String userDoB, String userAvatar, String userGender, String userDescription, String dateAdded) {
+    public User(String accountEmail, String username, String password, String userFullName, String userAddress, String role, String status, String userDoB, String userAvatar, String userGender, String userDescription, String dateAdded, String userPhonenumber) {
         this.accountEmail = accountEmail;
         this.username = username;
         this.password = password;
@@ -39,6 +40,7 @@ public class User {
         this.userGender = userGender;
         this.userDescription = userDescription;
         this.dateAdded = dateAdded;
+        this.userPhonenumber = userPhonenumber;
     }
 
     public String getAccountEmail() {
@@ -135,6 +137,14 @@ public class User {
 
     public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public String getUserPhonenumber() {
+        return userPhonenumber;
+    }
+
+    public void setUserPhonenumber(String userPhonenumber) {
+        this.userPhonenumber = userPhonenumber;
     }
     
 }

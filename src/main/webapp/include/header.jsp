@@ -25,7 +25,7 @@
         <!--===============================================================================================-->
         <link rel="stylesheet" href="include/resources/css/styleindex.css">
         <!--===============================================================================================-->
-        <!-- <link rel="stylesheet" href="vendors/css/griddemo1.css"> -->
+        <link rel="icon" type="image/png" href="include/resources/img/title_logo_BTEC.png" />
         <!--===============================================================================================-->
         <link rel="icon" type="image/png" href="include/resources/img/title_logo_BTEC.png" />
         <!--===============================================================================================-->
@@ -67,7 +67,6 @@
                 gapi.auth2.init();
             });
         }
-        alert("<s:property value="#session.userName"/>");
     </script>
     <s:if test="#session.login != 'true'">
         <script>
@@ -96,7 +95,7 @@
                         <div class="sign-in" style="width: 250px;">
                             <a>
                                 <img src="<s:property value="#session.userAvatar"/>" alt="" class="avartar">
-                                <p><s:property value="#session.userName"/></p>
+                                <p><s:property value="#session.userFullName"/></p>
                             </a>
                             <nav style="cursor: pointer;">
                                 <div class="drop-btn">

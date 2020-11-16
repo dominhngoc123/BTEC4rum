@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Entity.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,22 +37,37 @@ public class LoginDataProcess {
         }
         return connection;
     }
-    public boolean checkLogin(String userEmail)
+    public User checkLogin(String userEmail)
     {
-        boolean isLogin = false;
+        User user = new User();
         String sqlQuery = "SELECT * FROM tblAccount WHERE accountEmail = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);
             ResultSet resultSet = preparedStatement.executeQuery();
-            isLogin = resultSet.next();
+            while(resultSet.next())
+            {
+                user.setAccountEmail(resultSet.getString(1));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setUserFullName(resultSet.getNString(4));
+                user.setUserAddress(resultSet.getNString(5));
+                user.setRole(resultSet.getString(6));
+                user.setStatus(resultSet.getString(7));
+                user.setUserDoB(resultSet.getString(8));
+                user.setUserAvatar(resultSet.getString(9));
+                user.setUserGender(resultSet.getString(10));
+                user.setUserDescription(resultSet.getString(11));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));                
+            }
             resultSet.close();
             preparedStatement.close();
             getConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(LoginDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return isLogin;
+        return user;
     }
     public boolean checkAdminAccount(String userName, String password)
     {
@@ -74,14 +90,14 @@ public class LoginDataProcess {
     public boolean addUser(String userEmail, String userFullName, String userAddress, String userAvatar)
     {
         int isAdded = 0;
-        String sqlQuery = "INSERT INTO tblAccount VALUES (?, null, null, ?, ?, 3, 1, null, ?, null, null, CURRENT_TIMESTAMP)";
+        String sqlQuery = "INSERT INTO tblAccount VALUES (?, null, null, ?, ?, 3, 1, null, ?, null, null, null, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userEmail);
             preparedStatement.setString(2, userFullName);
             preparedStatement.setString(3, userAddress);
             preparedStatement.setString(4, userAvatar);
-            isAdded = preparedStatement.executeUpdate();
+            isAdded = preparedStatement.executeUpdate();        
             preparedStatement.close();
             getConnection().close();
         } catch (SQLException ex) {

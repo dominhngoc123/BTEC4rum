@@ -59,7 +59,8 @@ public class UserDataProcess {
                 user.setUserAvatar(resultSet.getString(9));
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
-                user.setDateAdded(resultSet.getString(12));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));                
                 listUser.add(user);
             }
             resultSet.close();
@@ -97,7 +98,8 @@ public class UserDataProcess {
                 user.setUserAvatar(resultSet.getString(9));
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
-                user.setDateAdded(resultSet.getString(12));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));                
                 listUser.add(user);
             }
             resultSet.close();
@@ -109,9 +111,9 @@ public class UserDataProcess {
         return listUser;
     }
     
-    public boolean addUser(String accountEmail, String _username, String _password, String userFullname, String userAddress, int _role, int _status, String userDoB, String userAvatar, int userGender, String userDescription) {
+    public boolean addUser(String accountEmail, String _username, String _password, String userFullname, String userAddress, int _role, int _status, String userDoB, String userAvatar, int userGender, String userDescription, String userPhonenumber) {
         boolean isAdded = false;
-        String sqlQuery = "INSERT INTO tblAccount VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        String sqlQuery = "INSERT INTO tblAccount VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, accountEmail);
@@ -125,6 +127,7 @@ public class UserDataProcess {
             preparedStatement.setString(9, userAvatar);
             preparedStatement.setInt(10, userGender);
             preparedStatement.setString(11, userDescription);
+            preparedStatement.setString(12, userPhonenumber);
             isAdded = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             getConnection().close();
@@ -134,9 +137,9 @@ public class UserDataProcess {
         return isAdded;
     }
 
-    public boolean updateUser(String accountEmail, String _username, String _password, String userFullname, String userAddress, int _role, int _status, String userDoB, String userAvatar, int userGender, String userDescription) {
+    public boolean updateUser(String accountEmail, String _username, String _password, String userFullname, String userAddress, int _role, int _status, String userDoB, String userAvatar, int userGender, String userDescription, String userPhonenumber) {
         boolean isUpdate = false;
-        String sqlQuery = "UPDATE tblAccount SET _username = ?, _password = ?, userFullName = ?, userAddress = ?, _role = ?, _status = ?,  userDoB = ?, userAvatar = ?, userGender = ?, userDescription = ? WHERE accountEmail = ?";
+        String sqlQuery = "UPDATE tblAccount SET _username = ?, _password = ?, userFullName = ?, userAddress = ?, _role = ?, _status = ?,  userDoB = ?, userAvatar = ?, userGender = ?, userDescription = ?, userPhonenumber = ? WHERE accountEmail = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, _username);
@@ -149,7 +152,8 @@ public class UserDataProcess {
             preparedStatement.setString(8, userAvatar);
             preparedStatement.setInt(9, userGender);
             preparedStatement.setString(10, userDescription);
-            preparedStatement.setString(11, accountEmail);
+            preparedStatement.setString(11, userPhonenumber);
+            preparedStatement.setString(12, accountEmail);
             isUpdate = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             getConnection().close();
