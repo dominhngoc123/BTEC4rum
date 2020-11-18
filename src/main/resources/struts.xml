@@ -5,7 +5,7 @@
 <!-- Author: Ngoc Do Minh -->
  
 <struts>
-    <package name="basicstruts2" extends="struts-default">
+    <package name="basicstruts2" extends="struts-default, json-default">
         <action name="login" class="App.LoginAction" method="checkLogin">
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
         </action>
@@ -19,11 +19,14 @@
             <result>/index.jsp</result>
         </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
-            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminLoadUserData</result>
+            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminLoadPostData</result>
             <result name="ADMINLOGINFAILED">
                 <param name="location">/index.jsp</param>
                 <param name="msg">${$msg}</param>
             </result>
+        </action>
+        <action name="adminLoadPostData" class="App.PostAction" method="getAllPost">
+            <result name="POSTDATA">/Admin/admin.jsp</result>
         </action>
         <action name="adminLoadUserData" class="App.UserAction" method="getData">
             <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
@@ -36,8 +39,11 @@
             <result>/newPost.jsp</result>
         </action>
         <action name="AddNewPost" class="App.PostAction" method="addNewPost">
-            <result name="USERADDPOSTSUCCESS">/index.jsp</result>
+            <result name="USERADDPOSTSUCCESS">/Member/member.jsp</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
+        </action>
+        <action name="adminLoadTopicData" class="App.TopicAction" method="getData">
+            <result name="LISTALLTOPIC" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
 </struts>

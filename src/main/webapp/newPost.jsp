@@ -88,7 +88,7 @@
                                                 <span class="fas fa-question-circle"></span></div>
                                             Help & support <i class="fas fa-angle-right"></i>
                                         </a></li>
-                                    <li><a href="#" onclick="signOut();">
+                                    <li><a href="" onclick="signOut();">
                                             <div class="icon-dropdown">
                                                 <span class="fas fa-sign-out-alt"></span></div>
                                             Log out
@@ -177,6 +177,7 @@
         </div>
         <section id="content">
             <form action="AddNewPost" method="POST">
+                <input type="hidden" name="postID" value="JAV01"/>
                 <input type="hidden" name="role" value="<s:property value="#session.userRole"/>"/>
                 <input type="hidden" name="accountEmail" value="<s:property value="#session.accountEmail"/>"/>
                 <div class="row">
@@ -204,8 +205,9 @@
                 </div>
                 <textarea placeholder="Enter title here..." required class="content-title-post" name="postTitle"></textarea>
                 <textarea name="postContent" id="editor1" placeholder="Type text content here..."
-                          required>Write content here...</textarea>
+                          required></textarea>
                 <br>
+                <!--<input type="hidden" name="postContent" id="postContent" value=""/>-->
                 <input type="submit" value=" Post" class="submit-post">
             </form>
         </section>
@@ -213,45 +215,51 @@
     </body>
     <script src="include/asset/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
-                                            $('textarea').each(function () {
-                                                this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-                                            }).on('input', function () {
-                                                this.style.height = 'auto';
-                                                this.style.height = (this.scrollHeight) + 'px';
-                                            });
-                                            // CKEDITOR
-                                            // config
-                                            config = {};
-                                            config.entities_latin = false;
-                                            config.lauguage = 'vi';
-                                            config.allowedContent = true;
-                                            config.removeFormatAttributes = '';
-                                            config.extraPlugins = 'autogrow';
-                                            // Define changes to default configuration here.
-                                            // For complete reference see:
-                                            // http://docs.ckeditor.com/#!/api/CKEDITOR.config
+                    $('textarea').each(function () {
+                        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+                    }).on('input', function () {
+                        this.style.height = 'auto';
+                        this.style.height = (this.scrollHeight) + 'px';
+                    });
+                    // CKEDITOR
+                    // config
+                    config = {};
+                    config.entities_latin = false;
+                    config.lauguage = 'vi';
+                    config.allowedContent = true;
+                    config.removeFormatAttributes = '';
+                    config.extraPlugins = 'autogrow';
+                    // Define changes to default configuration here.
+                    // For complete reference see:
+                    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
-                                            // The toolbar groups arrangement, optimized for two toolbar rows.
-                                            config.toolbarGroups = [
-                                                {name: 'clipboard', groups: ['clipboard', 'undo']},
-                                                {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
-                                                {name: 'links'},
-                                                {name: 'insert'},
-                                                {name: 'forms'},
-                                                {name: 'tools'},
-                                                {name: 'document', groups: ['mode', 'document', 'doctools']},
-                                                {name: 'others'},
-                                                '/',
-                                                {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
-                                                {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
-                                                {name: 'styles'},
-                                                {name: 'colors'},
-                                                {name: 'about'}
-                                            ];
+                    // The toolbar groups arrangement, optimized for two toolbar rows.
+                    config.toolbarGroups = [
+                        {name: 'clipboard', groups: ['clipboard', 'undo']},
+                        {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
+                        {name: 'links'},
+                        {name: 'insert'},
+                        {name: 'forms'},
+                        {name: 'tools'},
+                        {name: 'document', groups: ['mode', 'document', 'doctools']},
+                        {name: 'others'},
+                        '/',
+                        {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                        {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
+                        {name: 'styles'},
+                        {name: 'colors'},
+                        {name: 'about'}
+                    ];
 
-                                            // Replace the <textarea id="editor1"> with a CKEditor 4
-                                            // instance, using default configuration.
-                                            CKEDITOR.replace('editor1', config);
+                    // Replace the <textarea id="editor1"> with a CKEditor 4
+                    // instance, using default configuration.
+                    CKEDITOR.replace('editor1', config);
+
+//                    var e = CKEDITOR.instances['editor1'];
+//                    e.on('change', function () {
+//                        var value = e.getData();
+//                        document.getElementById("postContent").value = value;
+//                    });
     </script>
 
 

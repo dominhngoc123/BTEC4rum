@@ -5,8 +5,10 @@
  */
 package App;
 
+import Entity.Post;
 import Model.PostDataProcess;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.List;
 
 /**
  *
@@ -22,6 +24,7 @@ public class PostAction extends ActionSupport {
     private String dateAdded;
     private String status;
     private int role;
+    private List<Post> listPost; 
 
     public String getPostID() {
         return postID;
@@ -87,15 +90,35 @@ public class PostAction extends ActionSupport {
         this.role = role;
     }
 
+    public List<Post> getListPost() {
+        return listPost;
+    }
+
+    public void setListPost(List<Post> listPost) {
+        this.listPost = listPost;
+    }
+    
+    
     public PostAction() {
     }
 
     public String addNewPost() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.createPost(postID, postTitle, postContent, threadID, accountEmail, role)) {
+        if (postDataProcess.createPost(postTitle, postContent, threadID, accountEmail, role)) {
             return "USERADDPOSTSUCCESS";
         }
         return "USERADDPOSTFAILED";
     }
-
+    
+    public String getAllPost()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        listPost = postDataProcess.getData();
+        return "POSTDATA";
+    }
+    
+    public String getDetailPost()
+    {
+        return "POSTDETAIL";
+    }
 }

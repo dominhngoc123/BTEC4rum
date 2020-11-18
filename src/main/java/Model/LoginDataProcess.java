@@ -72,13 +72,21 @@ public class LoginDataProcess {
     public boolean checkAdminAccount(String userName, String password)
     {
         boolean isLogin = false;
+        int userRole = 0;
         String sqlQuery = "SELECT * FROM tblAccount WHERE _username = ? AND _password = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            isLogin = resultSet.next();
+            while (resultSet.next())
+            {
+                userRole = resultSet.getInt(6);
+            }
+            if (userRole == 1)
+            {
+                isLogin = true;
+            }
             resultSet.close();
             preparedStatement.close();
             getConnection().close();

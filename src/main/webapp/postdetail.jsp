@@ -231,7 +231,7 @@
                                 <li>
                                     <div class="comment-main-level">
                                         <!-- Avatar -->
-                                        <div class="comment-avatar"><img src="resources/img/pic.png" alt="" onclick="pop()">
+                                        <div class="comment-avatar"><img src="include/resources/img/pic.png" alt="" onclick="pop()">
                                         </div>
                                         <!-- Contenedor del Comentario -->
                                         <div class="comment-box">
@@ -326,7 +326,7 @@
 
                                         <li>
 
-                                            <div class="comment-avatar"><img src="resources/img/pic.png" alt=""
+                                            <div class="comment-avatar"><img src="include/resources/img/pic.png" alt=""
                                                                              onclick="pop()"></div>
 
                                             <div class="comment-box">

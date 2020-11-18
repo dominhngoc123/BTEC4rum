@@ -69,4 +69,24 @@ public class TopicAction extends ActionSupport {
         listTopic = topicDataProcess.getData();
         return "LISTALLTOPIC";
     }
+    
+    public String addTopic()
+    {
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
+        if (topicDataProcess.addTopic(topicID, topicName, topicDescription))
+        {
+            return "ADDTOPICSUCCESS";
+        }
+        return "ADDTOPICFAILED";
+    }
+    
+    public String updateTopic()
+    {
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
+        if (topicDataProcess.updateTopic(topicID, topicName, topicDescription))
+        {
+            return "UPDATETOPICSUCCESS";
+        }
+        return "UPDATETOPICFAILED";
+    }
 }
