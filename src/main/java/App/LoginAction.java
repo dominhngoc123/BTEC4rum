@@ -150,13 +150,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     }
 
     public String checkLogin() {
-        String loggedUserEmail = null;
-        if (sessionMap.containsKey("userEmail")) {
-            loggedUserEmail = (String) sessionMap.get("userEmail");
-        }
-        if (loggedUserEmail != null) {
-            return "LOGINSUCCESS";
-        }
         LoginDataProcess loginDataProcess = new LoginDataProcess();
         User user = loginDataProcess.checkLogin(userEmail);
         if (user.getAccountEmail() == null) {
@@ -196,7 +189,34 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     public String checkAdminAccount() {
         LoginDataProcess loginDataProcess = new LoginDataProcess();
-        if (loginDataProcess.checkAdminAccount(adminUsername, adminPassword)) {
+        User user = loginDataProcess.checkAdminAccount(adminUsername, adminPassword);
+        if (user.getAccountEmail() != null) {
+            userEmail = user.getAccountEmail();
+            adminUsername = user.getUsername();
+            adminPassword = user.getPassword();
+            userFullName = user.getUserFullName();
+            userAddress = user.getUserAddress();
+            userRole = user.getRole();
+            userStatus = user.getStatus();
+            userDoB = user.getUserDoB();
+            userAvatar = user.getUserAvatar();
+            userGender = user.getUserGender();
+            userDescription = user.getUserDescription();
+            dateAdded = user.getDateAdded();
+            userPhonenumber = user.getUserPhonenumber();
+            sessionMap.put("accountEmail", userEmail);
+            sessionMap.put("adminUsername", adminUsername);
+            sessionMap.put("adminPassword", adminPassword);
+            sessionMap.put("userFullName", userFullName);
+            sessionMap.put("userAddress", userAddress);
+            sessionMap.put("userRole", userRole);
+            sessionMap.put("userStatus", userStatus);
+            sessionMap.put("userDoB", userDoB);
+            sessionMap.put("userAvatar", userAvatar);
+            sessionMap.put("userGender", userGender);
+            sessionMap.put("userDescription", userDescription);
+            sessionMap.put("dateAdded", dateAdded);
+            sessionMap.put("userPhonenumber", userPhonenumber);
             return "ADMINLOGINSUCCESS";
         }
         msg = "Wrong username or password";
