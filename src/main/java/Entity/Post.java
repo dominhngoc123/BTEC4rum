@@ -17,6 +17,7 @@ public class Post {
     private String accountEmail;
     private String dateAdded;
     private String status;
+    private String approvedDate;
 
     public Post() {
     }
@@ -76,6 +77,12 @@ public class Post {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
+    public String getApprovedDate() {
+        return approvedDate;
+    }
+
+    public void setApprovedDate(String approvedDate) {
+        this.approvedDate = approvedDate;
+    }    
 }

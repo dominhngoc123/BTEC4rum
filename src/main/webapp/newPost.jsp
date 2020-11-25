@@ -176,8 +176,7 @@
             </div>
         </div>
         <section id="content">
-            <form action="AddNewPost" method="POST">
-                <input type="hidden" name="postID" value="JAV01"/>
+            <form method="POST" action="AddNewPost">
                 <input type="hidden" name="role" value="<s:property value="#session.userRole"/>"/>
                 <input type="hidden" name="accountEmail" value="<s:property value="#session.accountEmail"/>"/>
                 <div class="row">
@@ -208,7 +207,7 @@
                           required></textarea>
                 <br>
                 <!--<input type="hidden" name="postContent" id="postContent" value=""/>-->
-                <input type="submit" value=" Post" class="submit-post">
+                <input type="submit" value=" Post" class="submit-post" onclick="<s:if test="#session.userRole == 3">alert('Your post is waiting for approval. This may take 10-15 minutes')</s:if><s:else>alert('Your posts have been updated to the forum')</s:else>">
             </form>
         </section>
         <jsp:include page="include/footer.jsp"/>

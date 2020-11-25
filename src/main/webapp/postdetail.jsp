@@ -4,6 +4,7 @@
     Author     : Ngoc Do Minh
 --%>
 
+<%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -158,46 +159,19 @@
             <div class="content-right">
                 <div class="post-content">
                     <div class="post-title">
-                        <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nisi sapiente fugiat optio
-                            inventore fugit.</h3>
+                        <h3><s:property value="post.postTitle"/></h3>
                     </div>
                     <div class="post-author">
                         <div class="post-author-info">
                             <a onclick="pop()"><img src="include/resources/img/pic.png" alt=""></a>
                         </div>
                         <ul>
-                            <li><span onclick="pop()" class="post-author-name">Doe John</span></li>
-                            <li><span class="posted-time">Posted on 10-FEB-2015 12:00</span></li>
+                            <li><span onclick="pop()" class="post-author-name"><s:property value="post.accountEmail"/></span></li>
+                            <li><span class="posted-time"><s:property value="post.dateAdded"/></span></li>
                         </ul>
                     </div>
-                    <div class="post-main">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem nam error dignissimos praesentium
-                            istevoluptates fugiat, quasi, eveniet provident ex repellendus repellat reiciendis id
-                            repudiandae ad
-                            facilis vero neque corrupti. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente,
-                            iusto omnis ex dolorem asperiores cumque alias sint labore doloremque. A dolorum alias quos odit
-                            maiores atque! Assumenda debitis possimus ducimus?
-
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum expedita quas eius magnam
-                            deleniti
-                            inventore? Dolores ipsa, iure ullam sunt corrupti eligendi culpa sint sequi ipsam maiores, in,
-                            impedit aperiam.
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident voluptatum amet recusandae
-                            laboriosam saepe! Ipsam odio reprehenderit repellat ullam quisquam, repudiandae aliquam vero
-                            iste
-                            eaque excepturi esse et est ducimus? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Cum,
-                            totam inventore, repellendus velit unde a provident rem enim et doloribus, cupiditate ad. Culpa
-                            alias, voluptates obcaecati sunt sint similique nostrum. Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit. Laudantium nisi nostrum consequatur molestias, inventore ad impedit nemo
-                            accusantium laboriosam doloremque cumque incidunt adipisci illum, sed pariatur eius iure nihil
-                            tempore? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore maxime sequi similique,
-                            unde numquam accusamus dolore nesciunt totam consequatur eos, blanditiis soluta! Voluptate
-                            sapiente
-                            id soluta. Doloribus hic assumenda ipsam.
-                        </p>
-                    </div>
+                    <input type="hidden" name="tmp" id="tmp" value="<s:property value="post.postContent"/>"/>
+                    <div class="post-main" id="postContent" onload="getData();"></div>
                     <div class="thread-action" id="write-cmt">
                         <div class="heart-btn">
                             <div class="heart-btn-content">
@@ -433,6 +407,10 @@
         <jsp:include page="include/footer.jsp"/>
         <script src="include/resources/js/postdetail.js"></script>
         <script>
+            $(document).ready(function(){
+                var tmp = $("#tmp").val();
+                $('#postContent').html(tmp);
+            });
                                                         function show_cmt_box() {
                                                             if (d == 0) {
                                                                 document.getElementById("post-comment-box").style.display = "block"

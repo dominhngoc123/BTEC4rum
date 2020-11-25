@@ -9,8 +9,10 @@
         <action name="login" class="App.LoginAction" method="checkLogin">
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
         </action>
-        <action name="redirect">
-            <result>/Member/member.jsp</result>
+        <action name="redirect" class="App.LoginAction" method="redirectUser">
+            <result name="MEMBER">/Member/member.jsp</result>
+            <result name="ADMIN" type="redirectAction">adminWelcomeData</result>
+            <result name="MOD">/Moderator/moderator.jsp</result>
         </action>
         <action name="logOut" class="App.LoginAction" method="logOut">
             <result name="LOGOUTSUCCESS">/index.jsp</result>
@@ -19,18 +21,32 @@
             <result>/index.jsp</result>
         </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
-            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminLoadPostData</result>
+            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminWelcomeData</result>
             <result name="ADMINLOGINFAILED">
                 <param name="location">/index.jsp</param>
-                <param name="msg">${$msg}</param>
+                <param name="msg">${msg}</param>
             </result>
         </action>
-        <action name="adminLoadPostData" class="App.PostAction" method="getAllPost">
+        <!-- Admin load data -->
+        <action name="adminWelcomeData" class="App.PostAction" method="getAllPost">
             <result name="POSTDATA">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminLoadPostData" class="App.PostAction" method="getAllPost">
+            <result name="POSTDATA" type="json">/Admin/admin.jsp</result>
         </action>
         <action name="adminLoadUserData" class="App.UserAction" method="getData">
             <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
         </action>
+        <action name="adminLoadTopicData" class="App.TopicAction" method="getData">
+            <result name="LISTALLTOPIC" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminLoadCategoryData" class="App.CategoryAction" method="getData">
+            <result name="LISTCATEGORY" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminLoadThreadData" class="App.ThreadAction" method="getData">
+            <result name="LISTTHREAD" type="json">/Admin/admin.jsp</result>
+        </action>
+        <!-- Admin feature -->
         <action name="adminBlockUser" class="App.UserAction" method="blockUser">
             <result name="BLOCKSUCCESS" type="redirectAction">adminLoadUserData</result>
             <result name="BLOCFAILED">/Error.jsp</result>
@@ -39,11 +55,17 @@
             <result>/newPost.jsp</result>
         </action>
         <action name="AddNewPost" class="App.PostAction" method="addNewPost">
-            <result name="USERADDPOSTSUCCESS">/Member/member.jsp</result>
+            <result name="USERADDPOSTSUCCESS" type="redirectAction">redirect</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
-        <action name="adminLoadTopicData" class="App.TopicAction" method="getData">
-            <result name="LISTALLTOPIC" type="json">/Admin/admin.jsp</result>
+        <action name="getDetailPost" class="App.PostAction" method="getPostByID">
+            <result name="POSTDETAIL">/postdetail.jsp</result>
+        </action>
+        
+        
+        <action name="adminAddTopic" class="App.TopicAction" method="addTopic">
+            <result name="ADDTOPICSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="ADDTOPICFAILED" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
 </struts>

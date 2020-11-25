@@ -44,7 +44,7 @@ public class PostDataProcess {
     public List<Post> getData()
     {
         List<Post> listPost = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM tblPost";
+        String sqlQuery = "SELECT * FROM tblPost ORDER BY dateAdded DESC";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -58,8 +58,12 @@ public class PostDataProcess {
                 post.setAccountEmail(resultSet.getString(5));
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
+                post.setApprovedDate(resultSet.getString(8));
                 listPost.add(post);
             }
+            resultSet.close();
+            statement.close();
+            getConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,11 +76,11 @@ public class PostDataProcess {
         String sqlQuery = "";
         if (userRole == 3)
         {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2)";
+            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, )";
         }
         else
         {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1)";
+            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP)";
         }
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
@@ -112,8 +116,12 @@ public class PostDataProcess {
                 post.setAccountEmail(accountEmail);
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
+                post.setApprovedDate(resultSet.getString(8));
                 listPost.add(post);
             }
+            resultSet.close();
+            preparedStatement.close();
+            getConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,7 +144,11 @@ public class PostDataProcess {
                 post.setAccountEmail(resultSet.getString(5));
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
+                post.setApprovedDate(resultSet.getString(8));
             }
+            resultSet.close();
+            preparedStatement.close();
+            getConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -195,5 +207,4 @@ public class PostDataProcess {
         }
         return newPostID;
     }
-    
 }

@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+    <jsp:include page="../include/auth.jsp"/>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +16,9 @@
         <meta name="description" content="BTEC forum - admin page">
         <link rel="icon" type="image/png" href="include/resources/img/title_logo_BTEC.png" />
         <title>BTEC forum - admin page</title>
+        <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
+        <!--===============================================================================================-->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <link href="include/resources/css/adminpage.css" rel="stylesheet">
@@ -66,7 +70,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="#" style="cursor: pointer;">Manage post</a>
+                                            <a onclick="loadPost();" style="cursor: pointer;">Manage post</a>
                                         </li>
                                         <li>
                                             <a href="#" style="cursor: pointer;">Manage comment</a>
@@ -81,13 +85,13 @@
                                 </a>
                             </li>
                             <li class="sidebar">
-                                <a href="#" style="cursor: pointer;">
+                                <a onclick="loadCategory();" style="cursor: pointer;">
                                     <i class="fas fa-tasks"></i>
                                     <span>Manage category</span>
                                 </a>
                             </li>
                             <li class="sidebar">
-                                <a href="#" style="cursor: pointer;">
+                                <a onclick="loadThread();" style="cursor: pointer;">
                                     <i class="fas fa-tasks"></i>
                                     <span>Manage thread</span>
                                 </a>
@@ -120,7 +124,7 @@
                                 </a>
                             </li>
                             <li class="sidebar">
-                                <a href="#" style="cursor: pointer;">
+                                <a onclick="signOut();" style="cursor: pointer;">
                                     <i class="fa fa-power-off"></i>
                                     <span>Logout</span>
                                 </a>
@@ -135,9 +139,9 @@
             <main class="page-content">
                 <div class="container-fluid" id="showTable">
                     <h3 style="text-align: center;">Manage post</h3>
-                    <input class="form-control" id="myInput" type="text" placeholder="Type something to search.." label="searchbar">
+                    <input class="form-control" id="myInput2" type="text" placeholder="Type something to search.." label="searchbar">
                     <div class="scroll-table">
-                        <table class="table table-responsive-sm fixed_header ddj table-borderless table-fixed mb-0" id="ddj" cellspacing="0"
+                        <table class="table table-responsive-sm fixed_header ddj2 table-borderless table-fixed mb-0" id="ddj2" cellspacing="0"
                                width="100%">
                             <thead class="thead-light fixed_thead">
                                 <tr>
@@ -149,15 +153,15 @@
                                     <th colspan="3" style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="myTable">
+                            <tbody id="myTable2">
                                 <s:iterator value="listPost">
-                                    <tr class="clickable-row" data-href="#">
+                                    <tr class="clickable-row" data-href="#" style="cursor: pointer;">
                                         <td><s:property value="postTitle"/></td>
                                         <td><s:property value="accountEmail"/></td>
                                         <td><s:property value="dateAdded"/></td>
                                         <td><s:if test="status == 1">Approved</s:if><s:else>Pending</s:else></td>
                                         <td><s:property value="threadID"/></td>
-                                        <td><a href="#" class="btn btn-success">Detail</a></td>
+                                        <td><a href="getDetailPost?postID=<s:property value="postID"/>" class="btn btn-success">Detail</a></td>
                                         <td><a href="#" class="btn btn-primary">Update</a></td>
                                         <td><a href="#" class="btn btn-danger">Delete</a></td>
                                     </tr>
@@ -166,70 +170,14 @@
                         </table>
                     </div>
                     <div style="text-align: center;">
-                        <a class="btn btn-info" href="#">Add new</a>
+                        <a class="btn btn-primary" href="CreateNewPost">Add new</a>
                     </div>
                 </div>
             </main>
         </div>
-        <div class="modal fade" id="modal_add-topic" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <form action="" method="post">
-                        <div class="modal-header">
-                            <h3 class="modal-title text-info" id="exampleModalLongTitle">Add Topic</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01">Category</label>
-                                            </div>
-                                            <select class="custom-select" id="inputGroupSelect01" required>
-                                                <option selected disabled value="">Choose...</option>
-                                                <option value="">Information Technology</option>
-                                                <option value="">Graphic Design</option>
-                                                <option value="">Business Administration</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Name</span>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Username"
-                                                   aria-describedby="basic-addon1" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Description</span>
-                                            </div>
-                                            <textarea class="form-control" aria-label="With textarea"
-                                                      style="text-rendering: auto;" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-jump" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary btn-jump">ADD</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <div class="modal fade" id="modal_add" tabindex="-1" role="dialog"></div>
+        <div class="modal fade" id="modal_update" tabindex="-1" role="dialog"></div>
         <script src="include/resources/js/adminpage.js"></script>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
     </body>
 </html>

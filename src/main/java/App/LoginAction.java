@@ -223,6 +223,19 @@ public class LoginAction extends ActionSupport implements SessionAware {
         return "ADMINLOGINFAILED";
     }
 
+    public String redirectUser()
+    {
+        String role = (String) sessionMap.get("userRole");
+        if (role.equals("1"))
+        {
+            return "ADMIN";
+        }
+        else if (role.equals("2"))
+        {
+            return "MOD";
+        }
+        return "MEMBER";
+    }
     public String logOut() {
         sessionMap.invalidate();
         return "LOGOUTSUCCESS";

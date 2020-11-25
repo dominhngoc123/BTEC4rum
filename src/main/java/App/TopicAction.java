@@ -19,8 +19,18 @@ public class TopicAction extends ActionSupport {
     private String topicName;
     private String topicDescription;
     private String dateAdded;
+    private String msg;
     private List<Topic> listTopic;
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    
     public String getTopicID() {
         return topicID;
     }
@@ -73,10 +83,12 @@ public class TopicAction extends ActionSupport {
     public String addTopic()
     {
         TopicDataProcess topicDataProcess = new TopicDataProcess();
-        if (topicDataProcess.addTopic(topicID, topicName, topicDescription))
+        if (topicDataProcess.addTopic(topicName, topicDescription))
         {
+            msg = "Successfully add topic.";
             return "ADDTOPICSUCCESS";
         }
+        msg = "Cannot add topic.";
         return "ADDTOPICFAILED";
     }
     
@@ -85,8 +97,21 @@ public class TopicAction extends ActionSupport {
         TopicDataProcess topicDataProcess = new TopicDataProcess();
         if (topicDataProcess.updateTopic(topicID, topicName, topicDescription))
         {
+            msg = "Successfully update topic.";
             return "UPDATETOPICSUCCESS";
         }
+        msg = "Cannot update topic.";
+        return "UPDATETOPICFAILED";
+    }
+    public String deleteTopic()
+    {
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
+        if (topicDataProcess.deleteTopic(topicID))
+        {
+            msg = "Successfully delete topic.";
+            return "UPDATETOPICSUCCESS";
+        }
+        msg = "Cannot delete topic.";
         return "UPDATETOPICFAILED";
     }
 }

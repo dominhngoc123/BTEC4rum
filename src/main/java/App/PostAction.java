@@ -24,6 +24,8 @@ public class PostAction extends ActionSupport {
     private String dateAdded;
     private String status;
     private int role;
+    private String approvedDate;
+    private Post post;
     private List<Post> listPost; 
 
     public String getPostID() {
@@ -97,7 +99,22 @@ public class PostAction extends ActionSupport {
     public void setListPost(List<Post> listPost) {
         this.listPost = listPost;
     }
-    
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public String getApprovedDate() {
+        return approvedDate;
+    }
+
+    public void setApprovedDate(String approvedDate) {
+        this.approvedDate = approvedDate;
+    }
     
     public PostAction() {
     }
@@ -117,8 +134,10 @@ public class PostAction extends ActionSupport {
         return "POSTDATA";
     }
     
-    public String getDetailPost()
+    public String getPostByID()
     {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        post = postDataProcess.getPostByID(postID);
         return "POSTDETAIL";
     }
 }

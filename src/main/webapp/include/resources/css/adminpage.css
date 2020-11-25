@@ -529,3 +529,32 @@ iframe {
 [data-href] {
     cursor: pointer;
 }
+/* button jump */
+    .btn-jump {
+        display: block;
+        cursor: pointer;
+        transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .btn-jump:focus {
+        outline: none;
+    }
+
+    .btn-jump:hover {
+        transform: translateY(-2px) scale(1.015);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-jump:active {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    /* auto resize textarea */
+    textarea {
+        resize: none;
+        min-height: 100px;
+    }
+    .input-group-text {
+        min-width: 110px;
+    }

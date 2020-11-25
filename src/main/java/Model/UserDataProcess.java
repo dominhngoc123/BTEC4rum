@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -176,6 +177,36 @@ public class UserDataProcess {
             Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isDelete;
+    }
+    public List<User> getModerator()
+    {
+        List<User> listModerator = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM tblAccount WHERE _role = 2";
+        try {
+            Statement statement = getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next())
+            {
+                User user = new User();
+                user.setAccountEmail(resultSet.getString(1));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setUserFullName(resultSet.getString(4));
+                user.setUserAddress(resultSet.getString(5));
+                user.setRole(resultSet.getString(6));
+                user.setStatus(resultSet.getString(7));
+                user.setUserDoB(resultSet.getString(8));
+                user.setUserAvatar(resultSet.getString(9));
+                user.setUserGender(resultSet.getString(10));
+                user.setUserDescription(resultSet.getString(11));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));                
+                listModerator.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listModerator;
     }
     public boolean blockUser(String accountEmail, int status) {
         boolean isBlock = false;

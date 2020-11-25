@@ -112,9 +112,10 @@ public class TopicDataProcess {
         }
         return listTopic;
     }
-    public boolean addTopic(String topicID, String topicName, String topicDescription)
+    public boolean addTopic(String topicName, String topicDescription)
     {
         boolean isAdded = false;
+        String topicID = generateTopicID();
         String sqlQuery = "INSERT INTO tblTopic VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
@@ -160,5 +161,41 @@ public class TopicDataProcess {
             Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isDelete;
+    }
+    
+    public String generateTopicID()
+    {
+        String newtopicID = "";
+        List<Integer> listTopicID = new ArrayList<>();
+        String sqlQuery = "Select topicID from tblTopic";
+        try {
+            Statement statement = getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next())
+            {
+                String tmp = resultSet.getString(1);
+                int tmpNum = Integer.parseInt(tmp.substring(Math.max(0, tmp.length() - 2)));
+                listTopicID.add(tmpNum);
+            }
+            int tmpIndex = 1;
+            for (int i: listTopicID)
+            {
+                if (i >= tmpIndex)
+                {
+                    tmpIndex = i + 1;
+                }
+            }
+            if (tmpIndex < 10)
+            {
+                newtopicID += "T0" + tmpIndex;
+            }
+            else
+            {
+                newtopicID += "T" + tmpIndex;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newtopicID;
     }
 }
