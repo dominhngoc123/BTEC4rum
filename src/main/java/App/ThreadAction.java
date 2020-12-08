@@ -5,10 +5,13 @@
  */
 package App;
 
+import Entity.Category;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import Entity.Thread;
+import Entity.Topic;
 import Model.ThreadDataProcess;
+import Model.TopicDataProcess;
 
 /**
  *
@@ -21,6 +24,9 @@ public class ThreadAction extends ActionSupport {
     private String categoryID;
     private String dateAdded;
     private List<Thread> listThread;
+    private List<Topic> listTopic;
+    private List<Category> listCategory;
+    
     public String getThreadID() {
         return threadID;
     }
@@ -68,6 +74,22 @@ public class ThreadAction extends ActionSupport {
     public void setListThread(List<Thread> listThread) {
         this.listThread = listThread;
     }
+
+    public List<Topic> getListTopic() {
+        return listTopic;
+    }
+
+    public void setListTopic(List<Topic> listTopic) {
+        this.listTopic = listTopic;
+    }
+
+    public List<Category> getListCategory() {
+        return listCategory;
+    }
+
+    public void setListCategory(List<Category> listCategory) {
+        this.listCategory = listCategory;
+    }
     
     public ThreadAction() {
     }
@@ -75,7 +97,9 @@ public class ThreadAction extends ActionSupport {
     public String getData()
     {
         ThreadDataProcess threadDataProcess = new ThreadDataProcess();
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
         listThread = threadDataProcess.getData();
+        listTopic = topicDataProcess.getData();
         return "LISTTHREAD";
     }    
 }

@@ -15,6 +15,7 @@
         <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="CSS/LoginPageCSS/LoginPage.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <style>
         .login .vertical-form input[type='text'] {
@@ -33,17 +34,10 @@
         }
     </style>
     <script type="text/javascript">
-        function onSignIn(googleUser)
-        {
-            var profile = googleUser.getBasicProfile();
-            var name = profile.getName();
-            var email = profile.getEmail();
-            var avatar = profile.getImageUrl();
-            location.assign("login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
-        }
+
     </script>
     <body class="login">
-        <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
+        <input type="hidden" id="session" value="<s:property value="#session.accountEmail"/>"/>
         <img class="logo" height="80" width="208" src="https://btec.fpt.edu.vn/wp-content/uploads/2017/12/2017-Btec-01-354.png" alt="BTEC Forum">
         <form class="vertical-form sign-in" id="sign-in" action="adminLogin.action" accept-charset="UTF-8" method="post">
             <legend>Log In</legend><p style="color: red;"><s:property value="msg"/></p>
@@ -51,7 +45,7 @@
             <input placeholder="Enter password" label="false" autocomplete="off" class="is-sensitive" type="password" name="adminPassword" id="user_password" required="true" autocomplete="off">
             <input type="submit" name="commit" value="Log In">
             <div class="btnGSignIn" style="margin-top: 20px;">
-                <div class="g-signin2" data-width="390" data-height="50" data-longtitle="true" data-onsuccess="onSignIn" style="background-color: orange;"></div>
+                <div class="g-signin2" data-width="390" data-height="50" data-longtitle="true" data-onsuccess="onSignIn" id="btn-login"></div>
             </div>
             <p><a href="/forgot_password/new">Forgot password?</a></p>
         </form>
@@ -64,4 +58,21 @@
     </body>
     <!--===============================================================================================-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tmp = $("#session").val();
+            if (tmp != "")
+            {
+                window.location = "redirect";
+            }
+        });
+        function onSignIn(googleUser)
+        {
+            var profile = googleUser.getBasicProfile();
+            var name = profile.getName();
+            var email = profile.getEmail();
+            var avatar = profile.getImageUrl();
+            location.assign("login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
+        }
+    </script>
 </html>

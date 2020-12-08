@@ -26,7 +26,8 @@ public class PostAction extends ActionSupport {
     private int role;
     private String approvedDate;
     private Post post;
-    private List<Post> listPost; 
+    private List<Post> listPost;
+    private int commentLevel;
 
     public String getPostID() {
         return postID;
@@ -115,6 +116,14 @@ public class PostAction extends ActionSupport {
     public void setApprovedDate(String approvedDate) {
         this.approvedDate = approvedDate;
     }
+
+    public int getCommentLevel() {
+        return commentLevel;
+    }
+
+    public void setCommentLevel(int commentLevel) {
+        this.commentLevel = commentLevel;
+    }
     
     public PostAction() {
     }
@@ -127,17 +136,26 @@ public class PostAction extends ActionSupport {
         return "USERADDPOSTFAILED";
     }
     
+    public String addNewComment() {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        if (postDataProcess.createComment(postID, postTitle, postContent, threadID, accountEmail, role))
+        {
+            return "USERADDCOMMENTSUCCESS";
+        }
+        return "USERADDCOMMENTFAILED";
+    }
+    
     public String getAllPost()
     {
         PostDataProcess postDataProcess = new PostDataProcess();
-        listPost = postDataProcess.getData();
+        listPost = postDataProcess.getPost();
         return "POSTDATA";
     }
     
     public String getPostByID()
     {
         PostDataProcess postDataProcess = new PostDataProcess();
-        post = postDataProcess.getPostByID(postID);
+        listPost = postDataProcess.getPostByID(postID);
         return "POSTDETAIL";
     }
 }

@@ -8,7 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <jsp:include page="../include/auth.jsp"/>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,9 +24,9 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     </head>
     <body>
+        <input type="hidden" value="<s:property value="#session.accountEmail"/>" name="test" id="test"/>
         <div class="page-wrapper chiller-theme toggled">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
@@ -62,21 +61,11 @@
                             <li class="header-menu">
                                 <span>Manage feature</span>
                             </li>
-                            <li class="sidebar-dropdown">
-                                <a href="#" style="cursor: pointer;">
+                            <li class="sidebar">
+                                <a onclick="loadPost();" style="cursor: pointer;">
                                     <i class="far fa-sticky-note"></i>
                                     <span>Manage post/comment</span>
                                 </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a onclick="loadPost();" style="cursor: pointer;">Manage post</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" style="cursor: pointer;">Manage comment</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li class="sidebar">
                                 <a onclick="loadTopic();" style="cursor: pointer;">
@@ -103,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="sidebar">
-                                <a href="#" style="cursor: pointer;">
+                                <a onclick="loadUser();" style="cursor: pointer;">
                                     <i class="fas fa-user"></i>
                                     <span>Manage user</span>
                                 </a>
@@ -112,7 +101,7 @@
                                 <span>Other feature</span>
                             </li>
                             <li class="sidebar">
-                                <a href="#" style="cursor: pointer;">
+                                <a href="memberPage" style="cursor: pointer;">
                                     <i class="fas fa-home"></i>
                                     <span>Go to forum</span>
                                 </a>
@@ -138,40 +127,7 @@
             <!-- sidebar-wrapper  -->
             <main class="page-content">
                 <div class="container-fluid" id="showTable">
-                    <h3 style="text-align: center;">Manage post</h3>
-                    <input class="form-control" id="myInput2" type="text" placeholder="Type something to search.." label="searchbar">
-                    <div class="scroll-table">
-                        <table class="table table-responsive-sm fixed_header ddj2 table-borderless table-fixed mb-0" id="ddj2" cellspacing="0"
-                               width="100%">
-                            <thead class="thead-light fixed_thead">
-                                <tr>
-                                    <th onclick="sortTable(0)">Post title</th>
-                                    <th onclick="sortTable(1)">Posted by</th>
-                                    <th onclick="sortTable(2)">Posted date</th>
-                                    <th onclick="sortTable(3)">Status</th>
-                                    <th onclick="sortTable(4)">Thread</th>
-                                    <th colspan="3" style="text-align: center;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="myTable2">
-                                <s:iterator value="listPost">
-                                    <tr class="clickable-row" data-href="#" style="cursor: pointer;">
-                                        <td><s:property value="postTitle"/></td>
-                                        <td><s:property value="accountEmail"/></td>
-                                        <td><s:property value="dateAdded"/></td>
-                                        <td><s:if test="status == 1">Approved</s:if><s:else>Pending</s:else></td>
-                                        <td><s:property value="threadID"/></td>
-                                        <td><a href="getDetailPost?postID=<s:property value="postID"/>" class="btn btn-success">Detail</a></td>
-                                        <td><a href="#" class="btn btn-primary">Update</a></td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                </s:iterator>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="text-align: center;">
-                        <a class="btn btn-primary" href="CreateNewPost">Add new</a>
-                    </div>
+                    
                 </div>
             </main>
         </div>

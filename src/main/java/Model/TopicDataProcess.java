@@ -64,21 +64,19 @@ public class TopicDataProcess {
         }
         return listTopic;
     }
-    public List<Topic> getDatabyID(String topicID)
+    public Topic getDatabyID(String topicID)
     {
-        List<Topic> listTopic = new ArrayList<>();
+        Topic topic = new Topic();
         String sqlQuery = "SELECT * FROM tblTopic WHERE topicID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery(sqlQuery);
             while (resultSet.next())
             {
-                Topic topic = new Topic();
                 topic.setTopicID(resultSet.getString(1));
                 topic.setTopicID(resultSet.getString(2));
                 topic.setTopicID(resultSet.getString(3));
                 topic.setTopicID(resultSet.getString(4));
-                listTopic.add(topic);
             }
             resultSet.close();
             preparedStatement.close();
@@ -86,7 +84,7 @@ public class TopicDataProcess {
         } catch (SQLException ex) {
             Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listTopic;
+        return topic;
     }
     public List<Topic> getDatabyName(String topicName)
     {
@@ -165,7 +163,7 @@ public class TopicDataProcess {
     
     public String generateTopicID()
     {
-        String newtopicID = "";
+        String newTopicID = "";
         List<Integer> listTopicID = new ArrayList<>();
         String sqlQuery = "Select topicID from tblTopic";
         try {
@@ -177,6 +175,9 @@ public class TopicDataProcess {
                 int tmpNum = Integer.parseInt(tmp.substring(Math.max(0, tmp.length() - 2)));
                 listTopicID.add(tmpNum);
             }
+            resultSet.close();
+            statement.close();
+            getConnection().close();
             int tmpIndex = 1;
             for (int i: listTopicID)
             {
@@ -187,15 +188,15 @@ public class TopicDataProcess {
             }
             if (tmpIndex < 10)
             {
-                newtopicID += "T0" + tmpIndex;
+                newTopicID += "T0" + tmpIndex;
             }
             else
             {
-                newtopicID += "T" + tmpIndex;
+                newTopicID += "T" + tmpIndex;
             }
         } catch (SQLException ex) {
             Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return newtopicID;
+        return newTopicID;
     }
 }

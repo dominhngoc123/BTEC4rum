@@ -66,23 +66,21 @@ public class CategoryDataProcess {
         }
         return listCategory;
     }
-    public List<Category> getDatabyID(String categoryID)
+    public Category getDatabyID(String categoryID)
     {
-        List<Category> listCategory = new ArrayList<>();
+        Category category = new Category();
         String sqlQuery = "SELECT * FROM tblCategory WHERE categoryID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery(sqlQuery);
             while (resultSet.next())
             {
-                Category category = new Category();
                 category.setCategoryID(resultSet.getString(1));
                 category.setCategoryName(resultSet.getString(2));
                 category.setCategoryDescription(resultSet.getString(3));
                 category.setTopicID(resultSet.getString(4));
                 category.setAccountEmail(resultSet.getString(5));
                 category.setDateAdded(resultSet.getString(6));
-                listCategory.add(category);
             }
             resultSet.close();
             preparedStatement.close();
@@ -90,7 +88,7 @@ public class CategoryDataProcess {
         } catch (SQLException ex) {
             Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listCategory;
+        return category;
     }
     public List<Category> getDatabyName(String categoryName)
     {
@@ -119,10 +117,39 @@ public class CategoryDataProcess {
         }
         return listCategory;
     }
-    public boolean addCategory(String categoryID, String categoryName, String categoryDescription, String topicID, String accountEmail)
+    public List<Category> getDataByTopic(String topicID)
     {
+        List<Category> listCategory = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM tblCategory WHERE topicID = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, topicID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Category category = new Category();
+                category.setCategoryID(resultSet.getString(1));
+                category.setCategoryName(resultSet.getString(2));
+                category.setCategoryDescription(resultSet.getString(3));
+                category.setTopicID(resultSet.getString(4));
+                category.setAccountEmail(resultSet.getString(5));
+                category.setDateAdded(resultSet.getString(6));
+                listCategory.add(category);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCategory;
+    }
+    public boolean addCategory(String categoryName, String categoryDescription, String topicID, String accountEmail)
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        String categoryID = categoryDataProcess.generateCategoryID();
         boolean isAdded = false;
-        String sqlQuery = "INSERT INTO tblCategory VALUES (?, ?, ?, ?, ? CURRENT_TIMESTAMP)";
+        String sqlQuery = "INSERT INTO tblCategory VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, categoryID);
@@ -171,5 +198,43 @@ public class CategoryDataProcess {
             Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isDelete;
+    }
+    public String generateCategoryID()
+    {
+        String newCategoryID = "";
+        List<Integer> listTopicID = new ArrayList<>();
+        String sqlQuery = "Select categoryID from tblCategory";
+        try {
+            Statement statement = getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next())
+            {
+                String tmp = resultSet.getString(1);
+                int tmpNum = Integer.parseInt(tmp.substring(Math.max(0, tmp.length() - 2)));
+                listTopicID.add(tmpNum);
+            }
+            resultSet.close();
+            statement.close();
+            getConnection().close();
+            int tmpIndex = 1;
+            for (int i: listTopicID)
+            {
+                if (i >= tmpIndex)
+                {
+                    tmpIndex = i + 1;
+                }
+            }
+            if (tmpIndex < 10)
+            {
+                newCategoryID += "C0" + tmpIndex;
+            }
+            else
+            {
+                newCategoryID += "C" + tmpIndex;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newCategoryID;
     }
 }

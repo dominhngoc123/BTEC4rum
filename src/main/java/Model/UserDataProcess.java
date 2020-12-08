@@ -72,13 +72,6 @@ public class UserDataProcess {
         }
         return listUser;
     }
-    public static void main(String[] args) {
-        UserDataProcess u = new UserDataProcess();
-        List<User> l = u.getData();
-        for (User ls: l) {
-            System.out.println(ls.getStatus());
-        }
-    }
     public List<User> searchUserByName(String searchContent) {
         List<User> listUser = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblAccount WHERE userFullName LIKE '%?%'";
@@ -203,10 +196,45 @@ public class UserDataProcess {
                 user.setDateAdded(resultSet.getString(13));                
                 listModerator.add(user);
             }
+            resultSet.close();
+            statement.close();
+            getConnection().close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listModerator;
+    }
+    public User getModeratorInCategory(String categoryID)
+    {
+        User user = new User();
+        String sql = "SELECT * FROM tblAccount INNER JOIN tblCategory WHERE tblAccount.accountEmail = tblCategory.accountEmail AND tblCategory.categoryID = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, categoryID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                user.setAccountEmail(resultSet.getString(1));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setUserFullName(resultSet.getString(4));
+                user.setUserAddress(resultSet.getString(5));
+                user.setRole(resultSet.getString(6));
+                user.setStatus(resultSet.getString(7));
+                user.setUserDoB(resultSet.getString(8));
+                user.setUserAvatar(resultSet.getString(9));
+                user.setUserGender(resultSet.getString(10));
+                user.setUserDescription(resultSet.getString(11));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));
+            }
+            resultSet.close();
+            preparedStatement.close();
+            getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
     public boolean blockUser(String accountEmail, int status) {
         boolean isBlock = false;

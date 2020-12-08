@@ -20,6 +20,9 @@
         <action name="returnIndex">
             <result>/index.jsp</result>
         </action>
+        <action name="memberPage">
+            <result>/Member/member.jsp</result>
+        </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
             <result name="ADMINLOGINSUCCESS" type="redirectAction">adminWelcomeData</result>
             <result name="ADMINLOGINFAILED">
@@ -35,7 +38,7 @@
             <result name="POSTDATA" type="json">/Admin/admin.jsp</result>
         </action>
         <action name="adminLoadUserData" class="App.UserAction" method="getData">
-            <result name="LISTALLACCOUNT">/Admin/admin.jsp</result>
+            <result name="LISTALLACCOUNT" type="json">/Admin/admin.jsp</result>
         </action>
         <action name="adminLoadTopicData" class="App.TopicAction" method="getData">
             <result name="LISTALLTOPIC" type="json">/Admin/admin.jsp</result>
@@ -58,14 +61,36 @@
             <result name="USERADDPOSTSUCCESS" type="redirectAction">redirect</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
+        <action name="AddNewComment" class="App.PostAction" method="addNewComment">
+            <result name="USERADDCOMMENTSUCCESS" type="redirectAction">redirect</result>
+            <result name="USERADDPOSTFAILED">/Error.jsp</result>
+        </action>
         <action name="getDetailPost" class="App.PostAction" method="getPostByID">
             <result name="POSTDETAIL">/postdetail.jsp</result>
         </action>
         
-        
+        <!-- Admin manage topic -->
         <action name="adminAddTopic" class="App.TopicAction" method="addTopic">
             <result name="ADDTOPICSUCCESS" type="json">/Admin/admin.jsp</result>
             <result name="ADDTOPICFAILED" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminDeleteTopic" class="App.TopicAction" method="deleteTopic">
+            <result name="DELETETOPICSUCCESS">/Admin/admin.jsp</result>
+        </action>
+        <!-- Admin manage category -->
+        <action name ="adminDeleteCategory" class="App.CategoryAction" method="deleteCategory">
+            <result name="DELETECATEGORYSUCCESS">/Admin/admin.jsp</result>
+            <result name="ELETECATEGORYFAILED">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminAddCategory" class="App.CategoryAction" method="addCategory">
+            <result name="ADDCATEGORYSUCCESS">/Admin/admin.jsp</result>
+            <result name="ADDCATEGORYFAILED">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminGetCategoryInTopic" class="App.CategoryAction" method="getDataByTopic">
+            <result name="LISTCATEGORYINTOPIC" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminGetCategoryDetail" class="App.CategoryAction" method="getDataByID">
+            <result name="DETAILCATEGORY" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
 </struts>

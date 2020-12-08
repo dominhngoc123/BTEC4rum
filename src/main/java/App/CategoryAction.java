@@ -25,7 +25,11 @@ public class CategoryAction extends ActionSupport {
     private String topicID;
     private String accountEmail;
     private String dateAdded;
+    private Category category;
+    private User user;
+    private Topic topic;
     private List<Category> listCategory;
+    private List<Category> listCategory1;
     private List<Topic> listTopic;
     private List<User> listUser;
 
@@ -100,6 +104,38 @@ public class CategoryAction extends ActionSupport {
     public void setListUser(List<User> listUser) {
         this.listUser = listUser;
     }
+
+    public List<Category> getListCategory1() {
+        return listCategory1;
+    }
+
+    public void setListCategory1(List<Category> listCategory1) {
+        this.listCategory1 = listCategory1;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
     
     public CategoryAction() {
     }
@@ -115,5 +151,42 @@ public class CategoryAction extends ActionSupport {
         return "LISTCATEGORY";
         
     }
+    public String getDataByID()
+    {
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
+        UserDataProcess userDataProcess = new UserDataProcess();
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        category = categoryDataProcess.getDatabyID(categoryID);
+        user = userDataProcess.getModeratorInCategory(category.getAccountEmail());
+        topic = topicDataProcess.getDatabyID(category.getTopicID());
+        listTopic = topicDataProcess.getData();
+        listUser = userDataProcess.getModerator();
+        return "DETAILCATEGORY";
+    }
+    public String getDataByTopic()
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        listCategory1 = categoryDataProcess.getDataByTopic(topicID);
+        return "LISTCATEGORYINTOPIC";
+    }
     
+    public String addCategory()
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        if (categoryDataProcess.addCategory(categoryName, categoryDescription, topicID, accountEmail))
+        {
+            return "ADDCATEGORYSUCCESS";
+        }
+        return "ADDCATEGORYFAILED";
+    }
+    
+    public String deleteCategory()
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        if (categoryDataProcess.deleteCategory(categoryID))
+        {
+            return "DELETECATEGORYSUCCESS";
+        }
+        return "DELETECATEGORYFAILED";
+    }
 }

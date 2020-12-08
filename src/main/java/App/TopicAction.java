@@ -109,9 +109,9 @@ public class TopicAction extends ActionSupport {
         if (topicDataProcess.deleteTopic(topicID))
         {
             msg = "Successfully delete topic.";
-            return "UPDATETOPICSUCCESS";
+            return "DELETETOPICSUCCESS";
         }
         msg = "Cannot delete topic.";
-        return "UPDATETOPICFAILED";
+        return "DELETETOPICFAILED";
     }
 }

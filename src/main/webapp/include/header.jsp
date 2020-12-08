@@ -105,11 +105,27 @@
                                 </div>
                                 <div class="wrapper">
                                     <ul class="menu-bar">
-                                        <li><a href="#">
-                                                <div class="icon-dropdown">
-                                                    <span class="fas fa-home"></span></div>
-                                                Home
-                                            </a></li>
+                                        <s:if test="#session.userRole == 1">
+                                            <li><a href="redirect">
+                                                    <div class="icon-dropdown">
+                                                        <span class="fas fa-home"></span></div>
+                                                    Back to admin page
+                                                </a></li>
+                                            </s:if>
+                                            <s:elseif test="#session.userRole == 1">
+                                            <li><a href="redirect">
+                                                    <div class="icon-dropdown">
+                                                        <span class="fas fa-home"></span></div>
+                                                    Back to admin page
+                                                </a></li>
+                                            </s:elseif>
+                                            <s:else>
+                                            <li><a href="#">
+                                                    <div class="icon-dropdown">
+                                                        <span class="fas fa-home"></span></div>
+                                                    Home
+                                                </a></li>
+                                            </s:else>
                                         <li class="setting-item"><a>
                                                 <div class="icon-dropdown">
                                                     <span class="fas fa-cog"></span></div>

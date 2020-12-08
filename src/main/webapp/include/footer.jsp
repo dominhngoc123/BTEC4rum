@@ -173,18 +173,18 @@
                 </div>
                 <div class="update-name"><s:property value="#session.userFullName"/></div>
                 <div class="update-desc"><textarea type="text" class="input-update-desc" rows="3"><s:if test="#session.userDescription == null">This people is lazy. He/She do not write anything about his/herself</s:if><s:else><s:property value="#session.userDescription"/></s:else></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="update-card-header-right">
-                <a onclick="pop2()" class="update-close" style="color: white;"><i class="fas fa-times"></i></a>
-                <table class="update-info-detail">
-                    <tr>
-                        <td>
-                            <h6>Name</h6>
-                        </td>
-                        <td>
-                            <input type="text" class="input-update-profile" placeholder="Input your name" value="<s:property value="#session.userFullName"/>">
+                <div class="update-card-header-right">
+                    <a onclick="pop2()" class="update-close" style="color: white;"><i class="fas fa-times"></i></a>
+                    <table class="update-info-detail">
+                        <tr>
+                            <td>
+                                <h6>Name</h6>
+                            </td>
+                            <td>
+                                    <input type="text" class="input-update-profile" placeholder="Input your name" value="<s:property value="#session.userFullName"/>">
                         </td>
                     </tr>
                     <tr>
@@ -204,23 +204,23 @@
                                 <option value="1" <s:if test="#session.userGender == 1">selected</s:if>>Female</option>
                                 <option value="2" <s:if test="#session.userGender == 2">selected</s:if>>Male</option>
                                 <option value="3" <s:if test="#session.userGender == 3">selected</s:if>>Other</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Address</h6>
-                        </td>
-                        <td>
-                            <input type="text" class="input-update-profile" <s:if test="#session.userAddress == null">placeholder="Enter your address"</s:if><s:else>value="<s:property value="#session.userAddress"/>"</s:else>>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Phone Number</h6>
-                        </td>
-                        <td>
-                            <input type="number" class="input-update-profile" <s:if test="#session.userPhonenumber == null">placeholder="Enter your phonenumber"</s:if><s:else>value="<s:property value="#session.userPhonenumber"/>"</s:else>>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Address</h6>
+                            </td>
+                            <td>
+                                <input type="text" class="input-update-profile" <s:if test="#session.userAddress == null">placeholder="Enter your address"</s:if><s:else>value="<s:property value="#session.userAddress"/>"</s:else>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Phone Number</h6>
+                            </td>
+                            <td>
+                                    <input type="number" class="input-update-profile" <s:if test="#session.userPhonenumber == null">placeholder="Enter your phonenumber"</s:if><s:else>value="<s:property value="#session.userPhonenumber"/>"</s:else>>
                         </td>
                     </tr>
                     <tr>
@@ -237,39 +237,39 @@
             </div>
         </div>
     </form>
-    <script type="text/javascript">
-        // popup profile
-        var c = 0;
-        function pop() {
-            if (c == 0) {
-                document.getElementById("popup").style.display = "block";
-                c = 1;
-            } else {
-                document.getElementById("popup").style.display = "none";
-                c = 0;
-            }
-        }
-        // popup update profile
-        var d = 0;
-        function pop2() {
-            if (d == 0) {
-                document.getElementById("update-popup").style.display = "block";
-                d = 1;
-            } else {
-                document.getElementById("update-popup").style.display = "none";
-                d = 0;
-            }
-        }
-        function cancel_update() {
-            document.getElementById("update-popup").style.display = "none";
-            d = 0;
-            document.getElementById("popup").style.display = "block";
-        }
-    </script>
     <script type="text/javascript" src="include/resources/js/jquery-3.3.1.min.js"></script>
     <!--================================================================-->
     <script src="include/resources/js/scripindex.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+                                // popup profile
+                                var c = 0;
+                                function pop() {
+                                    if (c == 0) {
+                                        document.getElementById("popup").style.display = "block";
+                                        c = 1;
+                                    } else {
+                                        document.getElementById("popup").style.display = "none";
+                                        c = 0;
+                                    }
+                                }
+                                // popup update profile
+                                var d = 0;
+                                function pop2() {
+                                    if (d == 0) {
+                                        document.getElementById("update-popup").style.display = "block";
+                                        d = 1;
+                                    } else {
+                                        document.getElementById("update-popup").style.display = "none";
+                                        d = 0;
+                                    }
+                                }
+                                function cancel_update() {
+                                    document.getElementById("update-popup").style.display = "none";
+                                    d = 0;
+                                    document.getElementById("popup").style.display = "block";
+                                }
+    </script>
 
     <!--================================================================-->
 
