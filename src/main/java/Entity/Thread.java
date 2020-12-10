@@ -13,7 +13,7 @@ public class Thread {
     private String threadID;
     private String threadName;
     private String threadDescription;
-    private String categoryID;
+    private Category category;
     private String dateAdded;
 
     public Thread() {
@@ -43,14 +43,14 @@ public class Thread {
         this.threadDescription = threadDescription;
     }
 
-    public String getCategoryID() {
-        return categoryID;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryID(String categoryID) {
-        this.categoryID = categoryID;
+    public void setCategory(Category category) {
+        this.category = category;
     }
-
+    
     public String getDateAdded() {
         return dateAdded;
     }

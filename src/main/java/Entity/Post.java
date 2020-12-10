@@ -13,8 +13,8 @@ public class Post {
     private String postID;
     private String postTitle;
     private String postContent;
-    private String threadID;
-    private String accountEmail;
+    private Thread thread;
+    private User user;
     private String dateAdded;
     private String status;
     private String approvedDate;
@@ -46,22 +46,22 @@ public class Post {
         this.postContent = postContent;
     }
 
-    public String getThreadID() {
-        return threadID;
+    public Thread getThread() {
+        return thread;
     }
 
-    public void setThreadID(String threadID) {
-        this.threadID = threadID;
+    public void setThread(Thread thread) {
+        this.thread = thread;
     }
 
-    public String getAccountEmail() {
-        return accountEmail;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccountEmail(String accountEmail) {
-        this.accountEmail = accountEmail;
+    public void setUser(User user) {
+        this.user = user;
     }
-
+    
     public String getDateAdded() {
         return dateAdded;
     }

@@ -53,8 +53,10 @@ public class CategoryDataProcess {
                 category.setCategoryID(resultSet.getString(1));
                 category.setCategoryName(resultSet.getString(2));
                 category.setCategoryDescription(resultSet.getString(3));
-                category.setTopicID(resultSet.getString(4));
-                category.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
+                tmp = resultSet.getString(5);
+                category.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 category.setDateAdded(resultSet.getString(6));
                 listCategory.add(category);
             }
@@ -66,20 +68,24 @@ public class CategoryDataProcess {
         }
         return listCategory;
     }
+    
     public Category getDatabyID(String categoryID)
     {
         Category category = new Category();
         String sqlQuery = "SELECT * FROM tblCategory WHERE categoryID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery(sqlQuery);
+            preparedStatement.setString(1, categoryID);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
                 category.setCategoryID(resultSet.getString(1));
                 category.setCategoryName(resultSet.getString(2));
                 category.setCategoryDescription(resultSet.getString(3));
-                category.setTopicID(resultSet.getString(4));
-                category.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
+                tmp = resultSet.getString(5);
+                category.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 category.setDateAdded(resultSet.getString(6));
             }
             resultSet.close();
@@ -104,8 +110,10 @@ public class CategoryDataProcess {
                 category.setCategoryID(resultSet.getString(1));
                 category.setCategoryName(resultSet.getString(2));
                 category.setCategoryDescription(resultSet.getString(3));
-                category.setTopicID(resultSet.getString(4));
-                category.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
+                tmp = resultSet.getString(5);
+                category.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 category.setDateAdded(resultSet.getString(6));
                 listCategory.add(category);
             }
@@ -131,8 +139,10 @@ public class CategoryDataProcess {
                 category.setCategoryID(resultSet.getString(1));
                 category.setCategoryName(resultSet.getString(2));
                 category.setCategoryDescription(resultSet.getString(3));
-                category.setTopicID(resultSet.getString(4));
-                category.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
+                tmp = resultSet.getString(5);
+                category.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 category.setDateAdded(resultSet.getString(6));
                 listCategory.add(category);
             }

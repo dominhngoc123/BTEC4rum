@@ -55,8 +55,10 @@ public class PostDataProcess {
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
-                post.setThreadID(resultSet.getString(4));
-                post.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                tmp = resultSet.getString(5);
+                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(resultSet.getString(8));
@@ -140,12 +142,13 @@ public class PostDataProcess {
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
-                post.setThreadID(resultSet.getString(4));
-                post.setAccountEmail(accountEmail);
+                String tmp = resultSet.getString(4);
+                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                tmp = resultSet.getString(5);
+                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(resultSet.getString(8));
-                listPost.add(post);
             }
             resultSet.close();
             preparedStatement.close();
@@ -169,8 +172,10 @@ public class PostDataProcess {
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
-                post.setThreadID(resultSet.getString(4));
-                post.setAccountEmail(resultSet.getString(5));
+                String tmp = resultSet.getString(4);
+                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                tmp = resultSet.getString(5);
+                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
                 post.setDateAdded(resultSet.getString(6));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(resultSet.getString(8));

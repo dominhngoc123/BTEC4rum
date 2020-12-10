@@ -20,6 +20,7 @@ public class TopicAction extends ActionSupport {
     private String topicDescription;
     private String dateAdded;
     private String msg;
+    private Topic topic;
     private List<Topic> listTopic;
 
     public String getMsg() {
@@ -63,6 +64,14 @@ public class TopicAction extends ActionSupport {
         this.dateAdded = dateAdded;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+    
     public List<Topic> getListTopic() {
         return listTopic;
     }
@@ -79,7 +88,12 @@ public class TopicAction extends ActionSupport {
         listTopic = topicDataProcess.getData();
         return "LISTALLTOPIC";
     }
-    
+    public String getDataByID()
+    {
+        TopicDataProcess topicDataProcess = new TopicDataProcess();
+        topic = topicDataProcess.getDatabyID(topicID);
+        return "DETAILTOPIC";
+    }
     public String addTopic()
     {
         TopicDataProcess topicDataProcess = new TopicDataProcess();

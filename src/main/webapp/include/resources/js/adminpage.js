@@ -92,7 +92,7 @@ function sortTable(n) {
 function searchData() {
     var value = $("#myInput2").val().toLowerCase();
     $("#myTable2 tr").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
 }
 function alertAdminBlocUser(accountEmail)
@@ -111,6 +111,7 @@ function loadTopic()
         type: "GET",
         url: "adminLoadTopicData",
         success: function (itr) {
+            // Display data
             var tmpStr = "<div class='tab-pane' id='listTopic' role='tabpanel' aria-labelledby='manageTopic'>";
             tmpStr += "<h3 style='text-align: center;'>Manage topic</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
@@ -133,7 +134,7 @@ function loadTopic()
                 tmpStr += "<td>" + this['topicDescription'] + "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
                 tmpStr += "<td style='width: 120px;'><button class='btn btn-success'>Detail</button></td>";
-                tmpStr += "<td style='width: 120px;'><button class='btn btn-primary'>Update</button></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-primary updateTopicBtn'>Update</button></td>";
                 tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-danger deleteTopicBtn'>Delete</button></td>";
                 tmpStr += "</tr>";
             });
@@ -145,6 +146,7 @@ function loadTopic()
             tmpStr += "</div>";
             tmpStr += "</div>";
             $("#showTable").html(tmpStr);
+            // generate modal add new topic
             tmpStr = "";
             tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
             tmpStr += "<div class='modal-content'>";
@@ -187,6 +189,50 @@ function loadTopic()
             tmpStr += "</div>";
             tmpStr += "</div>";
             $("#modal_add").html(tmpStr);
+            // generate modal update topic
+            tmpStr = "";
+            tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
+            tmpStr += "<div class='modal-content'>";
+            tmpStr += "<form id='updateTopicForm' onsubmit='updateTopic();' method='POST' return false>";
+            tmpStr += "<input type='hidden' id='topicID1'/>";
+            tmpStr += "<div class='modal-header'>";
+            tmpStr += "<h3 class='modal-title text-info' id='exampleModalLongTitle'>Update Topic</h3>";
+            tmpStr += "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+            tmpStr += "<span aria-hidden='true'>&times;</span>";
+            tmpStr += "</button>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='modal-body'>";
+            tmpStr += "<div class='container-fluid'>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group mb-3'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<span class='input-group-text' id='basic-addon1'>Name</span>";
+            tmpStr += "</div>";
+            tmpStr += "<input type='text' class='form-control' name='topicName' id='topicName1' aria-label='Username' aria-describedby='basic-addon1' required>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "</div>";
+            tmpStr += "<textarea class='form-control' name='topicDescription' id='topicDescription1' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='modal-footer'>";
+            tmpStr += "<input type='button' class='btn btn-secondary btn-jump' data-dismiss='modal' value='Close'>";
+            tmpStr += "<input type='submit' class='btn btn-primary btn-jump' id='submitForm' value='Update'>";
+            tmpStr += "</div>";
+            tmpStr += "</form>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            $("#modal_update").html(tmpStr);
         }
     });
 }
@@ -218,8 +264,8 @@ function loadCategory()
                 tmpStr += "<tr class='clickable-row' data-href='#' style='cursor: pointer;'>";
                 tmpStr += "<td>" + this['categoryName'] + "</td>";
                 tmpStr += "<td>" + this['categoryDescription'] + "</td>";
-                tmpStr += "<td>" + this['topicID'] + "</td>";
-                tmpStr += "<td>" + this['accountEmail'] + "</td>";
+                tmpStr += "<td>" + this['topic'].topicName + "</td>";
+                tmpStr += "<td>" + this['user'].userFullName + "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
                 tmpStr += "<td style='width: 120px;'><button class='btn btn-success'>Detail</button></td>";
                 tmpStr += "<td style='width: 120px;'><button value='" + this['categoryID'] + "' class='btn btn-primary updateCategoryBtn'>Update</button></td>";
@@ -253,7 +299,7 @@ function loadCategory()
             tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Topic</label>";
             tmpStr += "</div>";
             tmpStr += "<select class='custom-select selectUI' id='topicID'>";
-            tmpStr += "<option>Please choose a topic</option>"
+            tmpStr += "<option>Please choose a topic</option>";
             $.each(itr['listTopic'], function () {
                 tmpStr += "<option value='" + this['topicID'] + "'>" + this['topicName'] + "</option>";
             });
@@ -288,6 +334,9 @@ function loadCategory()
             tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Moderator</label>";
             tmpStr += "</div>";
             tmpStr += "<select class='custom-select selectUI' id='moderatorEmail'>";
+            $.each(itr['listUser'], function () {
+                tmpStr += "<option value='" + this['accountEmail'] + "'>" + this['userFullName'] + "</option>";
+            });
             tmpStr += "</select>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -306,7 +355,8 @@ function loadCategory()
             tmpStr = "";
             tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
             tmpStr += "<div class='modal-content'>";
-            tmpStr += "<form id='updateCategoryForm' onsubmit='' method='POST' return false>";
+            tmpStr += "<form id='updateCategoryForm' onsubmit='updateCategory();' method='POST' return false>";
+            tmpStr += "<input type='hidden' id='categoryID1'/>";
             tmpStr += "<div class='modal-header'>";
             tmpStr += "<h3 class='modal-title text-info' id='exampleModalLongTitle'>Update Category</h3>";
             tmpStr += "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
@@ -361,7 +411,7 @@ function loadCategory()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<button type='button' class='btn btn-secondary btn-jump' data-dismiss='modal'>Close</button>";
-            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm2'>ADD</button>";
+            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm2'>Update</button>";
             tmpStr += "</div>";
             tmpStr += "</form>";
             tmpStr += "</div>";
@@ -387,7 +437,7 @@ function loadThread()
             tmpStr += "<tr>";
             tmpStr += "<th onclick='sortTable(0)'>Thread name</th>";
             tmpStr += "<th onclick='sortTable(1)'>Thread description</th>";
-            tmpStr += "<th onclick='sortTable(2)'>Category ID</th>";
+            tmpStr += "<th onclick='sortTable(2)'>Category</th>";
             tmpStr += "<th onclick='sortTable(3)'>Added date</th>";
             tmpStr += "<th colspan='3' style='text-align: center; width: 360px;'>Action</th>";
             tmpStr += "</tr>";
@@ -397,11 +447,11 @@ function loadThread()
                 tmpStr += "<tr class='clickable-row' data-href='#' style='cursor: pointer;'>";
                 tmpStr += "<td>" + this['threadName'] + "</td>";
                 tmpStr += "<td>" + this['threadDescription'] + "</td>";
-                tmpStr += "<td>" + this['categoryID'] + "</td>";
+                tmpStr += "<td>" + this['category'].categoryName + "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Detail</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-primary'>Update</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger'>Delete</a></td>";
+                tmpStr += "<td style='width: 120px;'><button class='btn btn-success'>Detail</a></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['threadID'] + "' class='btn btn-primary updateThreadBtn'>Update</button></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['threadID'] + "' class='btn btn-danger deleteThreadBtn'>Delete</button></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";
@@ -415,7 +465,7 @@ function loadThread()
             tmpStr = "";
             tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
             tmpStr += "<div class='modal-content'>";
-            tmpStr += "<form id='addCategoryForm' return false>";
+            tmpStr += "<form id='addThreadForm' onsubmit='addThread();' return false>";
             tmpStr += "<div class='modal-header'>";
             tmpStr += "<h3 class='modal-title text-info' id='exampleModalLongTitle'>Add New Thread</h3>";
             tmpStr += "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
@@ -430,7 +480,7 @@ function loadThread()
             tmpStr += "<div class='input-group-prepend'>";
             tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Topic</label>";
             tmpStr += "</div>";
-            tmpStr += "<select class='custom-select selectUI' id='topicID1' required>";
+            tmpStr += "<select class='custom-select selectUI' id='topicID' required>";
             tmpStr += "<option>Please choose a topic</option>";
             $.each(itr['listTopic'], function ()
             {
@@ -447,7 +497,7 @@ function loadThread()
             tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Category</label>";
             tmpStr += "</div>";
             tmpStr += "<select class='custom-select selectUI' id='categoryID' required>";
-            tmpStr += "<option>Please choose a topic</option>"
+            tmpStr += "<option>Please choose a topic</option>";
             tmpStr += "</select>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -458,7 +508,7 @@ function loadThread()
             tmpStr += "<div class='input-group-prepend'>";
             tmpStr += "<span class='input-group-text' id='basic-addon1'>Name</span>";
             tmpStr += "</div>";
-            tmpStr += "<input type='text' class='form-control' name='categoryName' id='categoryName' aria-label='Categoryname' aria-describedby='basic-addon1' required>";
+            tmpStr += "<input type='text' class='form-control' name='threadName' id='threadName' aria-label='Threadname' aria-describedby='basic-addon1' required>";
             tmpStr += "</div>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -468,7 +518,7 @@ function loadThread()
             tmpStr += "<div class='input-group-prepend'>";
             tmpStr += "<span class='input-group-text'>Description</span>";
             tmpStr += "</div>";
-            tmpStr += "<textarea class='form-control' name='categoryDescription' id='categoryDescription' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
+            tmpStr += "<textarea class='form-control' name='threadDescription' id='threadDescription' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -476,13 +526,79 @@ function loadThread()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<button type='button' class='btn btn-secondary btn-jump' data-dismiss='modal'>Close</button>";
-            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm1'>ADD</button>";
+            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm'>ADD</button>";
             tmpStr += "</div>";
             tmpStr += "</form>";
             tmpStr += "</div>";
             tmpStr += "</div>";
-//            tmpStr += "<script type='text/javascript' src='include/resources/js/dropdown.js'>";
             $("#modal_add").html(tmpStr);
+            tmpStr = "";
+            tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
+            tmpStr += "<div class='modal-content'>";
+            tmpStr += "<form id='updateThreadForm' onsubmit='updateThread();' return false>";
+            tmpStr += "<div class='modal-header'>";
+            tmpStr += "<h3 class='modal-title text-info' id='exampleModalLongTitle'>Update Thread</h3>";
+            tmpStr += "<input type='hidden' id='threadID1' name='threadID1'/>";
+            tmpStr += "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+            tmpStr += "<span aria-hidden='true'>&times;</span>";
+            tmpStr += "</button>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='modal-body'>";
+            tmpStr += "<div class='container-fluid'>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group mb-3'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Topic</label>";
+            tmpStr += "</div>";
+            tmpStr += "<select class='custom-select selectUI' id='topicID1' required>";
+            tmpStr += "</select>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group mb-3'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<label class='input-group-text' for='inputGroupSelect01'>Category</label>";
+            tmpStr += "</div>";
+            tmpStr += "<select class='custom-select selectUI' id='categoryID1' required>";
+            tmpStr += "<option>Please choose a topic</option>";
+            tmpStr += "</select>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group mb-3'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<span class='input-group-text' id='basic-addon1'>Name</span>";
+            tmpStr += "</div>";
+            tmpStr += "<input type='text' class='form-control' name='threadName' id='threadName1' aria-label='Threadname' aria-describedby='basic-addon1' required>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='row'>";
+            tmpStr += "<div class='col-12'>";
+            tmpStr += "<div class='input-group'>";
+            tmpStr += "<div class='input-group-prepend'>";
+            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "</div>";
+            tmpStr += "<textarea class='form-control' name='threadDescription' id='threadDescription1' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            tmpStr += "<div class='modal-footer'>";
+            tmpStr += "<button type='button' class='btn btn-secondary btn-jump' data-dismiss='modal'>Close</button>";
+            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm1'>Update</button>";
+            tmpStr += "</div>";
+            tmpStr += "<div id='additionalAjax'></div>";
+            tmpStr += "</form>";
+            tmpStr += "</div>";
+            tmpStr += "</div>";
+            $("#modal_update").html(tmpStr);
         }
     });
 }
@@ -513,7 +629,7 @@ function loadPost()
             $.each(itr["listPost"], function () {
                 tmpStr += "<tr class='clickable-row' data-href='#' style='cursor: pointer;'>";
                 tmpStr += "<td>" + this['postTitle'] + "</td>";
-                tmpStr += "<td style='width: 220px;'>" + this['accountEmail'] + "</td>";
+                tmpStr += "<td style='width: 220px;'>" + this['user'].userFullName + "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
                 tmpStr += "<td>";
                 if (this['status'] == 1)
@@ -524,7 +640,7 @@ function loadPost()
                     tmpStr += "Pending";
                 }
                 tmpStr += "</td>";
-                tmpStr += "<td>" + this['threadID'] + "</td>";
+                tmpStr += "<td>" + this['thread'].threadName + "</td>";
                 tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Detail</a></td>";
                 tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-primary'>Update</a></td>";
                 tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger'>Delete</a></td>";
@@ -640,23 +756,49 @@ function onLoad() {
 $(document).ready(function () {
     loadPost();
 });
+
+// Update and delete topic
+// Load modal function
 $(document).ajaxComplete(function () {
     $(".updateTopicBtn").click(function () {
         var topicID = $(this).val();
         $.ajax({
             type: "POST",
-            url: "adminDeleteTopic?topicID=" + topicID,
-            success: function () {
-                alert("Successfully delete topic.");
-                loadTopic();
-            },
-            error: function () {
-                alert("Cannot delete this topic");
-                loadTopic();
+            url: "adminGetTopicDetail?topicID=" + topicID,
+            success: function (data) {
+                $("#topicID1").attr("value", data['topic'].topicID);
+                $("#topicName1").attr("value", data['topic'].topicName);
+                $("#topicDescription1").html(data['topic'].topicDescription);
+                $("#modal_update").modal("show");
             }
         });
     });
 });
+// Update function
+function updateTopic()
+{
+    var topicID = $("#topicID1").val();
+    var topicName = $("#topicName1").val();
+    var topicDescription = $("#topicDescription1").val();
+    $.ajax({
+        type: "POST",
+        url: "adminUpdateTopic?topicID=" + topicID + "&topicName=" + topicName + "&topicDescription=" + topicDescription,
+        success: function ()
+        {
+            alert("Successfully update topic: " + topicName);
+            loadTopic();
+            $("#modal_update").modal("hide");
+        },
+        error: function ()
+        {
+            alert("Cannot update topic!");
+            loadTopic();
+            $("#modal_update").modal("hide");
+        }
+    });
+    event.preventDefault();
+}
+// Delete function
 $(document).ajaxComplete(function () {
     $(".deleteTopicBtn").click(function () {
         var check = confirm("Do you want to delete this topic?");
@@ -678,6 +820,8 @@ $(document).ajaxComplete(function () {
         }
     });
 });
+
+// Update and delete category
 $(document).ajaxComplete(function () {
     $(".deleteCategoryBtn").click(function () {
         var check = confirm("Do you want to delete this category?");
@@ -699,19 +843,45 @@ $(document).ajaxComplete(function () {
         }
     });
 });
-//$(document).ajaxComplete(function () {
-//    $(".updateCategoryBtn").click(function () {
-//        var categoryID = $(this).val();
-//        $.ajax({
-//            type: "GET",
-//            url: "adminGetCategoryDetail?categoryID=" + categoryID,
-//            success: function (itr) {
-//                var topicID = this['topic'].getTopicID();
-//                alert(topicID);
-//            }
-//        });
-//    });
-//});
+$(document).ajaxComplete(function () {
+    $(".updateCategoryBtn").click(function () {
+        var categoryID = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "adminGetCategoryDetail?categoryID=" + categoryID,
+            success: function (data) {
+                $("#categoryID1").attr("value", categoryID);
+                var tmpStr = "";
+                var currentTopicID = data['category'].topic.topicID;
+                var currentModerator = data['category'].user.accountEmail;
+                $.each(data['listTopic'], function () {
+                    tmpStr += "<option value='" + this['topicID'] + "' ";
+                    if (this['topicID'] == currentTopicID)
+                    {
+                        tmpStr += "selected";
+                    }
+                    tmpStr += ">" + this['topicName'] + "</option>";
+                });
+                $("#topicID1").html(tmpStr);
+                $("#categoryName1").attr("value", data['category'].categoryName);
+                $("#categoryDescription1").html(data['category'].categoryDescription);
+                tmpStr = "";
+                $.each(data['listUser'], function ()
+                {
+                    tmpStr += "<option value='" + this['accountEmail'] + "' ";
+                    if (this['accountEmail'] == currentModerator)
+                    {
+                        tmpStr += "selected>";
+                    }
+                    tmpStr += this['userFullName'] + "</option>";
+                });
+                $("#moderatorEmail1").html(tmpStr);
+                $("#modal_update").modal("show");
+//                alert(data['category'].topic.topicID);
+            }
+        });
+    });
+});
 function addCategory()
 {
     var categoryName = document.getElementById("categoryName").value;
@@ -729,6 +899,49 @@ function addCategory()
     });
     event.preventDefault();
 }
+function updateCategory()
+{
+    var categoryID = $("#categoryID1").val();
+    var categoryName = $("#categoryName1").val();
+    var categoryDescription = $("#categoryDescription1").val();
+    var topicID = $("#topicID1").val();
+    var accountEmail = $("#moderatorEmail1").val();
+    $.ajax({
+        type: "POST",
+        url: "adminUpdateCategory?categoryID=" + categoryID + "&categoryName=" + categoryName + "&categoryDescription=" + categoryDescription + "&topicID=" + topicID + "&accountEmail=" + accountEmail,
+        success: function () {
+            alert("Successfully update category");
+            loadCategory();
+            $("#modal_update").modal("hide");
+        },
+        error: function () {
+            alert("Cannot update category");
+            loadCategory();
+            $("#modal_update").modal("hide");
+        }
+    });
+    event.preventDefault();
+}
+
+// Manage thread
+$(document).ajaxComplete(function ()
+{
+    $("#topicID").on("change", function () {
+        var topicID = $("#topicID").val();
+        $.ajax({
+            type: "POST",
+            url: "adminGetCategoryInTopic?topicID=" + topicID,
+            success: function (itr) {
+                var tmpStr = "";
+                $.each(itr['listCategory1'], function ()
+                {
+                    tmpStr += "<option value='" + this['categoryID'] + "'>" + this['categoryName'] + "</option>";
+                });
+                $("#categoryID").html(tmpStr);
+            }
+        });
+    });
+});
 $(document).ajaxComplete(function ()
 {
     $("#topicID1").on("change", function () {
@@ -742,7 +955,114 @@ $(document).ajaxComplete(function ()
                 {
                     tmpStr += "<option value='" + this['categoryID'] + "'>" + this['categoryName'] + "</option>";
                 });
-                $("#categoryID").html(tmpStr);
+                $("#categoryID1").html(tmpStr);
+            }
+        });
+    });
+});
+function addThread()
+{
+    var threadName = $("#threadName").val();
+    var threadDescription = $("#threadDescription").val();
+    var categoryID = $("#categoryID").val();
+    $.ajax({
+        type: "POST",
+        url: "adminAddThread?threadName=" + threadName + "&threadDescription=" + threadDescription + "&categoryID=" + categoryID,
+        success: function () {
+            alert("Successfully add new thread");
+            loadThread();
+            $("#modal_add").modal("hide");
+        },
+        error: function () {
+            alert("Cannnot add new thread");
+            loadThread();
+            $("#modal_add").modal("hide");
+        }
+    });
+    event.preventDefault();
+}
+function updateThread()
+{
+    var threadID = $("#threadID1").val();
+    var threadName = $("#threadName1").val();
+    var threadDescription = $("#threadDescription1").val();
+    var categoryID = $("#categoryID1").val();
+    $.ajax({
+        type: "POST",
+        url: "updateThread?threadID=" + threadID + "&threadName=" + threadName + "&threadDescription=" + threadDescription + "&categoryID=" + categoryID,
+        success: function () {
+            alert("Update thread success.");
+            loadThread();
+            $("#modal_update").modal("hide");
+        },
+        error: function () {
+            alert("Update thread success.");
+            loadThread();
+            $("#modal_update").modal("hide");
+        }
+    });
+    event.preventDefault();
+}
+$(document).ajaxComplete(function () {
+    $(".deleteThreadBtn").click(function () {
+        var tmp = confirm("Do you want to delete this thread?");
+        if (tmp) {
+            var threadID = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "adminDeleteThread?threadID=" + threadID,
+                success: function () {
+                    alert("Successfully delete thread");
+                    loadThread();
+                },
+                error: function () {
+                    alert("Cannot delete thread");
+                    loadThread();
+                }
+            });
+        }
+    });
+});
+$(document).ajaxComplete(function () {
+    $(".updateThreadBtn").click(function () {
+        var threadID = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "adminUpdateThread?threadID=" + threadID,
+            success: function (data) {
+                $("#threadID1").attr("value", data['thread'].threadID);
+                var topicID = data['thread'].category.topic.topicID;
+                var categoryID = data['thread'].category.categoryID;
+                var tmpStr = "";
+                $.each(data['listTopic'], function () {
+                    tmpStr += "<option value='" + this['topicID'] + "' ";
+                    if (this['topicID'] == topicID)
+                    {
+                        tmpStr += "selected";
+                    }
+                    tmpStr += ">" + this['topicName'] + "</option>";
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "adminGetCategoryInTopic?topicID=" + topicID,
+                    success: function (itr) {
+                        var tmpStr = "";
+                        $.each(itr['listCategory1'], function ()
+                        {
+                            tmpStr += "<option value='" + this['categoryID'] + "'";
+                            if (this['categoryID'] == categoryID)
+                            {
+                                tmpStr += "selected";
+                            }
+                            tmpStr += ">" + this['categoryName'] + "</option>";
+                        });
+                        $("#categoryID1").html(tmpStr);
+                    }
+                });
+                $("#topicID1").html(tmpStr);
+                $("#threadName1").attr("value", data['thread'].threadName);
+                $("#threadDescription1").html(data['thread'].threadDescription);
+                $("#modal_update").modal("show");
             }
         });
     });

@@ -104,7 +104,38 @@ public class UserDataProcess {
         }
         return listUser;
     }
-    
+    public User getDataByEmail(String accountEmail)
+    {
+        User user = new User();
+        String sqlQuery = "SELECT * FROM tblAccount WHERE accountEmail = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, accountEmail);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user.setAccountEmail(resultSet.getString(1));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setUserFullName(resultSet.getString(4));
+                user.setUserAddress(resultSet.getString(5));
+                user.setRole(resultSet.getString(6));
+                user.setStatus(resultSet.getString(7));
+                user.setUserDoB(resultSet.getString(8));
+                user.setUserAvatar(resultSet.getString(9));
+                user.setUserGender(resultSet.getString(10));
+                user.setUserDescription(resultSet.getString(11));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(resultSet.getString(13));
+            }
+            resultSet.close();
+            preparedStatement.close();
+            getConnection().close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
     public boolean addUser(String accountEmail, String _username, String _password, String userFullname, String userAddress, int _role, int _status, String userDoB, String userAvatar, int userGender, String userDescription, String userPhonenumber) {
         boolean isAdded = false;
         String sqlQuery = "INSERT INTO tblAccount VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";

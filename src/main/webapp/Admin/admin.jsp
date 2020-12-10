@@ -24,6 +24,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
         <input type="hidden" value="<s:property value="#session.accountEmail"/>" name="test" id="test"/>
@@ -127,12 +128,12 @@
             <!-- sidebar-wrapper  -->
             <main class="page-content">
                 <div class="container-fluid" id="showTable">
-                    
                 </div>
             </main>
         </div>
-        <div class="modal fade" id="modal_add" tabindex="-1" role="dialog"></div>
-        <div class="modal fade" id="modal_update" tabindex="-1" role="dialog"></div>
+        <div class="modal fade" id="modal_add" role="dialog"></div>
+        <div class="modal fade" id="modal_update" role="dialog"></div>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script src="include/resources/js/adminpage.js"></script>
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
     </body>

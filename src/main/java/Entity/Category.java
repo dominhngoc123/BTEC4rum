@@ -13,8 +13,8 @@ public class Category {
     private String categoryID;
     private String categoryName;
     private String categoryDescription;
-    private String topicID;
-    private String accountEmail;
+    private Topic topic;
+    private User user;
     private String dateAdded;
 
     public Category() {
@@ -44,20 +44,20 @@ public class Category {
         this.categoryDescription = categoryDescription;
     }
 
-    public String getTopicID() {
-        return topicID;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setTopicID(String topicID) {
-        this.topicID = topicID;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
-    public String getAccountEmail() {
-        return accountEmail;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccountEmail(String accountEmail) {
-        this.accountEmail = accountEmail;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDateAdded() {

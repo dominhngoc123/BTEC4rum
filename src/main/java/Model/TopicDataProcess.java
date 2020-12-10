@@ -70,13 +70,14 @@ public class TopicDataProcess {
         String sqlQuery = "SELECT * FROM tblTopic WHERE topicID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery(sqlQuery);
+            preparedStatement.setString(1, topicID);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
                 topic.setTopicID(resultSet.getString(1));
-                topic.setTopicID(resultSet.getString(2));
-                topic.setTopicID(resultSet.getString(3));
-                topic.setTopicID(resultSet.getString(4));
+                topic.setTopicName(resultSet.getString(2));
+                topic.setTopicDescription(resultSet.getString(3));
+                topic.setDateAdded(resultSet.getString(4));
             }
             resultSet.close();
             preparedStatement.close();

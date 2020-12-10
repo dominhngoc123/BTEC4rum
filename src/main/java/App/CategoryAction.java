@@ -157,8 +157,6 @@ public class CategoryAction extends ActionSupport {
         UserDataProcess userDataProcess = new UserDataProcess();
         CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
         category = categoryDataProcess.getDatabyID(categoryID);
-        user = userDataProcess.getModeratorInCategory(category.getAccountEmail());
-        topic = topicDataProcess.getDatabyID(category.getTopicID());
         listTopic = topicDataProcess.getData();
         listUser = userDataProcess.getModerator();
         return "DETAILCATEGORY";
@@ -179,7 +177,15 @@ public class CategoryAction extends ActionSupport {
         }
         return "ADDCATEGORYFAILED";
     }
-    
+    public String updateCategory()
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        if (categoryDataProcess.updateCategory(categoryID, categoryName, categoryDescription, topicID, accountEmail))
+        {
+            return "UPDATECATEGORYSUCCESS";
+        }
+        return "UPDATECATEGORYFAILED";
+    }
     public String deleteCategory()
     {
         CategoryDataProcess categoryDataProcess = new CategoryDataProcess();

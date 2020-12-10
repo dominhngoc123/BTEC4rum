@@ -74,6 +74,13 @@
             <result name="ADDTOPICSUCCESS" type="json">/Admin/admin.jsp</result>
             <result name="ADDTOPICFAILED" type="json">/Admin/admin.jsp</result>
         </action>
+        <action name="adminGetTopicDetail" class="App.TopicAction" method="getDataByID">
+            <result name="DETAILTOPIC" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminUpdateTopic" class="App.TopicAction" method="updateTopic">
+            <result name="UPDATETOPICSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="UPDATETOPICFAILED" type="json">/Admin/admin.jsp</result>
+        </action>
         <action name="adminDeleteTopic" class="App.TopicAction" method="deleteTopic">
             <result name="DELETETOPICSUCCESS">/Admin/admin.jsp</result>
         </action>
@@ -86,11 +93,32 @@
             <result name="ADDCATEGORYSUCCESS">/Admin/admin.jsp</result>
             <result name="ADDCATEGORYFAILED">/Admin/admin.jsp</result>
         </action>
+        <action name="adminUpdateCategory" class="App.CategoryAction" method="updateCategory">
+            <result name="UPDATECATEGORYSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="UPDATECATEGORYFAILED" type="json">/Admin/admin.jsp</result>
+        </action>
         <action name="adminGetCategoryInTopic" class="App.CategoryAction" method="getDataByTopic">
             <result name="LISTCATEGORYINTOPIC" type="json">/Admin/admin.jsp</result>
         </action>
         <action name="adminGetCategoryDetail" class="App.CategoryAction" method="getDataByID">
             <result name="DETAILCATEGORY" type="json">/Admin/admin.jsp</result>
+        </action>
+        
+        <!-- Admin manage thread -->
+        <action name="adminAddThread" class="App.ThreadAction" method="addThread">
+            <result name="ADDTHREADSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="ADDTHREADFAILED" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminDeleteThread" class="App.ThreadAction" method="deleteThread">
+            <result name="DELETETHREADSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="DELETETHREADFAILED" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminUpdateThread" class="App.ThreadAction" method="getDataByID">
+            <result name="THREADDETAIL" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="updateThread" class="App.ThreadAction" method="updateThread">
+            <result name="UPDATETHREADSUCCESS" type="json">/Admin/admin.jsp</result>
+            <result name="UPDATETHREADFAILED" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
 </struts>
