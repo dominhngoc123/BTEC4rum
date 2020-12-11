@@ -641,7 +641,7 @@ function loadPost()
                 }
                 tmpStr += "</td>";
                 tmpStr += "<td>" + this['thread'].threadName + "</td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Detail</a></td>";
+                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Approve</a></td>";
                 tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-primary'>Update</a></td>";
                 tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger'>Delete</a></td>";
                 tmpStr += "</tr>";

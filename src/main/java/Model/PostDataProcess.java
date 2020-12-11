@@ -79,7 +79,7 @@ public class PostDataProcess {
         String sqlQuery = "";
         if (userRole == 3)
         {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, )";
+            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, NULL)";
         }
         else
         {

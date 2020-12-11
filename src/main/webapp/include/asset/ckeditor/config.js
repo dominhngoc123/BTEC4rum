@@ -7,6 +7,7 @@ CKEDITOR.editorConfig = function (config) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
-	config.filebrowserBrowseUrl = 'asset/ckfinder/ckfinder.html',
-		config.filebrowserUploadUrl = 'asset/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+	config.filebrowserBrowseUrl: url + 'responsive_filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+	config.filebrowserUploadUrl: url + 'responsive_filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+	config.filebrowserImageBrowseUrl: url + 'responsive_filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr='
 };

@@ -6,10 +6,10 @@
 
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script type="text/javascript">
-    <s:if test="#session.accountEmail == null">
-        alert("Your session is expired. Please login again.");
-        window.location.href = "index.jsp";
-    </s:if>
-</script>
+<s:if test="#session.userRole != 1">
+    <script>
+        alert("You do not have permission to access this page.");
+        window.location = "redirect";
+    </script>
+</s:if> 
 <!DOCTYPE html>
