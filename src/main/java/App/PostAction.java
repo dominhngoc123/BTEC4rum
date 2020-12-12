@@ -27,7 +27,8 @@ public class PostAction extends ActionSupport {
     private String approvedDate;
     private Post post;
     private List<Post> listPost;
-    private int commentLevel;
+    private List<Post> listNewPost;
+    private int commentCount;
 
     public String getPostID() {
         return postID;
@@ -101,6 +102,14 @@ public class PostAction extends ActionSupport {
         this.listPost = listPost;
     }
 
+    public List<Post> getListNewPost() {
+        return listNewPost;
+    }
+
+    public void setListNewPost(List<Post> listNewPost) {
+        this.listNewPost = listNewPost;
+    }
+
     public Post getPost() {
         return post;
     }
@@ -118,11 +127,11 @@ public class PostAction extends ActionSupport {
     }
 
     public int getCommentLevel() {
-        return commentLevel;
+        return commentCount;
     }
 
-    public void setCommentLevel(int commentLevel) {
-        this.commentLevel = commentLevel;
+    public void setCommentLevel(int commentCount) {
+        this.commentCount = commentCount;
     }
     
     public PostAction() {
@@ -151,11 +160,32 @@ public class PostAction extends ActionSupport {
         listPost = postDataProcess.getPost();
         return "POSTDATA";
     }
+//    
+//    public String getForumPost()
+//    {
+//        PostDataProcess postDataProcess = new PostDataProcess();
+//        listPost = postDataProcess.getForumDisplayPost();
+//        listNewPost = postDataProcess.getNewPost();
+//        return "POSTDATA";
+//    }
     
     public String getPostByID()
     {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getPostByID(postID);
+        commentCount = listPost.size();
         return "POSTDETAIL";
+    }
+    public String getPostbyEmail()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        listPost = postDataProcess.getDataByPosterEmail(accountEmail);
+        return "LISTPOSTBYEMAIL";
+    }
+    public String getSpecificPost()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        post = postDataProcess.getSpecificPost(postID);
+        return "SPECIFICPOST";
     }
 }

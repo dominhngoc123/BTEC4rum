@@ -39,7 +39,7 @@
     }
 }
 body {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
 }
 .page-wrapper .sidebar-wrapper,
 .sidebar-wrapper .sidebar-brand > a,
@@ -211,10 +211,14 @@ body {
 }
 
 .sidebar-wrapper .sidebar-menu .header-menu span {
-    font-weight: bold;
-    font-size: 14px;
-    padding: 15px 20px 5px 20px;
-    display: inline-block;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    padding: 15px 20px 5px 20px !important;
+    display: inline-block !important;
+}
+.sidebar-wrapper .sidebar-menu .sidebar span {
+    font-weight: bold !important;
+    font-size: 14px !important;
 }
 
 .sidebar-wrapper .sidebar-menu ul li a {
@@ -227,7 +231,7 @@ body {
 
 .sidebar-wrapper .sidebar-menu ul li a i {
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 12px !important;
     width: 30px;
     height: 30px;
     line-height: 30px;

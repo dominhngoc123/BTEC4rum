@@ -15,7 +15,7 @@ body
 /*! CSS Used from: https://cloud.digitalocean.com/assets/v2/login/login-5a6f5862e6ab7f5387680966522f3950.css ; media=screen */
 @media screen {
     .login {
-        background: #b3ffff;
+        background: #ffffff;
         font-family: "proxima-nova";
         padding: 0;
         margin: 0;
@@ -35,19 +35,25 @@ body
         text-decoration: underline;
         color: inherit;
     }
+    
     .login .vertical-form {
         margin: 0 auto;
         width: 470px;
         padding: 40px;
         border-radius: 3px;
         background: white;
+        box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     }
     .login .vertical-form legend {
         text-align: center;
         font-weight: 300;
         color: #444;
-        margin: 0 auto 45px;
-        font-size: 35px;
+        margin: 0 auto 35px;
+        font-size: 55px;
         line-height: 38px;
         text-transform: none;
         letter-spacing: 0;
@@ -82,6 +88,9 @@ body
     .login .vertical-form input[type='submit']:focus {
         border-color: #E7E7E7;
         box-shadow: none;
+        border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     }
     .login .vertical-form input[type='submit'] {
         color: white;
@@ -94,6 +103,15 @@ body
         margin-bottom: 0;
         height: auto;
         -webkit-appearance: none;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+        transition: 0.5s all;
+    }
+    .login .vertical-form input[type='text'], .login .vertical-form input[type='password']{
+        height: 50px !important;
+    }
+    .login .vertical-form input[type='submit']:hover{
+        -webkit-box-shadow: 0 0 3px 3px rgba(66,133,244,.3);
+        box-shadow: 0 0 3px 3px rgba(66,133,244,.3);
     }
     .login .vertical-form input:hover[type='submit'] {
         background-color: #ff8533;

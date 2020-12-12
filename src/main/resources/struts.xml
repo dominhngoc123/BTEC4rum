@@ -10,7 +10,7 @@
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
         </action>
         <action name="redirect" class="App.LoginAction" method="redirectUser">
-            <result name="MEMBER">/Member/member.jsp</result>
+            <result name="MEMBER" type="redirectAction">ForumContent</result>
             <result name="ADMIN" type="redirectAction">adminWelcomeData</result>
             <result name="MOD">/Moderator/moderator.jsp</result>
         </action>
@@ -20,15 +20,15 @@
         <action name="returnIndex">
             <result>/index.jsp</result>
         </action>
-        <action name="memberPage">
-            <result>/Member/member.jsp</result>
-        </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
             <result name="ADMINLOGINSUCCESS" type="redirectAction">adminWelcomeData</result>
             <result name="ADMINLOGINFAILED">
                 <param name="location">/index.jsp</param>
                 <param name="msg">${msg}</param>
             </result>
+        </action>
+        <action name="ForumContent" class="App.PostAction" method="getForumPost">
+            <result name="POSTDATA">/Member/member.jsp</result>
         </action>
         <!-- Admin load data -->
         <action name="adminWelcomeData" class="App.PostAction" method="getAllPost">
@@ -65,8 +65,17 @@
             <result name="USERADDCOMMENTSUCCESS" type="redirectAction">redirect</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
+        <action name="getDetailPostForUpdate" class="App.PostAction" method="getPostByID">
+            <result name="POSTDETAIL">/editpost.jsp</result>
+        </action>
         <action name="getDetailPost" class="App.PostAction" method="getPostByID">
             <result name="POSTDETAIL">/postdetail.jsp</result>
+        </action>
+        <action name="UserGetPost" class="App.PostAction" method="getPostbyEmail">
+            <result name="LISTPOSTBYEMAIL">managepost.jsp</result>
+        </action>
+        <action name="getSpecificPost" class="App.PostAction" method="getSpecificPost">
+            <result name="SPECIFICPOST" type="json">/postdetail.jsp</result>
         </action>
         
         <!-- Admin manage topic -->

@@ -641,9 +641,15 @@ function loadPost()
                 }
                 tmpStr += "</td>";
                 tmpStr += "<td>" + this['thread'].threadName + "</td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Approve</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-primary'>Update</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger'>Delete</a></td>";
+                if (this['status'] == 1)
+                {
+                    tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-warning btn-jump' title='Button này để mày bỏ duyệt bài'><i class='fas fa-comment-slash'></i></a></td>";
+                } else
+                {
+                    tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success btn-jump' title='Button này để mày duyệt bài'><i class='fas fa-check'></i></a></td>";
+                }
+                tmpStr += "<td style='width: 120px;'><a href='getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
+                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger btn-jump'><i class='far fa-trash-alt'></i></a></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";

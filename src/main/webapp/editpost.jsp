@@ -1,6 +1,6 @@
 <%-- 
     Document   : postdetail
-    Created on : Dec 11, 2020, 2:05:34 PM
+    Created on : Nov 6, 2020, 4:26:43 PM
     Author     : Ngoc Do Minh
 --%>
 
@@ -8,10 +8,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BTEC FPT Forum - Post Detail</title>
+        <title>BTEC FPT Forum - Edit Post Detail</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--=============================================Favicon==================================================-->
         <link rel="icon" type="image/png" href="resources/img/logo_BTEC -head.png" />
@@ -23,19 +24,15 @@
         <!--=========================================Bootstrap css======================================================-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
-        <!--===========================================Css Base====================================================-->
-        <link rel="stylesheet" href="include/resources/css/base.css">
         <!--===============================================Style css================================================-->
         <link rel="stylesheet" href="include/resources/css/postdetail.css">
+        <!--===========================================Css Base====================================================-->
+        <link rel="stylesheet" href="include/resources/css/base.css">
         <!--===============================================================================================-->
+        <link rel="stylesheet" href="include/resources/css/editpost.css">
+        <!--===============================================================================================-->
+
     </head>
-    <!--!cái style này ở đây vì thứ tự ưu tiên css, dùng cho scroll modal đừng ai xóa hoặc di chuyển nha <3 -->
-    <style>
-        #modalEdit_post {
-            opacity: 1 !important;
-            overflow: visible;
-        }
-    </style>
 
     <body class="preloading">
         <!-- *loading -->
@@ -113,7 +110,7 @@
                     <div class="modal-body modal-body-profile">
                         <div class="modal-body-profile-left" id="modal-body-profile-left">
                             <div class="modal-body-profile-pic">
-                                <img src="/resources/img/pic.png" alt="">
+                                <img src="include/resources/img/pic.png" alt="">
                             </div>
                             <div class="modal-body-profile-name"><span>John Doe</span>
                             </div>
@@ -447,67 +444,68 @@
             </div>
             <!-- *Content Right-->
             <div class="content_right">
-                <!--todo Post Container -->
+                <!-- Post Container -->
                 <div class="post-container">
-                    <!-- Post Header -->
                     <s:iterator value="listPost">
                         <s:if test="postID.length() == 10">
-                            <div class="post__header container">
-                                <div class="post__header-title">
-                                    <h4><s:property value="postTitle"/>
-                                    </h4>
-                                </div>
-                                <div class="post__header-action">
-                                    <div class="btn-group">
-                                        <div class="btn-group" role="group">
-                                            <button type="button"
-                                                    class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="sr-only">Toggle Dropleft</span>
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <div class="dropdown-menu edit-dropdown-menu">
-                                                <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                <button value="<s:property value="postID"/>" class="dropdown-item edit-dropdown-item editPost">Update</button>
-                                                <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
+                            <form action="" method="post">
+                                <!-- Post Header -->
+                                <div class="post__header container">
+                                    <div class="post__header-title">
+                                        <textarea class="form-control auto-textarea post-inp-color post-inp-edit fadeUpdate"
+                                                  placeholder="Enter title here..." aria-label="With textarea"
+                                                  style="text-rendering: auto;" required><s:property value="postTitle"/></textarea>
+                                    </div>
+                                    <div class="post__header-action">
+                                        <div class="btn-group">
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropleft</span>
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu edit-dropdown-menu">
+                                                    <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Post Body -->
-                            <div class="post__body container">
-                                <div class="post__body-author">
-                                    <div class="post__body-author-bg-img">
-                                        <a data-toggle="modal" data-target="#profile-modal"><img src="<s:property value="user.userAvatar"/>"
-                                                                                                 alt=""></a>
+                                <!-- Post Body -->
+                                <div class="post__body container">
+                                    <div class="post__body-author">
+                                        <div class="post__body-author-bg-img">
+                                            <a data-toggle="modal" data-target="#profile-modal"><img src="<s:property value="user.userAvatar"/>" alt=""></a>
+                                        </div>
+                                        <ul class="post__body-author-text">
+                                            <li><span class="post__body-author-name" data-toggle="modal"
+                                                      data-target="#profile-modal">Doe John</span></li>
+                                            <li><span class="post__body-author-time">Posted on
+                                                    <span>10-FEB-2015</span> <span>12:00</span></span></li>
+                                        </ul>
                                     </div>
-                                    <ul class="post__body-author-text">
-                                        <li><span class="post__body-author-name" data-toggle="modal"
-                                                  data-target="#profile-modal"><s:property value="user.userFullName"/></span></li>
-                                        <li><span class="post__body-author-time">Posted on&nbsp;
-                                                <span><s:property value="approvedDate"/></span> <span>12:00</span></span></li>
-                                    </ul>
+                                    <div class="post__body-content">
+                                        <textarea name="" id="editor1" placeholder="Type text content here..." required><s:property value="postContent" escape="false"/></textarea>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-jump btn-post btn-shadow btnFade">Update</button>
+                                    <div class="post__body-action unselecttable">
+                                        <div class="post__body-action-like">
+                                            <button type="button" class="btn-like btn-jump"><i class="far fa-thumbs-up"></i>
+                                                <span>Like</span> <span>12</span></button>
+                                        </div>
+                                        <div class="post__body-action-comment">
+                                            <button type="button" class="btn-cmt btn-jump"><i class="far fa-comment-dots"></i>
+                                                <span>Comment</span>
+                                                <span><s:property value="listPost.size() - 1"/></span></button>
+                                        </div>
+                                        <div class="post__body-action-share">
+                                            <button type="button" class="btn-jump"><i class="far fa-share-square"></i>
+                                                <span>Share</span></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="post__body-content" id="postContent" data-value="<s:property value="postContent" escape="false"/>">
-                                    <s:property value="postContent" escape="false"/>
-                                </div>
-                                <div class="post__body-action unselecttable">
-                                    <div class="post__body-action-like">
-                                        <button type="button" class="btn-like btn-jump"><i class="far fa-thumbs-up"></i>
-                                            <span>Like</span> <span>12</span></button>
-                                    </div>
-                                    <div class="post__body-action-comment">
-                                        <button type="button" class="btn-cmt btn-jump"><i class="far fa-comment-dots"></i>
-                                            <span>Comment</span>
-                                            <span><s:property value="listPost.size() - 1"/></span></button>
-                                    </div>
-                                    <div class="post__body-action-share">
-                                        <button type="button" class="btn-jump"><i class="far fa-share-square"></i>
-                                            <span>Share</span></button>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                             <div class="post__footer container" id="post__footer">
                                 <div class="post__footer-post-comment">
                                     <div class="cmt__action-container">
@@ -535,13 +533,13 @@
                                             <li>
                                                 <div class="comment-main-level">
                                                     <!-- Avatar -->
-                                                    <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>"></div>
+                                                    <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>" alt=""></div>
                                                     <!-- Contenedor del Comentario -->
                                                     <div class="comment-box">
                                                         <div class="comment-head">
                                                             <h6 class="comment-name by-author"><a href="#none" data-toggle="modal"
-                                                                                                  data-target="#profile-modal"><s:property value="user.userFullName"/></a></h6>
-                                                            <span class="posted-time">Posted on <s:property value="user.approvedDate"/></span>
+                                                                                                  data-target="#profile-modal">John Doe</a></h6>
+                                                            <span class="posted-time">Posted on 10-FEB-2015 12:00</span>
                                                             <div class="comment-head-more-action">
                                                                 <button type="button"
                                                                         class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
@@ -552,13 +550,19 @@
                                                                 </button>
                                                                 <div class="dropdown-menu edit-dropdown-menu">
                                                                     <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                                    <button value="<s:property value="postID"/>" class="dropdown-item edit-dropdown-item editComment">Update</button>
                                                                     <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="comment-content">
-                                                            <p id="<s:property value="postID"/>"><s:property value="postContent" escape="false"/></p>
+                                                            <form action="" method="post">
+                                                                <textarea type="text" class="txtUpdatecmt"
+                                                                          placeholder="Enter comment here..." required></textarea>
+                                                                <br>
+                                                                <button type="submit"
+                                                                        class="btn-jump btn-shadow btnUpdatecmt">update</button>
+                                                                <br>
+                                                            </form>
                                                             <div class="comment-open">
                                                                 <a href="#none" class="btn-like btn-like-ml"
                                                                    style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
@@ -583,63 +587,70 @@
                                                     </div>
                                                 </div>
                                                 <ul class="comments-list reply-list">
-                                                </s:elseif>
-                                                <s:elseif test="postID.length() == 14">
-                                            </li>
-                                            <li>
-                                                <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>" alt="">
-                                                </div>
-                                                <div class="comment-box">
-                                                    <div class="comment-head">
-                                                        <h6 class="comment-name"><a href="#"><s:property value="user.userFullName"/></a></h6>
-                                                        <span class="posted-time">Posted on <s:property value="approvedDate"/></span>
-                                                        <div class="comment-head-more-action">
-                                                            <button type="button"
-                                                                    class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                <span class="sr-only">Toggle Dropleft</span>
-                                                                <i class="fas fa-ellipsis-v"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu edit-dropdown-menu">
-                                                                <a class="dropdown-item edit-dropdown-item"
-                                                                   href="#">Delete</a>
-                                                                <button value="<s:property value="postID"/>" class="dropdown-item edit-dropdown-item editComment">Update</button>
-                                                                <a class="dropdown-item edit-dropdown-item"
-                                                                   href="#">Report</a>
+                                                    
+                                                    </s:elseif>
+                                                    <s:elseif test="postID.length() == 14">
+                                                    </li>
+                                                        <li>
+                                                        <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>" alt="">
+                                                        </div>
+                                                        <div class="comment-box">
+                                                            <div class="comment-head">
+                                                                <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6>
+                                                                <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+                                                                <div class="comment-head-more-action">
+                                                                    <button type="button"
+                                                                            class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">
+                                                                        <span class="sr-only">Toggle Dropleft</span>
+                                                                        <i class="fas fa-ellipsis-v"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu edit-dropdown-menu">
+                                                                        <a class="dropdown-item edit-dropdown-item"
+                                                                           href="#">Delete</a>
+                                                                        <a class="dropdown-item edit-dropdown-item"
+                                                                           href="#">Report</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="comment-content">
+                                                                <form action="" method="post">
+                                                                    <textarea type="text" class="txtUpdatecmt"
+                                                                              placeholder="Enter comment here..." required></textarea>
+                                                                    <br>
+                                                                    <button type="submit"
+                                                                            class="btn-jump btn-shadow btnUpdatecmt">update</button>
+                                                                    <br>
+                                                                </form>
+                                                                <div class="comment-open">
+                                                                    <a href="#none" class="btn-like btn-like-ml"
+                                                                       style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
+                                                                        <span>2</span></a>
+                                                                    <a class="btn-reply">
+                                                                        <i class="fa fa-reply"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="comment-footer">
+                                                                <div class="comment-form">
+                                                                    <form action="" method="post">
+                                                                        <textarea class="form-control auto-textarea" name=""
+                                                                                  placeholder="Write your comment here"
+                                                                                  required></textarea>
+                                                                        <div class="pull-right send-button">
+                                                                            <button type="submit"
+                                                                                    class="btn-send btn-jump">send</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <s:property value="postContent" escape="false"/>
-                                                        <div class="comment-open">
-                                                            <a href="#none" class="btn-like btn-like-ml"
-                                                               style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
-                                                                <span>2</span></a>
-                                                            <a class="btn-reply">
-                                                                <i class="fa fa-reply"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-footer">
-                                                        <div class="comment-form">
-                                                            <form action="" method="post">
-                                                                <textarea class="form-control auto-textarea" name=""
-                                                                          placeholder="Write your comment here"
-                                                                          required></textarea>
-                                                                <div class="pull-right send-button">
-                                                                    <button type="submit"
-                                                                            class="btn-send btn-jump">send</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </s:elseif>
-                                        </s:iterator>
+                                                    </s:elseif>
+                                                </s:iterator>
+                                            </li>
+                                        </ul>
                                     </li>
-                                </ul>
-                                </li>
                                 </ul>
                             </div>
                         </div>
@@ -649,241 +660,102 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal edit post-->
-            <div class="modal fade modal_overFlow" id="modalEdit_post">
-                <div class="modal-dialog modal-lg-edit" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Post</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                            <div class="modal-body">
-                                <!-- Post Header -->
-                                <div class="post__header">
-                                    <div class="post__header-title">
-                                        <textarea
-                                            class="form-control auto-textarea post-inp-color post-inp-edit fadeUpdate" id="editPostTitle"
-                                            placeholder="Enter title here..." aria-label="With textarea"
-                                            style="text-rendering: auto;" required></textarea>
-                                    </div>
-                                    <div class="post__header-action">
-                                        <div class="btn-group">
-                                            <div class="btn-group" role="group">
-                                                <button type="button"
-                                                        class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropleft</span>
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu edit-dropdown-menu">
-                                                    <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                    <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Post Body -->
-                                <div class="post__body">
-                                    <div class="post__body-author">
-                                        <div class="post__body-author-bg-img">
-                                            <a><img src="" class="editUserAvatar" alt=""></a>
-                                        </div>
-                                        <ul class="post__body-author-text">
-                                            <li><span class="post__body-author-name editUserName"></span></li>
-                                            <li><span class="post__body-author-time">Posted on
-                                                    <span class="approvedDate"></span></span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="post__body-content">
-                                        <textarea name="" id="editor1" class="editPostContent" placeholder="Type text content here..."
-                                                  required>Write content here...</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-jump btn-post btn-shadow btnFade">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        </section>
+        <!-- *scrollTop -->
+        <div class="scrollTop">
+            <a href="#" class="sclTop"><i class="far fa-arrow-alt-circle-up"></i></a>
+        </div>
+        <!-- *Footer -->
+        <footer class="footer">
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Hà Nội</h5>
+                    </li>
+                    <li>
+                        <p>Tầng 2, Tòa nhà Detech II, 107 Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 0981 090 513</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.hn@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 0981 090 513</p>
+                    </li>
+                </ul>
             </div>
-            <!-- Modal edit cmt-->
-            <div class="modal fade" id="modalEdit_cmt">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Comment</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                            <div class="modal-body">
-                                <div class="comment-main-level">
-                                    <!-- Contenedor del Comentario -->
-                                    <div class="comment-box">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name by-author"><a href="#" id="cmtAuthor"></a></h6>
-                                            <span class="posted-time" id="cmtApprovedDate"></span>
-                                            <div class="comment-head-more-action">
-                                                <button type="button"
-                                                        class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropleft</span>
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu edit-dropdown-menu">
-                                                    <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                    <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="comment-content">
-                                            <textarea type="text" class="txtUpdatecmt" id="cmtContent" required></textarea>
-                                            <br>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit"
-                                        class="btn btn-jump btn-post btn-shadow btn_cmtFade">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Đà Nẵng</h5>
+                    </li>
+                    <li>
+                        <p>66B Võ Văn Tần, Quận Thanh Khê, TP.Đà Nẵng (Tòa nhà Savico Building)</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 0236 730 9268</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.dn@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 0905 888 535</p>
+                    </li>
+                </ul>
             </div>
-        </div>
-    </section>
-    <!-- *scrollTop -->
-    <div class="scrollTop">
-        <a href="#" class="sclTop"><i class="far fa-arrow-alt-circle-up"></i></a>
-    </div>
-    <!-- *Footer -->
-    <footer class="footer">
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Hà Nội</h5>
-                </li>
-                <li>
-                    <p>Tầng 2, Tòa nhà Detech II, 107 Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 0981 090 513</p>
-                </li>
-                <li>
-                    <p>Email: btec.hn@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 0981 090 513</p>
-                </li>
-            </ul>
-        </div>
 
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Đà Nẵng</h5>
-                </li>
-                <li>
-                    <p>66B Võ Văn Tần, Quận Thanh Khê, TP.Đà Nẵng (Tòa nhà Savico Building)</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 0236 730 9268</p>
-                </li>
-                <li>
-                    <p>Email: btec.dn@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 0905 888 535</p>
-                </li>
-            </ul>
-        </div>
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>
+                            TP. Hồ Chí Minh
+                        </h5>
+                    </li>
+                    <li>
+                        <p>275 Nguyễn Văn Đậu - Quận Bình Thạnh - TP.Hồ Chí Minh</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 028 7300 9268</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.hcm@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 028 7300 9268 / 0942 25 68 25</p>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>
-                        TP. Hồ Chí Minh
-                    </h5>
-                </li>
-                <li>
-                    <p>275 Nguyễn Văn Đậu - Quận Bình Thạnh - TP.Hồ Chí Minh</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 028 7300 9268</p>
-                </li>
-                <li>
-                    <p>Email: btec.hcm@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 028 7300 9268 / 0942 25 68 25</p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Newsletter</h5>
-                </li>
-                <li>
-                    <p class="footer-p-last">A rover wearing a fuzzy suit doesn’t alarm the real penguinsi</p>
-                </li>
-                <li>
-                    <div class="footer-input-group">
-                        <input type="text" class="footer-input-form-control" placeholder="Search for...">
-                        <button><i class="fas fa-envelope btn-letter"></i></button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </footer>
-</body
-<!--=============================================Bootstrap js==================================================-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-<script type="text/javascript">
-                                                   $(".editPost").click(function () {
-                                                       var postID = $(this).val();
-                                                       var postContent = $("#postContent").attr("data-value");
-                                                       $.ajax({
-                                                           type: "POST",
-                                                           url: "getSpecificPost?postID=" + postID,
-                                                           success: function (data) {
-                                                               $("#editPostTitle").html(data['post'].postTitle);
-                                                               $(".editUserAvatar").attr("src", data['post'].user.userAvatar);
-                                                               $(".editUserName").html(data['post'].user.userFullName);
-                                                               $(".approvedDate").html(data['post'].approvedDate);
-                                                               CKEDITOR.instances["editor1"].setData(postContent);
-                                                               $("#modalEdit_post").modal("show");
-                                                           }
-                                                       });
-                                                   });
-                                                   $(".editComment").click(function () {
-                                                       var postID = $(this).val();
-                                                       $.ajax({
-                                                           type: "POST",
-                                                           url: "getSpecificPost?postID=" + postID,
-                                                           success: function (data) {
-                                                               $("#cmtAuthor").html(data['post'].user.userFullName);
-                                                               $("#cmtApprovedDate").html(data['post'].approvedDate);
-                                                               $("#cmtContent").html(data['post'].postContent);
-                                                               $("#modalEdit_cmt").modal("show");
-                                                           }
-                                                       });
-                                                   });
-</script>
-<script src="include/resources/js/base.js"></script>
-<script src="include/asset/ckeditor/ckeditor.js"></script>
-<script type="text/javascript">
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Newsletter</h5>
+                    </li>
+                    <li>
+                        <p class="footer-p-last">A rover wearing a fuzzy suit doesn’t alarm the real penguinsi</p>
+                    </li>
+                    <li>
+                        <div class="footer-input-group">
+                            <input type="text" class="footer-input-form-control" placeholder="Search for...">
+                            <button><i class="fas fa-envelope btn-letter"></i></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+    <!--=============================================Bootstrap js==================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script src="include/resources/js/base.js"></script>
+    <script src="include/asset/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
                                                    // CKEDITOR
                                                    // config
                                                    config = {};
@@ -931,10 +803,10 @@
                                                        $('.fadeUpdate').on('keyup', function () {
                                                            $('.btnFade').fadeIn(200);
                                                        });
-                                                       // =================== Fade btn cmt ===================
-                                                       $('.btn_cmtFade').fadeOut(0);
+
+                                                       $('.btnUpdatecmt').fadeOut(0);
                                                        $('.txtUpdatecmt').on('keyup', function () {
-                                                           $('.btn_cmtFade').fadeIn(200);
+                                                           $(this).next().next().fadeIn(200);
                                                        });
                                                        // =================== bnt Like ===================
                                                        $(".btn-like").click(function () {
@@ -957,7 +829,6 @@
                                                            eve.preventDefault();
                                                            $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
                                                        });
-
                                                    });
 
                                                    // $(document).on('click', '.btn-send', function (eve) {
@@ -977,7 +848,6 @@
                                                    //     }
                                                    // });
 
-</script>
+    </script>
 
 </html>
-<!-- Không tốt nghiệp, bay trường :Đ -->

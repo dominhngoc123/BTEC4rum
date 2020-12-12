@@ -38,9 +38,9 @@
     </script>
     <body class="login">
         <input type="hidden" id="session" value="<s:property value="#session.accountEmail"/>"/>
-        <img class="logo" height="80" width="208" src="https://btec.fpt.edu.vn/wp-content/uploads/2017/12/2017-Btec-01-354.png" alt="BTEC Forum">
+        <img class="logo" height="80" width="208" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_BTEC.png" alt="BTEC Forum">
         <form class="vertical-form sign-in" id="sign-in" action="adminLogin.action" accept-charset="UTF-8" method="post">
-            <legend>Log In</legend><p style="color: red;"><s:property value="msg"/></p>
+            <legend class="legendTitle">Sign In</legend><p style="color: red;"><s:property value="msg"/></p>
             <input type="text" placeholder="Enter username" label="false" spellcheck="false" class="is-sensitive" value="" name="adminUsername" id="user_email" required="true" autocomplete="off">
             <input placeholder="Enter password" label="false" autocomplete="off" class="is-sensitive" type="password" name="adminPassword" id="user_password" required="true" autocomplete="off">
             <input type="submit" name="commit" value="Log In">
