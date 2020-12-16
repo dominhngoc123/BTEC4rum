@@ -534,6 +534,14 @@ body {
 td {
     text-align: center;
 }
+#myTable2 tr td:first-child{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 70px;
+    word-break: break-all;
+}
 /* button jump */
 .btn-jump {
     display: block;

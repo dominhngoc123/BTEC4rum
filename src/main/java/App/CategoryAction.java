@@ -161,6 +161,12 @@ public class CategoryAction extends ActionSupport {
         listUser = userDataProcess.getModerator();
         return "DETAILCATEGORY";
     }
+    public String getModerator()
+    {
+        CategoryDataProcess categoryDataProcess = new CategoryDataProcess();
+        category = categoryDataProcess.getDatabyID(categoryID);
+        return "MODERATOR";
+    }
     public String getDataByTopic()
     {
         CategoryDataProcess categoryDataProcess = new CategoryDataProcess();

@@ -173,7 +173,7 @@ function loadTopic()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Topic Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='topicDescription' id='topicDescription' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
@@ -217,7 +217,7 @@ function loadTopic()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Topic Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='topicDescription' id='topicDescription1' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
@@ -321,7 +321,7 @@ function loadCategory()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group mb-3'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Category Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='categoryDescription' id='categoryDescription' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
@@ -350,7 +350,6 @@ function loadCategory()
             tmpStr += "</form>";
             tmpStr += "</div>";
             tmpStr += "</div>";
-//            tmpStr += "<script type='text/javascript' src='include/resources/js/dropdown.js'>";
             $("#modal_add").html(tmpStr);
             tmpStr = "";
             tmpStr += "<div class='modal-dialog modal-lg' role='document'>";
@@ -390,7 +389,7 @@ function loadCategory()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group mb-3'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Category Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='categoryDescription' id='categoryDescription1' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
@@ -516,7 +515,7 @@ function loadThread()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Thread Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='threadDescription' id='threadDescription' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";
@@ -582,7 +581,7 @@ function loadThread()
             tmpStr += "<div class='col-12'>";
             tmpStr += "<div class='input-group'>";
             tmpStr += "<div class='input-group-prepend'>";
-            tmpStr += "<span class='input-group-text'>Description</span>";
+            tmpStr += "<span class='input-group-text' title='Thread Description'>Des.</span>";
             tmpStr += "</div>";
             tmpStr += "<textarea class='form-control' name='threadDescription' id='threadDescription1' aria-label='With textarea' style='text-rendering: auto;' required></textarea>";
             tmpStr += "</div>";

@@ -29,6 +29,7 @@
         <!--===========================================Css Base====================================================-->
         <link rel="stylesheet" href="include/resources/css/base.css">
         <!--===============================================================================================-->
+        <script src="include/resources/js/DateTime.js" type="text/javascript"></script>
     </head>
     <body class="preloading">
         <!-- *loading -->
@@ -111,27 +112,27 @@
                             <div class="modal-body-profile-name"><span><s:property value="#session.userFullName"/></span>
                             </div>
                             <div class="modal-body-profile-desc"><span><s:if test="#session.userDescription == null">Lười bỏ mẹ</s:if><s:else><s:property value="#session.userDescription"/></s:else></span></div>
-                            <div class="modal-body-profile-sm">
-                                <a href="#" class="fab fa-facebook-f"></a>
-                                <a href="#" class="fab fa-twitter"></a>
-                                <a href="#" class="fab fa-github"></a>
-                                <a href="#" class="fab fa-youtube"></a>
+                                <div class="modal-body-profile-sm">
+                                    <a href="#" class="fab fa-facebook-f"></a>
+                                    <a href="#" class="fab fa-twitter"></a>
+                                    <a href="#" class="fab fa-github"></a>
+                                    <a href="#" class="fab fa-youtube"></a>
+                                </div>
+                                <a href="#" class="modal-body-profile-contact-btn">Contact Me</a>
                             </div>
-                            <a href="#" class="modal-body-profile-contact-btn">Contact Me</a>
-                        </div>
-                        <div class="modal-body-profile-right" id="modal-body-profile-right">
-                            <ul>
-                                <li>
-                                    <h6>Name</h6><span><s:property value="#session.userFullName"/></span>
+                            <div class="modal-body-profile-right" id="modal-body-profile-right">
+                                <ul>
+                                    <li>
+                                            <h6>Name</h6><span><s:property value="#session.userFullName"/></span>
                                 </li>
                                 <li>
                                     <h6>Date of birth</h6><span><s:if test="#session.userDoB != null"><s:property value="#session.userDoB"/></s:if></span>
-                                </li>
-                                <li>
-                                    <h6>Gender</h6><span><s:if test="#session.userGender == 1">Female</s:if><s:elseif test="#session.userGender == 2">Male</s:elseif></span>
-                                </li>
-                                <li>
-                                    <h6>Address</h6><span><s:property value="#session.userAddress"/></span>
+                                    </li>
+                                    <li>
+                                        <h6>Gender</h6><span><s:if test="#session.userGender == 1">Female</s:if><s:elseif test="#session.userGender == 2">Male</s:elseif></span>
+                                    </li>
+                                    <li>
+                                            <h6>Address</h6><span><s:property value="#session.userAddress"/></span>
                                 </li>
                                 <li>
                                     <h6>Phone Number</h6><span><s:property value="#session.userPhonenumber"/></span>
@@ -165,94 +166,95 @@
             </div>
         </div>
         <!-- *Modal update profile-->
-    <div class="modal fade edit-modal-profile" id="update-profile-modal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog  edit-modal-dialog-profile" role="document">
-            <div class="modal-content edit-modal-content">
-                <div class="modal-header edit-modal-header">
-                    <button type="button" class="close edit-close-profile" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body modal-body-profile modal-body-profile-update">
-                    <form action="" method="POST">
-                        <div class="form-row-update-profile">
-                            <div class="form-row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="validationDefault01">Name</label>
-                                    <input type="text" class="form-control form-control-sm" id="validationDefault01"
-                                        value="<s:property value="#session.userFullName"/>" minlength="6" maxlength="50" required>
+        <div class="modal fade edit-modal-profile" id="update-profile-modal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog  edit-modal-dialog-profile" role="document">
+                <div class="modal-content edit-modal-content">
+                    <div class="modal-header edit-modal-header">
+                        <button type="button" class="close edit-close-profile" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-body-profile modal-body-profile-update">
+                        <form action="" method="POST">
+                            <div class="form-row-update-profile">
+                                <div class="form-row">
+                                    <div class="col-md-5 mb-3">
+                                        <label for="validationDefault01">Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="validationDefault01"
+                                               value="<s:property value="#session.userFullName"/>" minlength="6" maxlength="50" required>
+                                    </div>
+                                    <div class="col-md-5 mb-3">
+                                        <label for="validationDefault02">Date of birth</label>
+                                        <input type="date" class="form-control form-control-sm" id="validationDefault02"
+                                               value="<s:property value="#session.userDoB"/>" required>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationDefault03">Gender</label>
+                                        <select class="form-control form-control-sm" id="validationDefault03" required>
+                                            <option selected disabled value="">Choose...</option>
+                                            <option value="1" <s:if test="#session.userGender == 1">selected</s:if>>Feale</option>
+                                            <option value="2" <s:if test="#session.userGender == 2">selected</s:if>>Male</option>
+                                                <option value="">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-5 mb-3">
+                                            <label for="validationDefault07">Avatar</label>
+                                            <input type="file" value="<s:property value="#session.userAvatar"/>" class="form-control form-control-sm form-control-file-avatar"
+                                               id="validationDefault07">
+                                    </div>
+                                    <div class="col-md-5 mb-3">
+                                        <label for="validationDefault04">Major</label>
+                                        <input type="text" class="form-control form-control-sm" id="validationDefault04"
+                                               value="<s:property value="#session.userDescription"/>" minlength="6" maxlength="50" required>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationDefault05">Phone</label>
+                                        <input type="number" class="form-control form-control-sm" id="validationDefault05"
+                                               min="100000000" value="<s:property value="#session.userPhonenumber"/>" onKeyPress="if (this.value.length == 10)
+                                                           return false;">
+                                    </div>
                                 </div>
-                                <div class="col-md-5 mb-3">
-                                    <label for="validationDefault02">Date of birth</label>
-                                    <input type="date" class="form-control form-control-sm" id="validationDefault02"
-                                        value="<s:property value="#session.userDoB"/>" required>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label for="validationDefault03">Gender</label>
-                                    <select class="form-control form-control-sm" id="validationDefault03" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option value="1" <s:if test="#session.userGender == 1">selected</s:if>>Feale</option>
-                                        <option value="2" <s:if test="#session.userGender == 2">selected</s:if>>Male</option>
-                                        <option value="">Other</option>
-                                    </select>
+                                <div class="form-row ">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationDefault06">Address</label>
+                                        <input type="text" class="form-control form-control-sm" id="validationDefault06"
+                                               minlength="10" maxlength="100" value="<s:property value="#session.userAddress"/>">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="validationDefault07">Avatar</label>
-                                    <input type="file" value="<s:property value="#session.userAvatar"/>" class="form-control form-control-sm form-control-file-avatar"
-                                        id="validationDefault07">
-                                </div>
-                                <div class="col-md-5 mb-3">
-                                    <label for="validationDefault04">Major</label>
-                                    <input type="text" class="form-control form-control-sm" id="validationDefault04"
-                                           value="<s:property value="#session.userDescription"/>" minlength="6" maxlength="50" required>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label for="validationDefault05">Phone</label>
-                                    <input type="number" class="form-control form-control-sm" id="validationDefault05"
-                                           min="100000000" value="<s:property value="#session.userPhonenumber"/>" onKeyPress="if(this.value.length==10) return false;">
-                                </div>
+                            <div class="btn-action-update-profile">
+                                <button class="btn btn-warning btn-jump btn-update-profile btn-update-profile-back"
+                                        type="button" data-dismiss="modal" data-toggle="modal"
+                                        data-target="#profile-modal">Back</button>
+                                <button class="btn btn-success btn-jump btn-update-profile btn-update-profile-save"
+                                        type="submit">Save</button>
                             </div>
-                            <div class="form-row ">
-                                <div class="col-md-12 mb-3">
-                                    <label for="validationDefault06">Address</label>
-                                    <input type="text" class="form-control form-control-sm" id="validationDefault06"
-                                           minlength="10" maxlength="100" value="<s:property value="#session.userAddress"/>">
-                                </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer  modal-footer-profile">
+                        <div class="modal-footer-profile-numbers">
+                            <div class="modal-footer-profile-item">
+                                <span>120</span>
+                                <span>Posts</span>
                             </div>
-                        </div>
-                        <div class="btn-action-update-profile">
-                            <button class="btn btn-warning btn-jump btn-update-profile btn-update-profile-back"
-                                type="button" data-dismiss="modal" data-toggle="modal"
-                                data-target="#profile-modal">Back</button>
-                            <button class="btn btn-success btn-jump btn-update-profile btn-update-profile-save"
-                                type="submit">Save</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer  modal-footer-profile">
-                    <div class="modal-footer-profile-numbers">
-                        <div class="modal-footer-profile-item">
-                            <span>120</span>
-                            <span>Posts</span>
-                        </div>
-                        <div class="modal-footer-profile-border-card"></div>
-                        <div class="modal-footer-profile-item">
-                            <span>127</span>
-                            <span>Scores</span>
-                        </div>
-                        <div class="modal-footer-profile-border-card"></div>
-                        <div class="modal-footer-profile-item">
-                            <span>120K</span>
-                            <span>Other</span>
+                            <div class="modal-footer-profile-border-card"></div>
+                            <div class="modal-footer-profile-item">
+                                <span>127</span>
+                                <span>Scores</span>
+                            </div>
+                            <div class="modal-footer-profile-border-card"></div>
+                            <div class="modal-footer-profile-item">
+                                <span>120K</span>
+                                <span>Other</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <!-- *Announcements -->
         <section class="announcements unselecttable">
             <div class="announcements-left-site">
@@ -282,7 +284,18 @@
                     <div class="table_left-scroll-table">
                         <table id="tblNewPost" class="table-striped table-hover">
                             <tbody>
-                            
+                                <s:set var="count" value="1"/>
+                                <s:iterator value="listPost">
+                                    <s:if test="status == 1">
+                                        <s:if test="#count <= 10">
+                                            <tr data-href="getDetailPost?postID=<s:property value="postID"/>">
+                                                <td><s:property value="postTitle"/></td>
+                                                <td><script>getDate("<s:property value="approvedDate"/>")</script></td>
+                                                <td><s:if test="thread.category.topic.topicID == 'T01'">IT</s:if><s:elseif test="thread.category.topic.topicID == 'T02'">BA</s:elseif><s:elseif test="thread.category.topic.topicID == 'T03'">GD</s:elseif></td>
+                                                </tr>
+                                        </s:if>
+                                    </s:if>
+                                </s:iterator>
                             </tbody>
                         </table>
                     </div>
@@ -386,7 +399,19 @@
                                 <div class="table100-body js-pscroll">
                                     <table class="table-striped table-hover" id="tableIT">
                                         <tbody>
-                                            
+                                            <s:iterator value="listPost">
+                                                <s:if test="status == 1">
+                                                    <s:if test="thread.category.topic.topicID == 'T01'">
+                                                        <tr class="row100 body" data-href="getDetailPost?postID=<s:property value="postID"/>">
+                                                            <td class="cell100 column1"><s:property value="postTitle"/></td>
+                                                            <td class="cell100 column2"><s:property value="thread.category.categoryName"/></td>
+                                                            <td class="cell100 column3"><s:property value="thread.threadName"/></td>
+                                                            <td class="cell100 column4"><s:property value="user.userFullName"/></td>
+                                                            <td class="cell100 column5"><script>getDateTime("<s:property value="approvedDate"/>")</script></td>
+                                                        </tr>
+                                                    </s:if>
+                                                </s:if>
+                                            </s:iterator>
                                         </tbody>
                                     </table>
                                 </div>
@@ -411,7 +436,19 @@
                                 <div class="table100-body js-pscroll">
                                     <table class="table-striped table-hover" id="tableGD">
                                         <tbody>
-                                            
+                                            <s:iterator value="listPost">
+                                                <s:if test="status == 1">
+                                                    <s:if test="thread.category.topic.topicID == 'T03'">
+                                                        <tr class="row100 body" data-href="getDetailPost?postID=<s:property value="postID"/>">
+                                                            <td class="cell100 column1"><s:property value="postTitle"/></td>
+                                                            <td class="cell100 column2"><s:property value="thread.category.categoryName"/></td>
+                                                            <td class="cell100 column3"><s:property value="thread.threadName"/></td>
+                                                            <td class="cell100 column4"><s:property value="user.userFullName"/></td>
+                                                            <td class="cell100 column5"><script>getDateTime("<s:property value="approvedDate"/>")</script></td>
+                                                        </tr>
+                                                    </s:if>
+                                                </s:if>
+                                            </s:iterator>
                                         </tbody>
                                     </table>
                                 </div>
@@ -438,7 +475,19 @@
                                 <div class="table100-body js-pscroll">
                                     <table class="table-striped table-hover" id="tableBA">
                                         <tbody>
-                                            
+                                            <s:iterator value="listPost">
+                                                <s:if test="status == 1">
+                                                    <s:if test="thread.category.topic.topicID == 'T02'">
+                                                        <tr class="row100 body" data-href="getDetailPost?postID=<s:property value="postID"/>">
+                                                            <td class="cell100 column1"><s:property value="postTitle"/></td>
+                                                            <td class="cell100 column2"><s:property value="thread.category.categoryName"/></td>
+                                                            <td class="cell100 column3"><s:property value="thread.threadName"/></td>
+                                                            <td class="cell100 column4"><s:property value="user.userFullName"/></td>
+                                                            <td class="cell100 column5"><script>getDateTime("<s:property value="approvedDate"/>")</script></td>
+                                                        </tr>
+                                                    </s:if>
+                                                </s:if>
+                                            </s:iterator>
                                         </tbody>
                                     </table>
                                 </div>
@@ -544,77 +593,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
     <script src="include/resources/js/base.js"></script>
     <script>
-        function getDate(date){
-            return date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4);
-        }
-        function getDateTime(date)
-        {
-            var tmp = date.substring(8, 10) + "/" + date.substring(5, 7) + "/" + date.substring(0, 4) + " at ";
-            if (date.substring(11, 13) >= 12)
-            {
-                tmp += (date.substring(11, 13) - 12) + ":";
-                tmp += date.substring(14, 16) + " PM";
-            }
-            else
-            {
-                tmp += date.substring(11, 13) + ":";
-                tmp += date.substring(14, 16) + " AM";
-            }
-            console.log(tmp);
-            return tmp;
-        }
-        $(document).ready(function (){
-            var newPostStr = "";
-            <s:iterator value="listNewPost">
-                newPostStr += "<tbody>";
-                newPostStr += "<tr data-href=''>";
-                newPostStr += "<td><s:property value="postTitle"/></td>";
-                newPostStr += "<td>" + getDate("<s:property value="approvedDate"/>") + "</td>";
-                newPostStr += "<td><s:if test="thread.category.topic.topicID == 'T01'">IT</s:if><s:elseif test="thread.category.topic.topicID == 'T02'">BA</s:elseif><s:elseif test="thread.category.topic.topicID == 'T03'">GD</s:elseif></td>";
-                newPostStr += "</tr>";
-                newPostStr += "</tbody>";
-            </s:iterator>
-            $("#tblNewPost").html(newPostStr);
-            var strIT = "<tbody>";
-            var strGD = "<tbody>";
-            var strBA = "<tbody>";
-            <s:iterator value="listPost">
-                <s:if test="thread.category.topic.topicID == 'T01'">
-                    strIT += "<tr class='row100 body' data-href='postdetail.html'>";
-                    strIT += "<td class='cell100 column1'><s:property value="postTitle"/></td>";
-                    strIT += "<td class='cell100 column2'><s:property value="thread.category.categoryName"/></td>";
-                    strIT += "<td class='cell100 column3'><s:property value="thread.threadName"/></td>";
-                    strIT += "<td class='cell100 column4'><s:property value="user.userFullName"/></td>";
-                    strIT += "<td class='cell100 column5'>" + getDateTime("<s:property value="approvedDate"/>") + "</td>"
-                    strIT += "</tr>";  
-                </s:if>
-                <s:elseif test="thread.category.topic.topicID == 'T02">
-                    strBA += "<tr class='row100 body' data-href='postdetail.html'>";
-                    strBA += "<td class='cell100 column1'><s:property value="postTitle"/></td>";
-                    strBA += "<td class='cell100 column2'><s:property value="thread.category.categoryName"/></td>";
-                    strBA += "<td class='cell100 column3'><s:property value="thread.threadName"/></td>";
-                    strBA += "<td class='cell100 column4'><s:property value="user.userFullName"/></td>";
-                    strBA += "<td class='cell100 column5'>" + getDateTime("<s:property value="approvedDate"/>") + "</td>"
-                    strBA += "</tr>";
-                </s:elseif>
-                <s:elseif test="thread.category.topic.topicID == 'T03">
-                    strGD += "<tr class='row100 body' data-href='postdetail.html'>";
-                    strGD += "<td class='cell100 column1'><s:property value="postTitle"/></td>";
-                    strGD += "<td class='cell100 column2'><s:property value="thread.category.categoryName"/></td>";
-                    strGD += "<td class='cell100 column3'><s:property value="thread.threadName"/></td>";
-                    strGD += "<td class='cell100 column4'><s:property value="user.userFullName"/></td>";
-                    strGD += "<td class='cell100 column5'>" + getDateTime("<s:property value="approvedDate"/>") + "</td>"
-                    strGD += "</tr>";
-                </s:elseif>
-            </s:iterator>
-                strIT += "</tbody>";
-                strGD += "</tbody>";
-                strBA += "</tbody>";
-                console.log(strIT);
-                $("#tableIT").html(strIT);
-                $("#tableGD").html(strGD);
-                $("#tableBA").html(strBA);
-        })
+                                                   
                                                     $("#goToPost").click(function () {
                                                         var email = $(this).val();
                                                         window.location = "UserGetPost?accountEmail=" + email;

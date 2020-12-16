@@ -23,8 +23,8 @@ import java.util.logging.Logger;
  * @author Ngoc Do Minh
  */
 public class PostDataProcess {
-    public Connection getConnection()
-    {
+
+    public Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -41,15 +41,14 @@ public class PostDataProcess {
         }
         return connection;
     }
-    public List<Post> getForumDisplayPost()
-    {
+
+    public List<Post> getForumDisplayPost() {
         List<Post> listPost = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 AND _status = 1 ORDER BY dateAdded DESC";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 Post post = new Post();
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
@@ -71,16 +70,14 @@ public class PostDataProcess {
         }
         return listPost;
     }
-    
-    public List<Post> getPost()
-    {
+
+    public List<Post> getPost() {
         List<Post> listPost = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 ORDER BY dateAdded DESC";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 Post post = new Post();
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
@@ -102,18 +99,15 @@ public class PostDataProcess {
         }
         return listPost;
     }
-    public boolean createPost(String postTitle, String postContent, String threadID, String accountEmail, int userRole)
-    {
+
+    public boolean createPost(String postTitle, String postContent, String threadID, String accountEmail, String status) {
         String postID = generatePostID(threadID);
         boolean isAdded = false;
         String sqlQuery = "";
-        if (userRole == 3)
-        {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, NULL)";
-        }
-        else
-        {
+        if (!status.equals("2")) {
             sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP)";
+        } else {
+            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, NULL)";
         }
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
@@ -130,19 +124,12 @@ public class PostDataProcess {
         }
         return isAdded;
     }
-    public boolean createComment(String postID, String postTitle, String postContent, String threadID, String accountEmail, int userRole)
-    {
+
+    public boolean createComment(String postID, String postTitle, String postContent, String threadID, String accountEmail) {
         String commentID = generatCommentID(postID);
         boolean isAdded = false;
         String sqlQuery = "";
-        if (userRole == 3)
-        {
-            sqlQuery = "INSERT INTO tblPost VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, )";
-        }
-        else
-        {
-            sqlQuery = "INSERT INTO tblPost VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, CURRENT_TIMESTAMP)";
-        }
+        sqlQuery = "INSERT INTO tblPost VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, commentID);
@@ -158,16 +145,15 @@ public class PostDataProcess {
         }
         return isAdded;
     }
-    public List<Post> getDataByPosterEmail(String accountEmail)
-    {
+
+    public List<Post> getDataByPosterEmail(String accountEmail) {
         List<Post> listPost = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblPost WHERE accountEmail = ? AND LEN(postID) = 10";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, accountEmail);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 Post post = new Post();
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
@@ -189,21 +175,21 @@ public class PostDataProcess {
         }
         return listPost;
     }
+
     public static void main(String[] args) {
         PostDataProcess p = new PostDataProcess();
-        List<Post> l = p.getDataByPosterEmail("ngocatp.52@gmail.com");
+        List<Post> l = p.getPostByID("THR01P0001");
         System.out.println(l.size());
     }
-    public List<Post> getPostByID(String postID)
-    {
+
+    public List<Post> getPostByID(String postID) {
         List<Post> listPost = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblPost WHERE postID LIKE ? ORDER BY SUBSTRING(postID, 0, 12) ASC";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, "%" + postID + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 Post post = new Post();
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
@@ -225,16 +211,15 @@ public class PostDataProcess {
         }
         return listPost;
     }
-    public Post getSpecificPost(String postID)
-    {
+
+    public Post getSpecificPost(String postID) {
         Post post = new Post();
         String sqlQuery = "SELECT * FROM tblPost WHERE postID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, postID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 post.setPostID(resultSet.getString(1));
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
@@ -254,47 +239,36 @@ public class PostDataProcess {
         }
         return post;
     }
-    public String generatePostID(String threadID)
-    {
+
+    public String generatePostID(String threadID) {
         String newPostID = threadID;
-        if (threadID != null)
-        {
+        if (threadID != null) {
             String sql = "SELECT postID FROM tblPost WHERE postID LIKE '%" + threadID + "%' AND LEN(postID) = 10";
             try {
                 PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
                 List<Integer> listPostIndex = new ArrayList<>();
                 ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     String tmp = resultSet.getString(1);
                     int tmpNum = Integer.parseInt(tmp.substring(Math.max(0, tmp.length() - 4)));
                     listPostIndex.add(tmpNum);
                 }
                 int index = 1;
-                for (int i: listPostIndex)
-                {
-                    if (i >= index)
-                    {
+                for (int i : listPostIndex) {
+                    if (i >= index) {
                         index = i + 1;
                     }
                 }
-                if (index < 10)
-                {
+                if (index < 10) {
                     newPostID += "P000";
                     newPostID += index;
-                }
-                else if (index < 100)
-                {
+                } else if (index < 100) {
                     newPostID += "P00";
                     newPostID += index;
-                }
-                else if (index < 1000)
-                {
+                } else if (index < 1000) {
                     newPostID += "P0";
                     newPostID += index;
-                }
-                else if (index < 10000)
-                {
+                } else if (index < 10000) {
                     newPostID += "P";
                     newPostID += index;
                 }
@@ -307,8 +281,9 @@ public class PostDataProcess {
         }
         return newPostID;
     }
-    public String generatCommentID(String baseID)
-    {
+
+    public String generatCommentID(String baseID) {
+        String newCommentID = "";
         List<Integer> listOrder = new ArrayList<>();
         String sql = "SELECT postID FROM tblPost WHERE postID LIKE ? AND LEN(postID) = ?";
         try {
@@ -317,18 +292,21 @@ public class PostDataProcess {
             preparedStatement.setString(1, "%" + baseID + "%");
             preparedStatement.setInt(2, baseIDLength + 2);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 String tmp = resultSet.getString(1);
                 int tmpNum = Integer.parseInt(tmp.substring(baseIDLength + 1, baseIDLength + 2));
                 listOrder.add(tmpNum);
             }
             resultSet.close();
-            preparedStatement.close(); 
+            preparedStatement.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String newCommentID = baseID + "." + (Collections.max(listOrder) + 1);
+        if (listOrder.size() == 0) {
+            newCommentID = baseID + "." + 1;
+        } else {
+            newCommentID = baseID + "." + (Collections.max(listOrder) + 1);
+        }
         return newCommentID;
     }
 }

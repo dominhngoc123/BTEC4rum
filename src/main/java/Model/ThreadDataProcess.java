@@ -23,8 +23,8 @@ import java.util.ArrayList;
  * @author Ngoc Do Minh
  */
 public class ThreadDataProcess {
-    public Connection getConnection()
-    {
+
+    public Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -41,15 +41,14 @@ public class ThreadDataProcess {
         }
         return connection;
     }
-    public List<Thread> getData()
-    {
+
+    public List<Thread> getData() {
         List<Thread> listThread = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblThread";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 Thread thread = new Thread();
                 thread.setThreadID(resultSet.getString(1));
                 thread.setThreadName(resultSet.getString(2));
@@ -67,16 +66,15 @@ public class ThreadDataProcess {
         }
         return listThread;
     }
-    public Thread getDataByID(String threadID)
-    {
+
+    public Thread getDataByID(String threadID) {
         Thread thread = new Thread();
         String sqlQuery = "SELECT * FROM tblThread WHERE threadID = ?";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, threadID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 thread.setThreadID(resultSet.getString(1));
                 thread.setThreadName(resultSet.getString(2));
                 thread.setThreadDescription(resultSet.getString(3));
@@ -92,8 +90,32 @@ public class ThreadDataProcess {
         }
         return thread;
     }
-    public boolean updateThread(String threadID, String threadName, String threadDescription, String categoryID)
-    {
+
+    public List<Thread> getThreadByCategory(String categoryID) {
+        List<Thread> listThread = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM tblThread WHERE categoryID = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, categoryID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Thread thread = new Thread();
+                thread.setThreadID(resultSet.getString(1));
+                thread.setThreadName(resultSet.getString(2));
+                thread.setThreadDescription(resultSet.getString(3));
+                String tmp = resultSet.getString(4);
+                thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
+                thread.setDateAdded(resultSet.getString(5));
+                listThread.add(thread);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ThreadDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listThread;
+    }
+
+    public boolean updateThread(String threadID, String threadName, String threadDescription, String categoryID) {
         boolean isUpdate = false;
         String sql = "UPDATE tblThread SET threadName = ?, threadDescription = ?, categoryID = ? WHERE threadID = ?";
         try {
@@ -110,8 +132,8 @@ public class ThreadDataProcess {
         }
         return isUpdate;
     }
-    public boolean addThread(String threadName, String threadDescription, String categoryID)
-    {
+
+    public boolean addThread(String threadName, String threadDescription, String categoryID) {
         boolean isAdded = false;
         String threadID = generateThreadID();
         String sqlQuery = "INSERT INTO tblThread VALUES(?, ?, ?, ?, CURRENT_TIMESTAMP)";
@@ -129,6 +151,7 @@ public class ThreadDataProcess {
         }
         return isAdded;
     }
+
     public boolean deleteThread(String threadID) {
         boolean isDelete = false;
         String sqlQuery = "DELETE tblThread WHERE threadID = ?";
@@ -143,16 +166,15 @@ public class ThreadDataProcess {
         }
         return isDelete;
     }
-    public String generateThreadID()
-    {
+
+    public String generateThreadID() {
         String newThreadID = "";
         List<Integer> listThreadIndex = new ArrayList<>();
         String sqlQuery = "SELECT threadID FROM tblThread";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 String tmp = resultSet.getString(1);
                 int tmpNum = Integer.parseInt(tmp.substring(Math.max(0, tmp.length() - 2)));
                 listThreadIndex.add(tmpNum);
@@ -161,19 +183,14 @@ public class ThreadDataProcess {
             statement.close();
             getConnection().close();
             int tmpIndex = 1;
-            for (int i: listThreadIndex)
-            {
-                if (i >= tmpIndex)
-                {
+            for (int i : listThreadIndex) {
+                if (i >= tmpIndex) {
                     tmpIndex = i + 1;
                 }
             }
-            if (tmpIndex < 10)
-            {
+            if (tmpIndex < 10) {
                 newThreadID += "THR0" + tmpIndex;
-            }
-            else
-            {
+            } else {
                 newThreadID += "THR" + tmpIndex;
             }
         } catch (SQLException ex) {

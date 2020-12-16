@@ -139,7 +139,7 @@ public class PostAction extends ActionSupport {
 
     public String addNewPost() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.createPost(postTitle, postContent, threadID, accountEmail, role)) {
+        if (postDataProcess.createPost(postTitle, postContent, threadID, accountEmail, status)) {
             return "USERADDPOSTSUCCESS";
         }
         return "USERADDPOSTFAILED";
@@ -147,7 +147,7 @@ public class PostAction extends ActionSupport {
     
     public String addNewComment() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.createComment(postID, postTitle, postContent, threadID, accountEmail, role))
+        if (postDataProcess.createComment(postID, postTitle, postContent, threadID, accountEmail))
         {
             return "USERADDCOMMENTSUCCESS";
         }

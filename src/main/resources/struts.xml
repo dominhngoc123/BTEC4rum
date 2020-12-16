@@ -27,7 +27,7 @@
                 <param name="msg">${msg}</param>
             </result>
         </action>
-        <action name="ForumContent" class="App.PostAction" method="getForumPost">
+        <action name="ForumContent" class="App.PostAction" method="getAllPost">
             <result name="POSTDATA">/Member/member.jsp</result>
         </action>
         <!-- Admin load data -->
@@ -49,20 +49,23 @@
         <action name="adminLoadThreadData" class="App.ThreadAction" method="getData">
             <result name="LISTTHREAD" type="json">/Admin/admin.jsp</result>
         </action>
+        <action name="getModerator" class="App.CategoryAction" method="getModerator">
+            <result name="MODERATOR" type="json">/newpost.jsp</result>
+        </action>
         <!-- Admin feature -->
         <action name="adminBlockUser" class="App.UserAction" method="blockUser">
             <result name="BLOCKSUCCESS" type="redirectAction">adminLoadUserData</result>
             <result name="BLOCFAILED">/Error.jsp</result>
         </action>
-        <action name="CreateNewPost">
-            <result>/newPost.jsp</result>
+        <action name="CreateNewPost" class="App.TopicAction" method="getData">
+            <result name="LISTALLTOPIC">/newPost.jsp</result>
         </action>
         <action name="AddNewPost" class="App.PostAction" method="addNewPost">
-            <result name="USERADDPOSTSUCCESS" type="redirectAction">redirect</result>
+            <result name="USERADDPOSTSUCCESS" type="redirectAction">ForumContent</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
         <action name="AddNewComment" class="App.PostAction" method="addNewComment">
-            <result name="USERADDCOMMENTSUCCESS" type="redirectAction">redirect</result>
+            <result name="USERADDCOMMENTSUCCESS" type="redirect">getDetailPost</result>
             <result name="USERADDPOSTFAILED">/Error.jsp</result>
         </action>
         <action name="getDetailPostForUpdate" class="App.PostAction" method="getPostByID">
@@ -112,7 +115,9 @@
         <action name="adminGetCategoryDetail" class="App.CategoryAction" method="getDataByID">
             <result name="DETAILCATEGORY" type="json">/Admin/admin.jsp</result>
         </action>
-        
+        <action name="adminGetThreadInCategory" class="App.ThreadAction" method="getThreadByCategory">
+            <result name="LISTTHREADINCATEGORY" type="json">/Admin/admin.jsp</result>
+        </action>
         <!-- Admin manage thread -->
         <action name="adminAddThread" class="App.ThreadAction" method="addThread">
             <result name="ADDTHREADSUCCESS" type="json">/Admin/admin.jsp</result>

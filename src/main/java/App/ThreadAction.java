@@ -27,6 +27,7 @@ public class ThreadAction extends ActionSupport {
     private Thread thread;
     private String topicID;
     private List<Thread> listThread;
+    private List<Thread> listThread1;
     private List<Topic> listTopic;
     private List<Category> listCategory;
     
@@ -109,6 +110,14 @@ public class ThreadAction extends ActionSupport {
     public void setTopicID(String topicID) {
         this.topicID = topicID;
     }
+
+    public List<Thread> getListThread1() {
+        return listThread1;
+    }
+
+    public void setListThread1(List<Thread> listThread1) {
+        this.listThread1 = listThread1;
+    }
     
     public ThreadAction() {
     }
@@ -137,6 +146,12 @@ public class ThreadAction extends ActionSupport {
             return "ADDTHREADSUCCESS";
         }
         return "ADDTHREADFAILED";
+    }
+    public String getThreadByCategory()
+    {
+        ThreadDataProcess threadDataProcess = new ThreadDataProcess();
+        listThread1 = threadDataProcess.getThreadByCategory(categoryID);
+        return "LISTTHREADINCATEGORY";
     }
     public String updateThread()
     {

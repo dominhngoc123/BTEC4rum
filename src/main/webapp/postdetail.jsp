@@ -28,6 +28,7 @@
         <!--===============================================Style css================================================-->
         <link rel="stylesheet" href="include/resources/css/postdetail.css">
         <!--===============================================================================================-->
+        <script src="include/resources/js/DateTime.js" type="text/javascript"></script>
     </head>
     <!--!cái style này ở đây vì thứ tự ưu tiên css, dùng cho scroll modal đừng ai xóa hoặc di chuyển nha <3 -->
     <style>
@@ -36,7 +37,6 @@
             overflow: visible;
         }
     </style>
-
     <body class="preloading">
         <!-- *loading -->
         <div class="load">
@@ -293,85 +293,86 @@
                     </table>
                     <div class="table_left-scroll-table">
                         <table class="table-striped table-hover">
-                            <tbody></tbody>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
-                            <tr data-href="postdetail.html">
-                                <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
-                                    asd</td>
-                                <td>02/02/2020</td>
-                                <td>IT</td>
-                            </tr>
+                            <tbody>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                                <tr data-href="postdetail.html">
+                                    <td>Body 1 asda asd asd as d asd asd as asdasd as dasd asd asd asd
+                                        asd</td>
+                                    <td>02/02/2020</td>
+                                    <td>IT</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -448,14 +449,18 @@
             <!-- *Content Right-->
             <div class="content_right">
                 <!--todo Post Container -->
-                <div class="post-container">
+                <input type="hidden" value="<s:property value="postID"/>" id="postID"/>
+                <div class="post-container" id="content">
                     <!-- Post Header -->
+    <!-- Post Header -->
+                    <input type="hidden" id="accountEmail" value="<s:property value="#session.accountEmail"/>"/>
                     <s:iterator value="listPost">
                         <s:if test="postID.length() == 10">
                             <div class="post__header container">
                                 <div class="post__header-title">
-                                    <h4><s:property value="postTitle"/>
-                                    </h4>
+                                    <input type="hidden" id="threadID" value="<s:property value="thread.threadID"/>"/>
+                                    <input type="hidden" value="<s:property value="posstID"/>" id="postID"/>
+                                    <h4 id="postTitle"><s:property value="postTitle"/></h4>
                                 </div>
                                 <div class="post__header-action">
                                     <div class="btn-group">
@@ -485,8 +490,7 @@
                                     <ul class="post__body-author-text">
                                         <li><span class="post__body-author-name" data-toggle="modal"
                                                   data-target="#profile-modal"><s:property value="user.userFullName"/></span></li>
-                                        <li><span class="post__body-author-time">Posted on&nbsp;
-                                                <span><s:property value="approvedDate"/></span> <span>12:00</span></span></li>
+                                        <li><span class="post__body-author-time">Posted on&nbsp;<script>getDateTime("<s:property value="approvedDate"/>")</script></span></li>
                                     </ul>
                                 </div>
                                 <div class="post__body-content" id="postContent" data-value="<s:property value="postContent" escape="false"/>">
@@ -495,7 +499,7 @@
                                 <div class="post__body-action unselecttable">
                                     <div class="post__body-action-like">
                                         <button type="button" class="btn-like btn-jump"><i class="far fa-thumbs-up"></i>
-                                            <span>Like</span> <span>12</span></button>
+                                            <span>Like</span><span>12</span></button>
                                     </div>
                                     <div class="post__body-action-comment">
                                         <button type="button" class="btn-cmt btn-jump"><i class="far fa-comment-dots"></i>
@@ -514,9 +518,9 @@
                                         <div class="cmt__action-container-avatar">
                                             <img class="cmt__action-avatar" src="<s:property value="#session.userAvatar"/>" alt="">
                                         </div>
-                                        <form action="" method="POST" class="cmt__action-post-area">
+                                        <form onsubmit="postComment('<s:property value="postID"/>');" method="POST" class="cmt__action-post-area">
                                             <div class="cmt__action-post-area-header">
-                                                <textarea name="" class="form-control auto-textarea edit-txta"
+                                                <textarea name="" id="CMT<s:property value="postID"/>"  class="form-control auto-textarea edit-txta"
                                                           placeholder="Write your comment here..." required></textarea>
                                             </div>
                                             <div class=" cmt__action-post-area-bottom">
@@ -541,7 +545,7 @@
                                                         <div class="comment-head">
                                                             <h6 class="comment-name by-author"><a href="#none" data-toggle="modal"
                                                                                                   data-target="#profile-modal"><s:property value="user.userFullName"/></a></h6>
-                                                            <span class="posted-time">Posted on <s:property value="user.approvedDate"/></span>
+                                                            <span class="posted-time">Posted on&nbsp;<script>getDateTime("<s:property value="approvedDate"/>")</script></span>
                                                             <div class="comment-head-more-action">
                                                                 <button type="button"
                                                                         class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
@@ -570,8 +574,8 @@
                                                         </div>
                                                         <div class="comment-footer">
                                                             <div class="comment-form">
-                                                                <form action="" method="post">
-                                                                    <textarea class="form-control auto-textarea" name=""
+                                                                <form onsubmit="postComment('<s:property value="postID"/>', '<s:property value="user.accountEmail"/>')" method="post">
+                                                                    <textarea id="CMT<s:property value="postID"/>" class="form-control auto-textarea" name=""
                                                                               placeholder="Write your comment here" required></textarea>
                                                                     <div class="pull-right send-button">
                                                                         <button type="submit"
@@ -592,7 +596,7 @@
                                                 <div class="comment-box">
                                                     <div class="comment-head">
                                                         <h6 class="comment-name"><a href="#"><s:property value="user.userFullName"/></a></h6>
-                                                        <span class="posted-time">Posted on <s:property value="approvedDate"/></span>
+                                                        <span class="posted-time">Posted on&nbsp;<script>getDateTime("<s:property value="approvedDate"/>")</script></span>
                                                         <div class="comment-head-more-action">
                                                             <button type="button"
                                                                     class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
@@ -623,8 +627,8 @@
                                                     </div>
                                                     <div class="comment-footer">
                                                         <div class="comment-form">
-                                                            <form action="" method="post">
-                                                                <textarea class="form-control auto-textarea" name=""
+                                                            <form onsubmit="postComment('<s:property value="postID"/>', '<s:property value="user.accountEmail"/>')" method="post">
+                                                                <textarea id="CMT<s:property value="postID"/>" class="form-control auto-textarea" name=""
                                                                           placeholder="Write your comment here"
                                                                           required></textarea>
                                                                 <div class="pull-right send-button">
@@ -661,7 +665,7 @@
                         </div>
                         <form action="" method="post">
                             <div class="modal-body">
-                                <!-- Post Header -->
+                                 Post Header 
                                 <div class="post__header">
                                     <div class="post__header-title">
                                         <textarea
@@ -686,7 +690,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Post Body -->
+                                 Post Body 
                                 <div class="post__body">
                                     <div class="post__body-author">
                                         <div class="post__body-author-bg-img">
@@ -694,8 +698,7 @@
                                         </div>
                                         <ul class="post__body-author-text">
                                             <li><span class="post__body-author-name editUserName"></span></li>
-                                            <li><span class="post__body-author-time">Posted on
-                                                    <span class="approvedDate"></span></span></li>
+                                            <li><span class="post__body-author-time">Posted on&nbsp;<script>getDateTime("<s:property value="approvedDate"/>")</script></span></li>
                                         </ul>
                                     </div>
                                     <div class="post__body-content">
@@ -711,7 +714,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal edit cmt-->
             <div class="modal fade" id="modalEdit_cmt">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
@@ -724,7 +726,7 @@
                         <form action="" method="post">
                             <div class="modal-body">
                                 <div class="comment-main-level">
-                                    <!-- Contenedor del Comentario -->
+                                     Contenedor del Comentario 
                                     <div class="comment-box">
                                         <div class="comment-head">
                                             <h6 class="comment-name by-author"><a href="#" id="cmtAuthor"></a></h6>
@@ -757,227 +759,229 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <!-- *scrollTop -->
+        <div class="scrollTop">
+            <a href="#" class="sclTop"><i class="far fa-arrow-alt-circle-up"></i></a>
         </div>
-    </section>
-    <!-- *scrollTop -->
-    <div class="scrollTop">
-        <a href="#" class="sclTop"><i class="far fa-arrow-alt-circle-up"></i></a>
-    </div>
-    <!-- *Footer -->
-    <footer class="footer">
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Hà Nội</h5>
-                </li>
-                <li>
-                    <p>Tầng 2, Tòa nhà Detech II, 107 Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 0981 090 513</p>
-                </li>
-                <li>
-                    <p>Email: btec.hn@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 0981 090 513</p>
-                </li>
-            </ul>
-        </div>
+        <!-- *Footer -->
+        <footer class="footer">
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Hà Nội</h5>
+                    </li>
+                    <li>
+                        <p>Tầng 2, Tòa nhà Detech II, 107 Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 0981 090 513</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.hn@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 0981 090 513</p>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Đà Nẵng</h5>
-                </li>
-                <li>
-                    <p>66B Võ Văn Tần, Quận Thanh Khê, TP.Đà Nẵng (Tòa nhà Savico Building)</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 0236 730 9268</p>
-                </li>
-                <li>
-                    <p>Email: btec.dn@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 0905 888 535</p>
-                </li>
-            </ul>
-        </div>
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Đà Nẵng</h5>
+                    </li>
+                    <li>
+                        <p>66B Võ Văn Tần, Quận Thanh Khê, TP.Đà Nẵng (Tòa nhà Savico Building)</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 0236 730 9268</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.dn@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 0905 888 535</p>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>
-                        TP. Hồ Chí Minh
-                    </h5>
-                </li>
-                <li>
-                    <p>275 Nguyễn Văn Đậu - Quận Bình Thạnh - TP.Hồ Chí Minh</p>
-                </li>
-                <li>
-                    <p>Điện thoại: 028 7300 9268</p>
-                </li>
-                <li>
-                    <p>Email: btec.hcm@fpt.edu.vn</p>
-                </li>
-                <li>
-                    <p>Hotline: 028 7300 9268 / 0942 25 68 25</p>
-                </li>
-            </ul>
-        </div>
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>
+                            TP. Hồ Chí Minh
+                        </h5>
+                    </li>
+                    <li>
+                        <p>275 Nguyễn Văn Đậu - Quận Bình Thạnh - TP.Hồ Chí Minh</p>
+                    </li>
+                    <li>
+                        <p>Điện thoại: 028 7300 9268</p>
+                    </li>
+                    <li>
+                        <p>Email: btec.hcm@fpt.edu.vn</p>
+                    </li>
+                    <li>
+                        <p>Hotline: 028 7300 9268 / 0942 25 68 25</p>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="infor-box-footer">
-            <ul>
-                <li>
-                    <h5>Newsletter</h5>
-                </li>
-                <li>
-                    <p class="footer-p-last">A rover wearing a fuzzy suit doesn’t alarm the real penguinsi</p>
-                </li>
-                <li>
-                    <div class="footer-input-group">
-                        <input type="text" class="footer-input-form-control" placeholder="Search for...">
-                        <button><i class="fas fa-envelope btn-letter"></i></button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </footer>
-</body
-<!--=============================================Bootstrap js==================================================-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-<script type="text/javascript">
-                                                   $(".editPost").click(function () {
-                                                       var postID = $(this).val();
-                                                       var postContent = $("#postContent").attr("data-value");
-                                                       $.ajax({
-                                                           type: "POST",
-                                                           url: "getSpecificPost?postID=" + postID,
-                                                           success: function (data) {
-                                                               $("#editPostTitle").html(data['post'].postTitle);
-                                                               $(".editUserAvatar").attr("src", data['post'].user.userAvatar);
-                                                               $(".editUserName").html(data['post'].user.userFullName);
-                                                               $(".approvedDate").html(data['post'].approvedDate);
-                                                               CKEDITOR.instances["editor1"].setData(postContent);
-                                                               $("#modalEdit_post").modal("show");
-                                                           }
-                                                       });
-                                                   });
-                                                   $(".editComment").click(function () {
-                                                       var postID = $(this).val();
-                                                       $.ajax({
-                                                           type: "POST",
-                                                           url: "getSpecificPost?postID=" + postID,
-                                                           success: function (data) {
-                                                               $("#cmtAuthor").html(data['post'].user.userFullName);
-                                                               $("#cmtApprovedDate").html(data['post'].approvedDate);
-                                                               $("#cmtContent").html(data['post'].postContent);
-                                                               $("#modalEdit_cmt").modal("show");
-                                                           }
-                                                       });
-                                                   });
-</script>
-<script src="include/resources/js/base.js"></script>
-<script src="include/asset/ckeditor/ckeditor.js"></script>
-<script type="text/javascript">
-                                                   // CKEDITOR
-                                                   // config
-                                                   config = {};
-                                                   config.entities_latin = false;
-                                                   config.lauguage = 'vi';
-                                                   config.allowedContent = true;
-                                                   config.removeFormatAttributes = '';
-                                                   // config.height = '80vh';
-                                                   config.extraPlugins = 'autogrow';
+            <div class="infor-box-footer">
+                <ul>
+                    <li>
+                        <h5>Newsletter</h5>
+                    </li>
+                    <li>
+                        <p class="footer-p-last">A rover wearing a fuzzy suit doesn’t alarm the real penguinsi</p>
+                    </li>
+                    <li>
+                        <div class="footer-input-group">
+                            <input type="text" class="footer-input-form-control" placeholder="Search for...">
+                            <button><i class="fas fa-envelope btn-letter"></i></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </body
+    <!--=============================================Bootstrap js==================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+                                                    $(".editPost").click(function () {
+                                                        var postID = $(this).val();
+                                                        var postContent = $("#postContent").attr("data-value");
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "getSpecificPost?postID=" + postID,
+                                                            success: function (data) {
+                                                                $("#editPostTitle").html(data['post'].postTitle);
+                                                                $(".editUserAvatar").attr("src", data['post'].user.userAvatar);
+                                                                $(".editUserName").html(data['post'].user.userFullName);
+                                                                $(".approvedDate").html(data['post'].approvedDate);
+                                                                CKEDITOR.instances["editor1"].setData(postContent);
+                                                                $("#modalEdit_post").modal("show");
+                                                            }
+                                                        });
+                                                    });
+                                                    $(".editComment").click(function () {
+                                                        var postID = $(this).val();
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "getSpecificPost?postID=" + postID,
+                                                            success: function (data) {
+                                                                $("#cmtAuthor").html(data['post'].user.userFullName);
+                                                                $("#cmtApprovedDate").html(data['post'].approvedDate);
+                                                                $("#cmtContent").html(data['post'].postContent);
+                                                                $("#modalEdit_cmt").modal("show");
+                                                            }
+                                                        });
+                                                    });
+    </script>
+    <script src="include/resources/js/base.js"></script>
+    <script src="include/asset/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+                                                    function postComment(baseCommentID, tagEmail)
+                                                    {
+                                                        event.preventDefault();
+                                                        var postID = $("#postID").val();
+                                                        var postTitle = $("#postTitle").html();
+                                                        var commentContent = document.getElementById("CMT" + baseCommentID).value;
+                                                        if (baseCommentID.length == 14)
+                                                        {
+                                                            baseCommentID = baseCommentID.substring(0, 12);
+                                                        }
+                                                        var accountEmail = $("#accountEmail").val();
+                                                        var threadID = $("#threadID").val();
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "AddNewComment?postID=" + baseCommentID + "&postTitle=" + postTitle + "&postContent=" + commentContent + "&threadID=" + threadID + "&accountEmail=" + accountEmail,
+                                                            success: function () {
+                                                                window.location = "getDetailPost?postID"= postID;
+                                                            }
+                                                        });
+                                                    }
+                                                    
+                                                    // CKEDITOR
+                                                    // config
+                                                    config = {};
+                                                    config.entities_latin = false;
+                                                    config.lauguage = 'vi';
+                                                    config.allowedContent = true;
+                                                    config.removeFormatAttributes = '';
+                                                    // config.height = '80vh';
+                                                    config.extraPlugins = 'autogrow';
 
-                                                   // Define changes to default configuration here.
-                                                   // For complete reference see:
-                                                   // http://docs.ckeditor.com/#!/api/CKEDITOR.config
+                                                    // Define changes to default configuration here.
+                                                    // For complete reference see:
+                                                    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
-                                                   // The toolbar groups arrangement, optimized for two toolbar rows.
-                                                   config.toolbarGroups = [
-                                                       {name: 'clipboard', groups: ['clipboard', 'undo']},
-                                                       {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
-                                                       {name: 'links'},
-                                                       {name: 'insert'},
-                                                       {name: 'forms'},
-                                                       {name: 'tools'},
-                                                       {name: 'document', groups: ['mode', 'document', 'doctools']},
-                                                       {name: 'others'},
-                                                       '/',
-                                                       {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
-                                                       {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
-                                                       {name: 'styles'},
-                                                       {name: 'colors'},
-                                                       {name: 'about'}
-                                                   ];
+                                                    // The toolbar groups arrangement, optimized for two toolbar rows.
+                                                    config.toolbarGroups = [
+                                                        {name: 'clipboard', groups: ['clipboard', 'undo']},
+                                                        {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
+                                                        {name: 'links'},
+                                                        {name: 'insert'},
+                                                        {name: 'forms'},
+                                                        {name: 'tools'},
+                                                        {name: 'document', groups: ['mode', 'document', 'doctools']},
+                                                        {name: 'others'},
+                                                        '/',
+                                                        {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                                                        {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
+                                                        {name: 'styles'},
+                                                        {name: 'colors'},
+                                                        {name: 'about'}
+                                                    ];
 
-                                                   // Replace the <textarea id="editor1"> with a CKEditor 4
-                                                   // instance, using default configuration.
-                                                   CKEDITOR.replace('editor1', config);
-                                                   // =================== Jquery ===================
-                                                   $(document).ready(function () {
-                                                       // =================== Fade btn update ===================
-                                                       $('.btnFade').fadeOut(0);
-                                                       var fadeCkeditor = CKEDITOR.instances['editor1'];
-                                                       fadeCkeditor.on('change', function () {
-                                                           $('.btnFade').fadeIn(200);
-                                                       });
+                                                    // Replace the <textarea id="editor1"> with a CKEditor 4
+                                                    // instance, using default configuration.
+                                                    CKEDITOR.replace('editor1', config);
+                                                    // =================== Jquery ===================
+                                                    $(document).ready(function () {
+                                                        // =================== Fade btn update ===================
+                                                        $('.btnFade').fadeOut(0);
+                                                        var fadeCkeditor = CKEDITOR.instances['editor1'];
+                                                        fadeCkeditor.on('change', function () {
+                                                            $('.btnFade').fadeIn(200);
+                                                        });
 
-                                                       $('.fadeUpdate').on('keyup', function () {
-                                                           $('.btnFade').fadeIn(200);
-                                                       });
-                                                       // =================== Fade btn cmt ===================
-                                                       $('.btn_cmtFade').fadeOut(0);
-                                                       $('.txtUpdatecmt').on('keyup', function () {
-                                                           $('.btn_cmtFade').fadeIn(200);
-                                                       });
-                                                       // =================== bnt Like ===================
-                                                       $(".btn-like").click(function () {
-                                                           $(this).toggleClass("liked");
-                                                       });
-                                                       // =================== bnt Comment ===================
-                                                       $('#post__footer').slideUp();
-                                                       $(".btn-cmt").click(function () {
-                                                           $(this).toggleClass("cmted");
-                                                           $('#post__footer').slideToggle(1000);
-                                                       });
-                                                       // =================== Comment ===================
-                                                       $(document).on('click', '.btn-reply', function (eve) {
-                                                           eve.preventDefault();
-                                                           $(this).parent().parent().siblings('.comment-footer').slideToggle();
-                                                           eve.stopImmediatePropagation();
-                                                       });
-                                                       //=================== Write your comment ===================
-                                                       $(document).on('click', '.write_cmt', function (eve) {
-                                                           eve.preventDefault();
-                                                           $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
-                                                       });
+                                                        $('.fadeUpdate').on('keyup', function () {
+                                                            $('.btnFade').fadeIn(200);
+                                                        });
+                                                        // =================== Fade btn cmt ===================
+                                                        $('.btn_cmtFade').fadeOut(0);
+                                                        $('.txtUpdatecmt').on('keyup', function () {
+                                                            $('.btn_cmtFade').fadeIn(200);
+                                                        });
+                                                        // =================== bnt Like ===================
+                                                        $(".btn-like").click(function () {
+                                                            $(this).toggleClass("liked");
+                                                        });
+                                                        // =================== bnt Comment ===================
+                                                        $('#post__footer').slideUp();
+                                                        $(".btn-cmt").click(function () {
+                                                            $(this).toggleClass("cmted");
+                                                            $('#post__footer').slideToggle(1000);
+                                                        });
+                                                        // =================== Comment ===================
+                                                        $(document).on('click', '.btn-reply', function (eve) {
+                                                            eve.preventDefault();
+                                                            $(this).parent().parent().siblings('.comment-footer').slideToggle();
+                                                            eve.stopImmediatePropagation();
+                                                        });
+                                                        //=================== Write your comment ===================
+                                                        $(document).on('click', '.write_cmt', function (eve) {
+                                                            eve.preventDefault();
+                                                            $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
+                                                        });
 
-                                                   });
-
-                                                   // $(document).on('click', '.btn-send', function (eve) {
-                                                   //     var targetObject = $(this).parent().parent().parent().parent().parent();
-                                                   //     //console.log(targetObject);
-                                                   //     var reply_text = $(this).parent().siblings('textarea').val();
-
-                                                   //     if ($.trim(reply_text) == " " || $.trim(reply_text) == "") {
-                                                   //         alert("insert comment");
-                                                   //     } else {
-                                                   //         if ($(targetObject).hasClass("comment-main-level")) {
-                                                   //             if ($(targetObject).siblings('.comments-list.reply-list')) {
-                                                   //                 element_prepend = '<li> <div class="comment-avatar"><img alt="" src="http://dummyimage.com/60"></div><div class="comment-box"> <div class="comment-head"> <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i> </div> <div class="comment-content">' + reply_text + ' <div class="comment-open"> <a class="btn-reply"> <i class="fa fa-reply"></i> </a> </div> </div> <div class="comment-footer"> <div class="comment-form"> <textarea id="" name="" class="form-control"></textarea> <div class="pull-right send-button"> <a class="btn-send">send</a> </div> </div> </div> </div> </li>';
-                                                   //                 $(targetObject).siblings('.comments-list.reply-list').prepend(element_prepend);
-                                                   //             }
-                                                   //         }
-                                                   //     }
-                                                   // });
-
-</script>
+                                                    });
+    </script>
 
 </html>
 <!-- Không tốt nghiệp, bay trường :Đ -->
