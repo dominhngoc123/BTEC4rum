@@ -901,11 +901,10 @@
                                                             type: "POST",
                                                             url: "AddNewComment?postID=" + baseCommentID + "&postTitle=" + postTitle + "&postContent=" + commentContent + "&threadID=" + threadID + "&accountEmail=" + accountEmail,
                                                             success: function () {
-                                                                window.location = "getDetailPost?postID"= postID;
+                                                                window.location = "getDetailPost?postID=" + postID;
                                                             }
                                                         });
                                                     }
-                                                    
                                                     // CKEDITOR
                                                     // config
                                                     config = {};

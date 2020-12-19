@@ -15,7 +15,7 @@
         <title>BTEC FPT Forum - Edit Post Detail</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--=============================================Favicon==================================================-->
-        <link rel="icon" type="image/png" href="resources/img/logo_BTEC -head.png" />
+        <link rel="icon" type="image/png" href="include/resources/img/logo_BTEC -head.png" />
         <!--==============================================Google font=================================================-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
         <!--==========================================Fort Awesome=====================================================-->
@@ -216,7 +216,7 @@
                                         <label for="validationDefault05">Phone Number</label>
                                         <input type="number" class="form-control form-control-sm" id="validationDefault05"
                                                min="100000000" onKeyPress="if (this.value.length == 10)
-                                                           return false;">
+                                                    return false;">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="validationDefault07">Avatar</label>
@@ -448,11 +448,14 @@
                 <div class="post-container">
                     <s:iterator value="listPost">
                         <s:if test="postID.length() == 10">
-                            <form action="" method="post">
+                            <input type="hidden" value="<s:property value="postID"/>" id="postID"/>
+                            <input type="hidden" value="<s:property value="thread.threadID"/>" id="threadID"/>
+                            <form id="updatePostForm">
                                 <!-- Post Header -->
+                                <input type="hidden" value="<s:property value="user.accountEmail"/>" class="accountEmail"/>
                                 <div class="post__header container">
-                                    <div class="post__header-title">
-                                        <textarea class="form-control auto-textarea post-inp-color post-inp-edit fadeUpdate"
+                                    <div class="post__header-title">                                        
+                                        <textarea class="form-control auto-textarea updateTitle post-inp-color post-inp-edit fadeUpdate"
                                                   placeholder="Enter title here..." aria-label="With textarea"
                                                   style="text-rendering: auto;" required><s:property value="postTitle"/></textarea>
                                     </div>
@@ -479,7 +482,7 @@
                                         </div>
                                         <ul class="post__body-author-text">
                                             <li><span class="post__body-author-name" data-toggle="modal"
-                                                      data-target="#profile-modal">Doe John</span></li>
+                                                      data-target="#profile-modal"><s:property value="user.userFullName"/></span></li>
                                             <li><span class="post__body-author-time">Posted on
                                                     <span>10-FEB-2015</span> <span>12:00</span></span></li>
                                         </ul>
@@ -488,7 +491,7 @@
                                         <textarea name="" id="editor1" placeholder="Type text content here..." required><s:property value="postContent" escape="false"/></textarea>
                                     </div>
                                     <br>
-                                    <button type="submit" class="btn btn-jump btn-post btn-shadow btnFade">Update</button>
+                                    <button class="btn btn-jump btn-post btn-shadow btnFade">Update</button>
                                     <div class="post__body-action unselecttable">
                                         <div class="post__body-action-like">
                                             <button type="button" class="btn-like btn-jump"><i class="far fa-thumbs-up"></i>
@@ -538,7 +541,7 @@
                                                     <div class="comment-box">
                                                         <div class="comment-head">
                                                             <h6 class="comment-name by-author"><a href="#none" data-toggle="modal"
-                                                                                                  data-target="#profile-modal">John Doe</a></h6>
+                                                                                                  data-target="#profile-modal"><s:property value="user.userFullName"/></a></h6>
                                                             <span class="posted-time">Posted on 10-FEB-2015 12:00</span>
                                                             <div class="comment-head-more-action">
                                                                 <button type="button"
@@ -587,70 +590,70 @@
                                                     </div>
                                                 </div>
                                                 <ul class="comments-list reply-list">
-                                                    
-                                                    </s:elseif>
-                                                    <s:elseif test="postID.length() == 14">
-                                                    </li>
-                                                        <li>
-                                                        <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>" alt="">
-                                                        </div>
-                                                        <div class="comment-box">
-                                                            <div class="comment-head">
-                                                                <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6>
-                                                                <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
-                                                                <div class="comment-head-more-action">
-                                                                    <button type="button"
-                                                                            class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
-                                                                        <span class="sr-only">Toggle Dropleft</span>
-                                                                        <i class="fas fa-ellipsis-v"></i>
-                                                                    </button>
-                                                                    <div class="dropdown-menu edit-dropdown-menu">
-                                                                        <a class="dropdown-item edit-dropdown-item"
-                                                                           href="#">Delete</a>
-                                                                        <a class="dropdown-item edit-dropdown-item"
-                                                                           href="#">Report</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="comment-content">
-                                                                <form action="" method="post">
-                                                                    <textarea type="text" class="txtUpdatecmt"
-                                                                              placeholder="Enter comment here..." required></textarea>
-                                                                    <br>
-                                                                    <button type="submit"
-                                                                            class="btn-jump btn-shadow btnUpdatecmt">update</button>
-                                                                    <br>
-                                                                </form>
-                                                                <div class="comment-open">
-                                                                    <a href="#none" class="btn-like btn-like-ml"
-                                                                       style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
-                                                                        <span>2</span></a>
-                                                                    <a class="btn-reply">
-                                                                        <i class="fa fa-reply"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="comment-footer">
-                                                                <div class="comment-form">
-                                                                    <form action="" method="post">
-                                                                        <textarea class="form-control auto-textarea" name=""
-                                                                                  placeholder="Write your comment here"
-                                                                                  required></textarea>
-                                                                        <div class="pull-right send-button">
-                                                                            <button type="submit"
-                                                                                    class="btn-send btn-jump">send</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </s:elseif>
-                                                </s:iterator>
+
+                                                </s:elseif>
+                                                <s:elseif test="postID.length() == 14">
                                             </li>
-                                        </ul>
+                                            <li>
+                                                <div class="comment-avatar"><img src="<s:property value="user.userAvatar"/>" alt="">
+                                                </div>
+                                                <div class="comment-box">
+                                                    <div class="comment-head">
+                                                        <h6 class="comment-name"><a href="#"><s:property value="user.userFullName"/></a></h6>
+                                                        <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+                                                        <div class="comment-head-more-action">
+                                                            <button type="button"
+                                                                    class="btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                <span class="sr-only">Toggle Dropleft</span>
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu edit-dropdown-menu">
+                                                                <a class="dropdown-item edit-dropdown-item"
+                                                                   href="#">Delete</a>
+                                                                <a class="dropdown-item edit-dropdown-item"
+                                                                   href="#">Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <form action="" method="post">
+                                                            <textarea type="text" class="txtUpdatecmt"
+                                                                      placeholder="Enter comment here..." required></textarea>
+                                                            <br>
+                                                            <button type="submit"
+                                                                    class="btn-jump btn-shadow btnUpdatecmt">update</button>
+                                                            <br>
+                                                        </form>
+                                                        <div class="comment-open">
+                                                            <a href="#none" class="btn-like btn-like-ml"
+                                                               style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
+                                                                <span>2</span></a>
+                                                            <a class="btn-reply">
+                                                                <i class="fa fa-reply"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-footer">
+                                                        <div class="comment-form">
+                                                            <form action="" method="post">
+                                                                <textarea class="form-control auto-textarea" name=""
+                                                                          placeholder="Write your comment here"
+                                                                          required></textarea>
+                                                                <div class="pull-right send-button">
+                                                                    <button type="submit"
+                                                                            class="btn-send btn-jump">send</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </s:elseif>
+                                        </s:iterator>
                                     </li>
+                                </ul>
+                                </li>
                                 </ul>
                             </div>
                         </div>
@@ -756,98 +759,113 @@
     <script src="include/resources/js/base.js"></script>
     <script src="include/asset/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
-                                                   // CKEDITOR
-                                                   // config
-                                                   config = {};
-                                                   config.entities_latin = false;
-                                                   config.lauguage = 'vi';
-                                                   config.allowedContent = true;
-                                                   config.removeFormatAttributes = '';
-                                                   // config.height = '80vh';
-                                                   config.extraPlugins = 'autogrow';
+                                                // CKEDITOR
+                                                // config
+                                                config = {};
+                                                config.entities_latin = false;
+                                                config.lauguage = 'vi';
+                                                config.allowedContent = true;
+                                                config.removeFormatAttributes = '';
+                                                // config.height = '80vh';
+                                                config.extraPlugins = 'autogrow';
 
-                                                   // Define changes to default configuration here.
-                                                   // For complete reference see:
-                                                   // http://docs.ckeditor.com/#!/api/CKEDITOR.config
+                                                // Define changes to default configuration here.
+                                                // For complete reference see:
+                                                // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
-                                                   // The toolbar groups arrangement, optimized for two toolbar rows.
-                                                   config.toolbarGroups = [
-                                                       {name: 'clipboard', groups: ['clipboard', 'undo']},
-                                                       {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
-                                                       {name: 'links'},
-                                                       {name: 'insert'},
-                                                       {name: 'forms'},
-                                                       {name: 'tools'},
-                                                       {name: 'document', groups: ['mode', 'document', 'doctools']},
-                                                       {name: 'others'},
-                                                       '/',
-                                                       {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
-                                                       {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
-                                                       {name: 'styles'},
-                                                       {name: 'colors'},
-                                                       {name: 'about'}
-                                                   ];
+                                                // The toolbar groups arrangement, optimized for two toolbar rows.
+                                                config.toolbarGroups = [
+                                                    {name: 'clipboard', groups: ['clipboard', 'undo']},
+                                                    {name: 'editing', groups: ['find', 'selection', 'spellchecker']},
+                                                    {name: 'links'},
+                                                    {name: 'insert'},
+                                                    {name: 'forms'},
+                                                    {name: 'tools'},
+                                                    {name: 'document', groups: ['mode', 'document', 'doctools']},
+                                                    {name: 'others'},
+                                                    '/',
+                                                    {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                                                    {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
+                                                    {name: 'styles'},
+                                                    {name: 'colors'},
+                                                    {name: 'about'}
+                                                ];
 
-                                                   // Replace the <textarea id="editor1"> with a CKEditor 4
-                                                   // instance, using default configuration.
-                                                   CKEDITOR.replace('editor1', config);
-                                                   // =================== Jquery ===================
-                                                   $(document).ready(function () {
-                                                       // =================== Fade btn update ===================
-                                                       $('.btnFade').fadeOut(0);
-                                                       var fadeCkeditor = CKEDITOR.instances['editor1'];
-                                                       fadeCkeditor.on('change', function () {
-                                                           $('.btnFade').fadeIn(200);
-                                                       });
+                                                // Replace the <textarea id="editor1"> with a CKEditor 4
+                                                // instance, using default configuration.
+                                                CKEDITOR.replace('editor1', config);
+                                                // =================== Jquery ===================
+                                                $(document).ready(function () {
+                                                    // =================== Fade btn update ===================
+                                                    $('.btnFade').fadeOut(0);
+                                                    var fadeCkeditor = CKEDITOR.instances['editor1'];
+                                                    fadeCkeditor.on('change', function () {
+                                                        $('.btnFade').fadeIn(200);
+                                                    });
 
-                                                       $('.fadeUpdate').on('keyup', function () {
-                                                           $('.btnFade').fadeIn(200);
-                                                       });
+                                                    $('.fadeUpdate').on('keyup', function () {
+                                                        $('.btnFade').fadeIn(200);
+                                                    });
 
-                                                       $('.btnUpdatecmt').fadeOut(0);
-                                                       $('.txtUpdatecmt').on('keyup', function () {
-                                                           $(this).next().next().fadeIn(200);
-                                                       });
-                                                       // =================== bnt Like ===================
-                                                       $(".btn-like").click(function () {
-                                                           $(this).toggleClass("liked");
-                                                       });
-                                                       // =================== bnt Comment ===================
-                                                       $('#post__footer').slideUp();
-                                                       $(".btn-cmt").click(function () {
-                                                           $(this).toggleClass("cmted");
-                                                           $('#post__footer').slideToggle(1000);
-                                                       });
-                                                       // =================== Comment ===================
-                                                       $(document).on('click', '.btn-reply', function (eve) {
-                                                           eve.preventDefault();
-                                                           $(this).parent().parent().siblings('.comment-footer').slideToggle();
-                                                           eve.stopImmediatePropagation();
-                                                       });
-                                                       //=================== Write your comment ===================
-                                                       $(document).on('click', '.write_cmt', function (eve) {
-                                                           eve.preventDefault();
-                                                           $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
-                                                       });
-                                                   });
+                                                    $('.btnUpdatecmt').fadeOut(0);
+                                                    $('.txtUpdatecmt').on('keyup', function () {
+                                                        $(this).next().next().fadeIn(200);
+                                                    });
+                                                    // =================== bnt Like ===================
+                                                    $(".btn-like").click(function () {
+                                                        $(this).toggleClass("liked");
+                                                    });
+                                                    // =================== bnt Comment ===================
+                                                    $('#post__footer').slideUp();
+                                                    $(".btn-cmt").click(function () {
+                                                        $(this).toggleClass("cmted");
+                                                        $('#post__footer').slideToggle(1000);
+                                                    });
+                                                    // =================== Comment ===================
+                                                    $(document).on('click', '.btn-reply', function (eve) {
+                                                        eve.preventDefault();
+                                                        $(this).parent().parent().siblings('.comment-footer').slideToggle();
+                                                        eve.stopImmediatePropagation();
+                                                    });
+                                                    //=================== Write your comment ===================
+                                                    $(document).on('click', '.write_cmt', function (eve) {
+                                                        eve.preventDefault();
+                                                        $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
+                                                    });
+                                                });
 
-                                                   // $(document).on('click', '.btn-send', function (eve) {
-                                                   //     var targetObject = $(this).parent().parent().parent().parent().parent();
-                                                   //     //console.log(targetObject);
-                                                   //     var reply_text = $(this).parent().siblings('textarea').val();
 
-                                                   //     if ($.trim(reply_text) == " " || $.trim(reply_text) == "") {
-                                                   //         alert("insert comment");
-                                                   //     } else {
-                                                   //         if ($(targetObject).hasClass("comment-main-level")) {
-                                                   //             if ($(targetObject).siblings('.comments-list.reply-list')) {
-                                                   //                 element_prepend = '<li> <div class="comment-avatar"><img alt="" src="http://dummyimage.com/60"></div><div class="comment-box"> <div class="comment-head"> <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i> </div> <div class="comment-content">' + reply_text + ' <div class="comment-open"> <a class="btn-reply"> <i class="fa fa-reply"></i> </a> </div> </div> <div class="comment-footer"> <div class="comment-form"> <textarea id="" name="" class="form-control"></textarea> <div class="pull-right send-button"> <a class="btn-send">send</a> </div> </div> </div> </div> </li>';
-                                                   //                 $(targetObject).siblings('.comments-list.reply-list').prepend(element_prepend);
-                                                   //             }
-                                                   //         }
-                                                   //     }
-                                                   // });
+
+                                                // $(document).on('click', '.btn-send', function (eve) {
+                                                //     var targetObject = $(this).parent().parent().parent().parent().parent();
+                                                //     //console.log(targetObject);
+                                                //     var reply_text = $(this).parent().siblings('textarea').val();
+
+                                                //     if ($.trim(reply_text) == " " || $.trim(reply_text) == "") {
+                                                //         alert("insert comment");
+                                                //     } else {
+                                                //         if ($(targetObject).hasClass("comment-main-level")) {
+                                                //             if ($(targetObject).siblings('.comments-list.reply-list')) {
+                                                //                 element_prepend = '<li> <div class="comment-avatar"><img alt="" src="http://dummyimage.com/60"></div><div class="comment-box"> <div class="comment-head"> <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i> </div> <div class="comment-content">' + reply_text + ' <div class="comment-open"> <a class="btn-reply"> <i class="fa fa-reply"></i> </a> </div> </div> <div class="comment-footer"> <div class="comment-form"> <textarea id="" name="" class="form-control"></textarea> <div class="pull-right send-button"> <a class="btn-send">send</a> </div> </div> </div> </div> </li>';
+                                                //                 $(targetObject).siblings('.comments-list.reply-list').prepend(element_prepend);
+                                                //             }
+                                                //         }
+                                                //     }
+                                                // });
 
     </script>
 
+    <script type="text/javascript">
+        $(document).on("submit", "#updatePostForm", function ()
+        {
+            event.preventDefault();
+            var postID = $("#postID").val();
+            var postTitle = $(this).find(".updateTitle").val();
+            var postContent = CKEDITOR.instances.editor1.getData();
+            var threadID = $("#threadID").val();
+            var accountEmail = $(this).children(".accountEmail").val();
+            var tmp = encodeURI("AddNewPost?postTitle=" + postTitle + "&postContent=" + postContent + "&threadID=" + threadID + "&accountEmail=" + accountEmail + "&status=" + postID);
+            window.location = tmp;
+        });
+    </script>
 </html>

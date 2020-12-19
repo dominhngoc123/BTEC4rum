@@ -5,8 +5,8 @@
 <!-- Author: Ngoc Do Minh -->
  
 <struts>
-    <package name="basicstruts2" extends="struts-default, json-default">
-        <action name="login" class="App.LoginAction" method="checkLogin">
+    <package name="Member" extends="struts-default, json-default">
+        <action name="Login" class="App.LoginAction" method="checkLogin">
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
         </action>
         <action name="redirect" class="App.LoginAction" method="redirectUser">
@@ -15,10 +15,7 @@
             <result name="MOD">/Moderator/moderator.jsp</result>
         </action>
         <action name="logOut" class="App.LoginAction" method="logOut">
-            <result name="LOGOUTSUCCESS">/index.jsp</result>
-        </action>
-        <action name="returnIndex">
-            <result>/index.jsp</result>
+            <result name="LOGOUTSUCCESS">index.jsp</result>
         </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
             <result name="ADMINLOGINSUCCESS" type="redirectAction">adminWelcomeData</result>
@@ -80,6 +77,18 @@
         <action name="getSpecificPost" class="App.PostAction" method="getSpecificPost">
             <result name="SPECIFICPOST" type="json">/postdetail.jsp</result>
         </action>
+        <action name="updatePost" class="App.PostAction" method="updatePost">
+            <result name="UPDATEPOSTSUCCESS">/Admin/admin.jsp</result>
+            <result name="UPDATEPOSTFAILED">/Admin/admin.jsp</result>
+        </action>
+        <action name="updatePostStatus" class="App.PostAction" method="updatePostStatus">
+            <result name="UPDATEPOSTSTATUSSUCCESS">/Admin/admin.jsp</result>
+            <result name="UPDATEPOSTSTATUSFAILED">/Admin/admin.jsp</result>
+        </action>
+        <action name="deletePost" class="App.PostAction" method="deletePost">
+            <result name="DELETEPOSTSUCCESS">/Admin/admin.jsp</result>
+            <result name="UPDATEPOSTFAILED">/Admin/admin.jsp</result>
+        </action>
         
         <!-- Admin manage topic -->
         <action name="adminAddTopic" class="App.TopicAction" method="addTopic">
@@ -135,4 +144,5 @@
             <result name="UPDATETHREADFAILED" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
+    <package name="Admin" namespace="/Admin" extends="struts-default, json-default"></package>
 </struts>

@@ -133,7 +133,7 @@ public class PostAction extends ActionSupport {
     public void setCommentLevel(int commentCount) {
         this.commentCount = commentCount;
     }
-    
+
     public PostAction() {
     }
 
@@ -144,48 +144,67 @@ public class PostAction extends ActionSupport {
         }
         return "USERADDPOSTFAILED";
     }
-    
+
     public String addNewComment() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.createComment(postID, postTitle, postContent, threadID, accountEmail))
-        {
+        if (postDataProcess.createComment(postID, postTitle, postContent, threadID, accountEmail)) {
             return "USERADDCOMMENTSUCCESS";
         }
         return "USERADDCOMMENTFAILED";
     }
-    
-    public String getAllPost()
-    {
+
+    public String getAllPost() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getPost();
         return "POSTDATA";
     }
-//    
-//    public String getForumPost()
-//    {
-//        PostDataProcess postDataProcess = new PostDataProcess();
-//        listPost = postDataProcess.getForumDisplayPost();
-//        listNewPost = postDataProcess.getNewPost();
-//        return "POSTDATA";
-//    }
-    
-    public String getPostByID()
-    {
+
+    public String getPostByID() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getPostByID(postID);
         commentCount = listPost.size();
         return "POSTDETAIL";
     }
-    public String getPostbyEmail()
-    {
+
+    public String getPostbyEmail() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getDataByPosterEmail(accountEmail);
         return "LISTPOSTBYEMAIL";
     }
-    public String getSpecificPost()
-    {
+
+    public String getSpecificPost() {
         PostDataProcess postDataProcess = new PostDataProcess();
         post = postDataProcess.getSpecificPost(postID);
         return "SPECIFICPOST";
+    }
+    
+    public String updatePost()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        if (postDataProcess.updatePost(postID, status))
+        {
+            return "UPDATEPOSTSUCCESS";
+        }
+        return "UPDATEPOSTFAILED";
+    }
+    
+    public String updatePostStatus()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        if (postDataProcess.updatePost(postID, status))
+        {
+            return "UPDATEPOSTSTATUSSUCCESS";
+        }
+        return "UPDATEPOSTSTATUSFAILED";
+    }
+    
+    public String deletePost()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        if (postDataProcess.deletePost(postID))
+        {
+            return "DELETEPOSTSUCCESS";
+        }
+        return "DELETEPOSTFAILED";
     }
 }

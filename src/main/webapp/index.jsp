@@ -39,7 +39,7 @@
     <body class="login">
         <input type="hidden" id="session" value="<s:property value="#session.accountEmail"/>"/>
         <img class="logo" height="80" width="208" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_BTEC.png" alt="BTEC Forum">
-        <form class="vertical-form sign-in" id="sign-in" action="adminLogin.action" accept-charset="UTF-8" method="post">
+        <form class="vertical-form sign-in" id="sign-in" action="Admin/adminLogin.action" accept-charset="UTF-8" method="post">
             <legend class="legendTitle">Sign In</legend><p style="color: red;"><s:property value="msg"/></p>
             <input type="text" placeholder="Enter username" label="false" spellcheck="false" class="is-sensitive" value="" name="adminUsername" id="user_email" required="true" autocomplete="off">
             <input placeholder="Enter password" label="false" autocomplete="off" class="is-sensitive" type="password" name="adminPassword" id="user_password" required="true" autocomplete="off">
@@ -72,7 +72,7 @@
             var name = profile.getName();
             var email = profile.getEmail();
             var avatar = profile.getImageUrl();
-            location.assign("login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
+            location.assign("Forum/Login?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
         }
     </script>
 </html>

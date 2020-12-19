@@ -736,3 +736,6 @@ textarea {
 .dropdown-select a:hover {
     color: #666;
 }*/
+.custom-button{
+    min-width: 90px;
+}

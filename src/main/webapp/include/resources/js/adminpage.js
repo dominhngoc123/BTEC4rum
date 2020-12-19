@@ -133,9 +133,9 @@ function loadTopic()
                 tmpStr += "<td>" + this['topicName'] + "</td>";
                 tmpStr += "<td>" + this['topicDescription'] + "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
-                tmpStr += "<td style='width: 120px;'><button class='btn btn-success'>Detail</button></td>";
-                tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-primary updateTopicBtn'>Update</button></td>";
-                tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-danger deleteTopicBtn'>Delete</button></td>";
+                tmpStr += "<td style='width: 120px;'><button class='btn btn-success btn-jump'>Detail</button></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-primary btn-jump updateTopicBtn'>Update</button></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-danger btn-jump deleteTopicBtn'>Delete</button></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";
@@ -183,7 +183,7 @@ function loadTopic()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<input type='button' class='btn btn-secondary btn-jump' data-dismiss='modal' value='Close'>";
-            tmpStr += "<input type='submit' class='btn btn-primary btn-jump' id='submitForm' value='Add'>";
+            tmpStr += "<input type='submit' class='btn btn-primary btn-jump' id='submitForm1' value='Add'>";
             tmpStr += "</div>";
             tmpStr += "</form>";
             tmpStr += "</div>";
@@ -227,7 +227,7 @@ function loadTopic()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<input type='button' class='btn btn-secondary btn-jump' data-dismiss='modal' value='Close'>";
-            tmpStr += "<input type='submit' class='btn btn-primary btn-jump' id='submitForm' value='Update'>";
+            tmpStr += "<input type='submit' class='btn btn-primary btn-jump' id='submitForm2' value='Update'>";
             tmpStr += "</div>";
             tmpStr += "</form>";
             tmpStr += "</div>";
@@ -525,7 +525,7 @@ function loadThread()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<button type='button' class='btn btn-secondary btn-jump' data-dismiss='modal'>Close</button>";
-            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm'>ADD</button>";
+            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm1'>ADD</button>";
             tmpStr += "</div>";
             tmpStr += "</form>";
             tmpStr += "</div>";
@@ -591,7 +591,7 @@ function loadThread()
             tmpStr += "</div>";
             tmpStr += "<div class='modal-footer'>";
             tmpStr += "<button type='button' class='btn btn-secondary btn-jump' data-dismiss='modal'>Close</button>";
-            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm1'>Update</button>";
+            tmpStr += "<button type='submit' class='btn btn-primary btn-jump' id='submitForm2'>Update</button>";
             tmpStr += "</div>";
             tmpStr += "<div id='additionalAjax'></div>";
             tmpStr += "</form>";
@@ -634,21 +634,30 @@ function loadPost()
                 if (this['status'] == 1)
                 {
                     tmpStr += "Approved";
-                } else
+                } else if (this['status'] == 2)
                 {
                     tmpStr += "Pending";
+                }
+                else
+                {
+                    tmpStr += "Pending update";
                 }
                 tmpStr += "</td>";
                 tmpStr += "<td>" + this['thread'].threadName + "</td>";
                 if (this['status'] == 1)
                 {
-                    tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-warning btn-jump' title='Button này để mày bỏ duyệt bài'><i class='fas fa-comment-slash'></i></a></td>";
-                } else
+                    tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-warning btn-jump custom-button declinePostBtn' title='Button này để mày bỏ duyệt bài'><i class='fas fa-comment-slash'></i></button></td>";
+                } else if (this['status'] == 2)
                 {
-                    tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success btn-jump' title='Button này để mày duyệt bài'><i class='fas fa-check'></i></a></td>";
+                    tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-success btn-jump custom-button approvePostBtn' title='Button này để mày duyệt bài'><i class='fas fa-check'></i></button></td>";
+                }
+                else
+                {
+                    tmpStr += "<input type='hidden' id='TMP" + this['postID'] + "' value='" + this['status'] + "'/>";
+                    tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-success btn-jump custom-button approveUpdatePostBtn' title='Button này để mày duyệt bài'><i class='fas fa-check'></i></button></td>";
                 }
                 tmpStr += "<td style='width: 120px;'><a href='getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger btn-jump'><i class='far fa-trash-alt'></i></a></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-danger btn-jump custom-button deletePostBtn'><i class='far fa-trash-alt'></i></a></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";
@@ -709,18 +718,21 @@ function loadUser()
                 }
                 tmpStr += "</td>";
                 tmpStr += "<td>" + this['dateAdded'] + "</td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-success'>Detail</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-primary'>Update</a></td>";
-                tmpStr += "<td style='width: 120px;'><a href='#' class='btn btn-danger'>Delete</a></td>";
+                tmpStr += "<td>";
+                if (this['status'] == 1)
+                {
+                    tmpStr += "<button class='btn btn-success btn-jump blockUserBtn custom-button' value='" + this['accountEmail'] + "'><i class='fa fa-lock' aria-hidden='true'></i></button>";
+                } else
+                {
+                    tmpStr += "<button class='btn btn-warning btn-jump blockUserBtn custom-button' value='" + this['accountEmail'] + "'><i class='fa fa-unlock' aria-hidden='true'></i></button>";
+                }
+                tmpStr += "</td>";
+                 tmpStr += "<td style='width: 120px;'><a href='getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
+                tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-danger btn-jump custom-button deletePostBtn'><i class='far fa-trash-alt'></i></a></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";
             tmpStr += "</table>";
-            tmpStr += "</div>";
-            tmpStr += "<div style='text-align: center;'>";
-            tmpStr += "<a class='btn btn-primary' href='CreateNewPost'>Add new</a>";
-            tmpStr += "</div>";
-            tmpStr += "</div>";
             $("#showTable").html(tmpStr);
         }
     });
@@ -764,6 +776,59 @@ $(document).ready(function () {
 
 // Update and delete topic
 // Load modal function
+$(document).on("click", ".approvePostBtn", function () {
+    var postID = $(this).val();
+    $.ajax({
+        type: "POST",
+        url: "updatePostStatus?postID=" + postID + "&status=1",
+        success: function ()
+        {
+            alert("This post is approved");
+            loadPost();
+        }
+    });
+});
+$(document).on("click", ".declinePostBtn", function () {
+    var postID = $(this).val();
+    $.ajax({
+        type: "POST",
+        url: "updatePostStatus?postID=" + postID + "&status=2",
+        success: function ()
+        {
+            alert("This post is declined");
+            loadPost();
+        }
+    });
+});
+$(document).on("click", ".approveUpdatePostBtn", function () {
+    var postID = $(this).val();
+    var status = $("#TMP" + postID).val();
+    $.ajax({
+        type: "POST",
+        url: "updatePostStatus?postID=" + postID + "&status=" + status,
+        success: function ()
+        {
+            alert("This post is approved");
+            loadPost();
+        }
+    });
+});
+$(document).on("click", ".deletePostBtn", function () {
+    var check = confirm("Do you want to delete this post?");
+    if (check)
+    {
+        var postID = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "deletePost?postID=" + postID,
+            success: function ()
+            {
+                alert("Delete success");
+                loadPost();
+            }
+        });
+    }
+});
 $(document).ajaxComplete(function () {
     $(".updateTopicBtn").click(function () {
         var topicID = $(this).val();

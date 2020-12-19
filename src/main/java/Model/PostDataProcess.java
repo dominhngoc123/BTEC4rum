@@ -44,7 +44,7 @@ public class PostDataProcess {
 
     public List<Post> getForumDisplayPost() {
         List<Post> listPost = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 AND _status = 1 ORDER BY dateAdded DESC";
+        String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 AND _status = '1' ORDER BY dateAdded DESC";
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -104,10 +104,14 @@ public class PostDataProcess {
         String postID = generatePostID(threadID);
         boolean isAdded = false;
         String sqlQuery = "";
-        if (!status.equals("2")) {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP)";
+        if (status.length() < 2) {
+            if (!status.equals("2")) {
+                sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP)";
+            } else {
+                sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, NULL)";
+            }
         } else {
-            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, NULL)";
+            sqlQuery += "INSERT INTO tblPost VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, NULL)";
         }
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
@@ -116,6 +120,9 @@ public class PostDataProcess {
             preparedStatement.setString(3, postContent);
             preparedStatement.setString(4, threadID);
             preparedStatement.setString(5, accountEmail);
+            if (status.length() > 1) {
+                preparedStatement.setString(6, status);
+            }
             isAdded = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             getConnection().close();
@@ -129,7 +136,7 @@ public class PostDataProcess {
         String commentID = generatCommentID(postID);
         boolean isAdded = false;
         String sqlQuery = "";
-        sqlQuery = "INSERT INTO tblPost VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, CURRENT_TIMESTAMP)";
+        sqlQuery = "INSERT INTO tblPost VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, commentID);
@@ -178,8 +185,11 @@ public class PostDataProcess {
 
     public static void main(String[] args) {
         PostDataProcess p = new PostDataProcess();
-        List<Post> l = p.getPostByID("THR01P0001");
-        System.out.println(l.size());
+//        List<Post> l = p.getPostByID("THR01P0001");
+//        for (Post post : l) {
+//            System.out.println(post.getPostID());
+//        }
+        System.out.println(p.getForumDisplayPost().size());
     }
 
     public List<Post> getPostByID(String postID) {
@@ -238,6 +248,49 @@ public class PostDataProcess {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return post;
+    }
+
+    public boolean updatePost(String postID, String status) {
+        boolean isUpdate = false;
+        if (status.length() == 1) {
+            String sqlQuery = "UPDATE tblPost SET _status = ?, approvedDate = CURRENT_TIMESTAMP WHERE postID = ?";
+            try {
+                PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+                preparedStatement.setString(1, status);
+                preparedStatement.setString(2, postID);
+                isUpdate = (preparedStatement.executeUpdate() > 0);
+                preparedStatement.close();
+                getConnection().close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            String sqlQuery = "DELETE tblPost WHERE postID = ?; UPDATE tblPost SET _status = '1', approvedDate = CURRENT_TIMESTAMP WHERE postID = ?";
+            try {
+                PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+                preparedStatement.setString(1, status);
+                preparedStatement.setString(2, postID);
+                isUpdate = (preparedStatement.executeUpdate() > 0);
+            } catch (SQLException ex) {
+                Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return isUpdate;
+    }
+
+    public boolean deletePost(String postID) {
+        boolean isDelete = false;
+        String sqlQuery = "DELETE tblPost WHERE postID = ?";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, postID);
+            isDelete = (preparedStatement.executeUpdate() > 0);
+            preparedStatement.close();
+            getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isDelete;
     }
 
     public String generatePostID(String threadID) {

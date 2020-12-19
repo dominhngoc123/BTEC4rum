@@ -407,7 +407,7 @@
                                                             <td class="cell100 column2"><s:property value="thread.category.categoryName"/></td>
                                                             <td class="cell100 column3"><s:property value="thread.threadName"/></td>
                                                             <td class="cell100 column4"><s:property value="user.userFullName"/></td>
-                                                            <td class="cell100 column5"><script>getDateTime("<s:property value="approvedDate"/>")</script></td>
+                                                            <td class="cell100 column5"><script>getDate("<s:property value="approvedDate"/>")</script></td>
                                                         </tr>
                                                     </s:if>
                                                 </s:if>
