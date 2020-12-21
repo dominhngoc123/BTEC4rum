@@ -94,28 +94,18 @@ function searchData() {
     $("#myTable2 tr").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
-}
-function alertAdminBlocUser(accountEmail)
-{
-    return confirm("Do you want to block user with email:" + accountEmail);
-}
-;
-function alertAdminUnblocUser(accountEmail)
-{
-    return confirm("Do you want to unblock user with email:" + accountEmail);
-}
-;
+};
+
 function loadTopic()
 {
     $.ajax({
         type: "GET",
-        url: "adminLoadTopicData",
+        url: "Admin/adminLoadTopicData",
         success: function (itr) {
             // Display data
             var tmpStr = "<div class='tab-pane' id='listTopic' role='tabpanel' aria-labelledby='manageTopic'>";
             tmpStr += "<h3 style='text-align: center;'>Manage topic</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
-            tmpStr += "<div style='text-align: center;' id='msg'>";
             tmpStr += "</div>";
             tmpStr += "<div class='scroll-table'>";
             tmpStr += "<table class='table table-hover table-responsive-sm fixed_header table-borderless table-fixed mb-0' id='ddj2' cellspacing='0' width='100%'>";
@@ -132,7 +122,7 @@ function loadTopic()
                 tmpStr += "<tr class='clickable-row' data-href='#' style='cursor: pointer;'>";
                 tmpStr += "<td>" + this['topicName'] + "</td>";
                 tmpStr += "<td>" + this['topicDescription'] + "</td>";
-                tmpStr += "<td>" + this['dateAdded'] + "</td>";
+                tmpStr += "<td>" + this["dateAdded"] + "</td>";
                 tmpStr += "<td style='width: 120px;'><button class='btn btn-success btn-jump'>Detail</button></td>";
                 tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-primary btn-jump updateTopicBtn'>Update</button></td>";
                 tmpStr += "<td style='width: 120px;'><button value='" + this['topicID'] + "' class='btn btn-danger btn-jump deleteTopicBtn'>Delete</button></td>";
@@ -141,7 +131,7 @@ function loadTopic()
             tmpStr += "</tbody>";
             tmpStr += "</table>";
             tmpStr += "</div>";
-            tmpStr += "<div style='text-align: center;'>";
+            tmpStr += "<div style='text-align: center; margin-top: 22px;'>";
             tmpStr += "<a class='btn btn-primary' data-toggle='modal' data-target='#modal_add'>Add new</a>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -240,12 +230,11 @@ function loadCategory()
 {
     $.ajax({
         type: "GET",
-        url: "adminLoadCategoryData",
+        url: "Admin/adminLoadCategoryData",
         success: function (itr) {
             var tmpStr = "<div class='tab-pane' id='listCategory' role='tabpanel' aria-labelledby='manageTopic'>";
             tmpStr += "<h3 style='text-align: center;'>Manage category</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
-            tmpStr += "<div style='text-align: center;' id='msg'>";
             tmpStr += "</div>";
             tmpStr += "<div class='scroll-table'>";
             tmpStr += "<table class='table table-hover table-responsive-sm fixed_header table-borderless table-fixed mb-0' id='ddj2' cellspacing='0' width='100%'>";
@@ -275,7 +264,7 @@ function loadCategory()
             tmpStr += "</tbody>";
             tmpStr += "</table>";
             tmpStr += "</div>";
-            tmpStr += "<div style='text-align: center;'>";
+            tmpStr += "<div style='text-align: center; margin-top: 22px;'>";
             tmpStr += "<a class='btn btn-primary' data-toggle='modal' data-target='#modal_add'>Add new</a>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -423,12 +412,11 @@ function loadThread()
 {
     $.ajax({
         type: "GET",
-        url: "adminLoadThreadData",
+        url: "Admin/adminLoadThreadData",
         success: function (itr) {
             var tmpStr = "<div class='tab-pane' id='listThread' role='tabpanel' aria-labelledby='manageTopic'>";
             tmpStr += "<h3 style='text-align: center;'>Manage thread</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
-            tmpStr += "<div style='text-align: center;' id='msg'>";
             tmpStr += "</div>";
             tmpStr += "<div class='scroll-table'>";
             tmpStr += "<table class='table table-hover table-responsive-sm fixed_header table-borderless table-fixed mb-0' id='ddj2' cellspacing='0' width='100%'>";
@@ -456,7 +444,7 @@ function loadThread()
             tmpStr += "</tbody>";
             tmpStr += "</table>";
             tmpStr += "</div>";
-            tmpStr += "<div style='text-align: center;'>";
+            tmpStr += "<div style='text-align: center; margin-top: 22px;'>";
             tmpStr += "<a class='btn btn-primary' data-toggle='modal' data-target='#modal_add'>Add new</a>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -605,12 +593,11 @@ function loadPost()
 {
     $.ajax({
         type: "GET",
-        url: "adminLoadPostData",
+        url: "Admin/adminLoadPostData",
         success: function (itr) {
             var tmpStr = "<div class='tab-pane' id='listPost' role='tabpanel' aria-labelledby='managePost'>";
             tmpStr += "<h3 style='text-align: center;'>Manage post</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
-            tmpStr += "<div style='text-align: center;' id='msg'>";
             tmpStr += "</div>";
             tmpStr += "<div class='scroll-table'>";
             tmpStr += "<table class='table table-hover table-responsive-sm fixed_header table-borderless table-fixed mb-0' id='ddj2' cellspacing='0' width='100%'>";
@@ -656,14 +643,14 @@ function loadPost()
                     tmpStr += "<input type='hidden' id='TMP" + this['postID'] + "' value='" + this['status'] + "'/>";
                     tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-success btn-jump custom-button approveUpdatePostBtn' title='Button này để mày duyệt bài'><i class='fas fa-check'></i></button></td>";
                 }
-                tmpStr += "<td style='width: 120px;'><a href='getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
+                tmpStr += "<td style='width: 120px;'><a href='../getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
                 tmpStr += "<td style='width: 120px;'><button value='" + this['postID'] + "' class='btn btn-danger btn-jump custom-button deletePostBtn'><i class='far fa-trash-alt'></i></a></td>";
                 tmpStr += "</tr>";
             });
             tmpStr += "</tbody>";
             tmpStr += "</table>";
             tmpStr += "</div>";
-            tmpStr += "<div style='text-align: center;'>";
+            tmpStr += "<div style='text-align: center; margin-top: 22px;'>";
             tmpStr += "<a class='btn btn-primary' href='CreateNewPost'>Add new</a>";
             tmpStr += "</div>";
             tmpStr += "</div>";
@@ -675,12 +662,11 @@ function loadUser()
 {
     $.ajax({
         type: "GET",
-        url: "adminLoadUserData",
+        url: "Admin/adminLoadUserData",
         success: function (itr) {
             var tmpStr = "<div class='tab-pane' id='listPost' role='tabpanel' aria-labelledby='managePost'>";
             tmpStr += "<h3 style='text-align: center;'>Manage user</h3>";
             tmpStr += "<input class='form-control' id='myInput2' type='text' placeholder='Type something to search..' label='searchbar' onkeyup='searchData();'>";
-            tmpStr += "<div style='text-align: center;' id='msg'>";
             tmpStr += "</div>";
             tmpStr += "<div class='scroll-table'>";
             tmpStr += "<table class='table table-hover table-responsive-sm fixed_header table-borderless table-fixed mb-0' id='ddj2' cellspacing='0' width='100%'>";
@@ -724,7 +710,7 @@ function loadUser()
                     tmpStr += "<button class='btn btn-success btn-jump blockUserBtn custom-button' value='" + this['accountEmail'] + "'><i class='fa fa-lock' aria-hidden='true'></i></button>";
                 } else
                 {
-                    tmpStr += "<button class='btn btn-warning btn-jump blockUserBtn custom-button' value='" + this['accountEmail'] + "'><i class='fa fa-unlock' aria-hidden='true'></i></button>";
+                    tmpStr += "<button class='btn btn-warning btn-jump unblockUserBtn custom-button' value='" + this['accountEmail'] + "'><i class='fa fa-unlock' aria-hidden='true'></i></button>";
                 }
                 tmpStr += "</td>";
                  tmpStr += "<td style='width: 120px;'><a href='getDetailPostForUpdate?postID=" + this['postID'] + "' class='btn btn-primary btn-jump'><i class='fas fa-wrench'></i></a></td>";
@@ -743,7 +729,7 @@ function addTopic()
     var topicDescription = document.getElementById("topicDescription").value;
     $.ajax({
         type: "POST",
-        url: "adminAddTopic?topicName=" + topicName + "&topicDescription=" + topicDescription,
+        url: "Admin/adminAddTopic?topicName=" + topicName + "&topicDescription=" + topicDescription,
         success: function () {
             alert("Successfully add new topic.");
             loadTopic();
@@ -768,7 +754,7 @@ function onLoad() {
 function expiredToken() {
     auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        window.location = 'logOut.action';
+        window.location = '../logOut';
     });
 }
 
@@ -836,7 +822,7 @@ $(document).ajaxComplete(function () {
         var topicID = $(this).val();
         $.ajax({
             type: "POST",
-            url: "adminGetTopicDetail?topicID=" + topicID,
+            url: "Admin/adminGetTopicDetail?topicID=" + topicID,
             success: function (data) {
                 $("#topicID1").attr("value", data['topic'].topicID);
                 $("#topicName1").attr("value", data['topic'].topicName);
@@ -854,7 +840,7 @@ function updateTopic()
     var topicDescription = $("#topicDescription1").val();
     $.ajax({
         type: "POST",
-        url: "adminUpdateTopic?topicID=" + topicID + "&topicName=" + topicName + "&topicDescription=" + topicDescription,
+        url: "Admin/adminUpdateTopic?topicID=" + topicID + "&topicName=" + topicName + "&topicDescription=" + topicDescription,
         success: function ()
         {
             alert("Successfully update topic: " + topicName);
@@ -879,7 +865,7 @@ $(document).ajaxComplete(function () {
             var topicID = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "adminDeleteTopic?topicID=" + topicID,
+                url: "Admin/adminDeleteTopic?topicID=" + topicID,
                 success: function () {
                     alert("Successfully delete topic.");
                     loadTopic();
@@ -902,7 +888,7 @@ $(document).ajaxComplete(function () {
             var categoryID = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "adminDeleteCategory?categoryID=" + categoryID,
+                url: "Admin/adminDeleteCategory?categoryID=" + categoryID,
                 success: function () {
                     alert("Successfully delete category.");
                     loadCategory();
@@ -920,7 +906,7 @@ $(document).ajaxComplete(function () {
         var categoryID = $(this).val();
         $.ajax({
             type: "GET",
-            url: "adminGetCategoryDetail?categoryID=" + categoryID,
+            url: "Admin/adminGetCategoryDetail?categoryID=" + categoryID,
             success: function (data) {
                 $("#categoryID1").attr("value", categoryID);
                 var tmpStr = "";
@@ -962,7 +948,7 @@ function addCategory()
     var accountEmail = document.getElementById("moderatorEmail").value;
     $.ajax({
         type: "POST",
-        url: "adminAddCategory?categoryName=" + categoryName + "&categoryDescription=" + categoryDescription + "&topicID=" + topicID + "&accountEmail=" + accountEmail,
+        url: "Admin/adminAddCategory?categoryName=" + categoryName + "&categoryDescription=" + categoryDescription + "&topicID=" + topicID + "&accountEmail=" + accountEmail,
         success: function () {
             alert("Successfully add new category.");
             loadCategory();
@@ -980,7 +966,7 @@ function updateCategory()
     var accountEmail = $("#moderatorEmail1").val();
     $.ajax({
         type: "POST",
-        url: "adminUpdateCategory?categoryID=" + categoryID + "&categoryName=" + categoryName + "&categoryDescription=" + categoryDescription + "&topicID=" + topicID + "&accountEmail=" + accountEmail,
+        url: "Admin/adminUpdateCategory?categoryID=" + categoryID + "&categoryName=" + categoryName + "&categoryDescription=" + categoryDescription + "&topicID=" + topicID + "&accountEmail=" + accountEmail,
         success: function () {
             alert("Successfully update category");
             loadCategory();
@@ -1002,7 +988,7 @@ $(document).ajaxComplete(function ()
         var topicID = $("#topicID").val();
         $.ajax({
             type: "POST",
-            url: "adminGetCategoryInTopic?topicID=" + topicID,
+            url: "Admin/adminGetCategoryInTopic?topicID=" + topicID,
             success: function (itr) {
                 var tmpStr = "";
                 $.each(itr['listCategory1'], function ()
@@ -1020,7 +1006,7 @@ $(document).ajaxComplete(function ()
         var topicID = $("#topicID1").val();
         $.ajax({
             type: "POST",
-            url: "adminGetCategoryInTopic?topicID=" + topicID,
+            url: "Admin/adminGetCategoryInTopic?topicID=" + topicID,
             success: function (itr) {
                 var tmpStr = "";
                 $.each(itr['listCategory1'], function ()
@@ -1039,7 +1025,7 @@ function addThread()
     var categoryID = $("#categoryID").val();
     $.ajax({
         type: "POST",
-        url: "adminAddThread?threadName=" + threadName + "&threadDescription=" + threadDescription + "&categoryID=" + categoryID,
+        url: "Admin/adminAddThread?threadName=" + threadName + "&threadDescription=" + threadDescription + "&categoryID=" + categoryID,
         success: function () {
             alert("Successfully add new thread");
             loadThread();
@@ -1082,7 +1068,7 @@ $(document).ajaxComplete(function () {
             var threadID = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "adminDeleteThread?threadID=" + threadID,
+                url: "Admin/adminDeleteThread?threadID=" + threadID,
                 success: function () {
                     alert("Successfully delete thread");
                     loadThread();
@@ -1100,7 +1086,7 @@ $(document).ajaxComplete(function () {
         var threadID = $(this).val();
         $.ajax({
             type: "GET",
-            url: "adminUpdateThread?threadID=" + threadID,
+            url: "Admin/adminUpdateThread?threadID=" + threadID,
             success: function (data) {
                 $("#threadID1").attr("value", data['thread'].threadID);
                 var topicID = data['thread'].category.topic.topicID;
@@ -1116,7 +1102,7 @@ $(document).ajaxComplete(function () {
                 });
                 $.ajax({
                     type: "POST",
-                    url: "adminGetCategoryInTopic?topicID=" + topicID,
+                    url: "Admin/adminGetCategoryInTopic?topicID=" + topicID,
                     success: function (itr) {
                         var tmpStr = "";
                         $.each(itr['listCategory1'], function ()
@@ -1139,6 +1125,48 @@ $(document).ajaxComplete(function () {
         });
     });
 });
+$(document).ready(function () {
+    var username = $(".user-name").text();
+    if (username.length >= 16)
+    {
+        username = username.substring(0, 12);
+        username += "...";
+    }
+    $(".user-name").text(username);
+});
+$(document).on("click", ".blockUserBtn", function () {
+    var accountEmail = $(this).val();
+    var check = confirm("Do you want to block user with email:" + accountEmail);
+    if (check)
+    {
+        $.ajax({
+           type: "POST",
+           url: "adminBlockUser?accountEmail=" + accountEmail + "&status=1",
+           success: function()
+           {
+               alert("Block user success");
+               loadUser();
+           }
+        });
+    }
+});
+$(document).on("click", ".unblockUserBtn", function () {
+    var accountEmail = $(this).val();
+    var check = confirm("Do you want to unblock user with email:" + accountEmail);
+    if (check)
+    {
+        $.ajax({
+           type: "POST",
+           url: "adminBlockUser?accountEmail=" + accountEmail + "&status=0",
+           success: function()
+           {
+               alert("Unlock user success");
+               loadUser();
+           }
+        });
+    }
+});
+
 //$(document).ready(function () {
 //    var x = $("#test").val();
 //    if (x == "")
