@@ -752,6 +752,7 @@ function addTopic()
     });
     event.preventDefault();
 }
+var auth2;
 function signOut() {
     var check = confirm("Do you want to log out?");
     if (check)
@@ -759,17 +760,18 @@ function signOut() {
         expiredToken();
     }
 }
-function expiredToken() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        window.location = 'logOut.action';
-    });
-}
 function onLoad() {
     gapi.load('auth2', function () {
         gapi.auth2.init();
     });
 }
+function expiredToken() {
+    auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        window.location = 'logOut.action';
+    });
+}
+
 $(document).ready(function () {
     loadPost();
 });
