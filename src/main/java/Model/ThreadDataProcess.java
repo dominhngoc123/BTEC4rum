@@ -55,7 +55,7 @@ public class ThreadDataProcess {
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
                 thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
-                thread.setDateAdded(resultSet.getString(5));
+                thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
                 listThread.add(thread);
             }
             resultSet.close();
@@ -80,7 +80,7 @@ public class ThreadDataProcess {
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
                 thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
-                thread.setDateAdded(resultSet.getString(5));
+                thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
             }
             resultSet.close();
             preparedStatement.close();
@@ -106,7 +106,7 @@ public class ThreadDataProcess {
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
                 thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
-                thread.setDateAdded(resultSet.getString(5));
+                thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
                 listThread.add(thread);
             }
         } catch (SQLException ex) {

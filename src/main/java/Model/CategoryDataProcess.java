@@ -57,7 +57,7 @@ public class CategoryDataProcess {
                 category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
                 tmp = resultSet.getString(5);
                 category.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                category.setDateAdded(resultSet.getString(6));
+                category.setDateAdded(ConvertDate.getDate(resultSet.getString(6)));
                 listCategory.add(category);
             }
             resultSet.close();
@@ -86,7 +86,7 @@ public class CategoryDataProcess {
                 category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
                 tmp = resultSet.getString(5);
                 category.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                category.setDateAdded(resultSet.getString(6));
+                category.setDateAdded(ConvertDate.getDate(resultSet.getString(6)));
             }
             resultSet.close();
             preparedStatement.close();
@@ -114,7 +114,7 @@ public class CategoryDataProcess {
                 category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
                 tmp = resultSet.getString(5);
                 category.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                category.setDateAdded(resultSet.getString(6));
+                category.setDateAdded(ConvertDate.getDate(resultSet.getString(6)));
                 listCategory.add(category);
             }
             resultSet.close();
@@ -143,7 +143,7 @@ public class CategoryDataProcess {
                 category.setTopic((new TopicDataProcess()).getDatabyID(tmp));
                 tmp = resultSet.getString(5);
                 category.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                category.setDateAdded(resultSet.getString(6));
+                category.setDateAdded(ConvertDate.getDate(resultSet.getString(6)));
                 listCategory.add(category);
             }
             resultSet.close();

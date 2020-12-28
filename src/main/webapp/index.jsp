@@ -68,7 +68,7 @@
             var name = profile.getName();
             var email = profile.getEmail();
             var avatar = profile.getImageUrl();
-            location.assign("Forum/Login?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
+            location.assign("Login.action?userEmail=" + email + "&userFullName=" + name + "&userAvatar=" + avatar);
         }
     </script>
 </html>

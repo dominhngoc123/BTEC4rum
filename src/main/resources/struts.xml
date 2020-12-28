@@ -5,31 +5,67 @@
 <!-- Author: Ngoc Do Minh -->
  
 <struts>
-    <package name="Member" extends="struts-default, json-default">
+    <package name="Member" namespace="" extends="struts-default, json-default">
         <action name="Login" class="App.LoginAction" method="checkLogin">
             <result name="LOGINSUCCESS" type="redirectAction">redirect</result>
+            <result name="LOGINFAILED">/Error1.jsp</result>
         </action>
         <action name="redirect" class="App.LoginAction" method="redirectUser">
             <result name="MEMBER" type="redirectAction">ForumContent</result>
-            <result name="ADMIN" type="redirectAction">adminWelcomeData</result>
+            <result name="ADMIN" type="redirectAction">Admin/adminWelcomeData</result>
             <result name="MOD">/Moderator/moderator.jsp</result>
         </action>
         <action name="logOut" class="App.LoginAction" method="logOut">
             <result name="LOGOUTSUCCESS">index.jsp</result>
         </action>
         <action name="adminLogin" class="App.LoginAction" method="checkAdminAccount">
-            <result name="ADMINLOGINSUCCESS" type="redirectAction">adminWelcomeData</result>
+            <result name="ADMINLOGINSUCCESS" type="redirectAction">Admin/adminWelcomeData</result>
             <result name="ADMINLOGINFAILED">
                 <param name="location">/index.jsp</param>
                 <param name="msg">${msg}</param>
             </result>
         </action>
-        <action name="ForumContent" class="App.PostAction" method="getAllPost">
-            <result name="POSTDATA">/Member/member.jsp</result>
+        <action name="ForumContent" class="App.PostAction" method="getForumPost">
+            <result name="FORUMPOSTDATA">/Member/member.jsp</result>
         </action>
+        <action name="getDetailPostForUpdate" class="App.PostAction" method="getPostByID">
+            <result name="POSTDETAIL">/editpost.jsp</result>
+        </action>
+        <action name="getDetailPost" class="App.PostAction" method="getPostByID">
+            <result name="POSTDETAIL">/postdetail.jsp</result>
+        </action>
+        <action name="getModerator" class="App.CategoryAction" method="getModerator">
+            <result name="MODERATOR" type="json">/newpost.jsp</result>
+        </action>
+        <!--Add post and comment-->
+        <action name="CreateNewPost" class="App.TopicAction" method="getData">
+            <result name="LISTALLTOPIC">/newPost.jsp</result>
+        </action>
+        <action name="AddNewPost" class="App.PostAction" method="addNewPost">
+            <result name="USERADDPOSTSUCCESS" type="redirectAction">ForumContent</result>
+            <result name="USERADDPOSTFAILED">/Error.jsp</result>
+        </action>
+        <action name="AddNewComment" class="App.PostAction" method="addNewComment">
+            <result name="USERADDCOMMENTSUCCESS" type="redirect">getDetailPost</result>
+            <result name="USERADDPOSTFAILED">/Error.jsp</result>
+        </action>
+        <action name="UserGetPost" class="App.PostAction" method="getPostbyEmail">
+            <result name="LISTPOSTBYEMAIL">managepost.jsp</result>
+        </action>
+        <action name="adminGetCategoryInTopic" class="App.CategoryAction" method="getDataByTopic">
+            <result name="LISTCATEGORYINTOPIC" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="adminGetThreadInCategory" class="App.ThreadAction" method="getThreadByCategory">
+            <result name="LISTTHREADINCATEGORY" type="json">/Admin/admin.jsp</result>
+        </action>
+        <action name="getSpecificPost" class="App.PostAction" method="getSpecificPost">
+            <result name="SPECIFICPOST" type="json">/postdetail.jsp</result>
+        </action>
+    </package>
+    <package name="Admin" namespace="/Admin" extends="struts-default, json-default">
         <!-- Admin load data -->
-        <action name="adminWelcomeData" class="App.PostAction" method="getAllPost">
-            <result name="POSTDATA">/Admin/admin.jsp</result>
+        <action name="adminWelcomeData">
+            <result>/Admin/admin.jsp</result>
         </action>
         <action name="adminLoadPostData" class="App.PostAction" method="getAllPost">
             <result name="POSTDATA" type="json">/Admin/admin.jsp</result>
@@ -46,36 +82,11 @@
         <action name="adminLoadThreadData" class="App.ThreadAction" method="getData">
             <result name="LISTTHREAD" type="json">/Admin/admin.jsp</result>
         </action>
-        <action name="getModerator" class="App.CategoryAction" method="getModerator">
-            <result name="MODERATOR" type="json">/newpost.jsp</result>
-        </action>
+        
         <!-- Admin feature -->
         <action name="adminBlockUser" class="App.UserAction" method="blockUser">
-            <result name="BLOCKSUCCESS" type="redirectAction">adminLoadUserData</result>
-            <result name="BLOCFAILED">/Error.jsp</result>
-        </action>
-        <action name="CreateNewPost" class="App.TopicAction" method="getData">
-            <result name="LISTALLTOPIC">/newPost.jsp</result>
-        </action>
-        <action name="AddNewPost" class="App.PostAction" method="addNewPost">
-            <result name="USERADDPOSTSUCCESS" type="redirectAction">ForumContent</result>
-            <result name="USERADDPOSTFAILED">/Error.jsp</result>
-        </action>
-        <action name="AddNewComment" class="App.PostAction" method="addNewComment">
-            <result name="USERADDCOMMENTSUCCESS" type="redirect">getDetailPost</result>
-            <result name="USERADDPOSTFAILED">/Error.jsp</result>
-        </action>
-        <action name="getDetailPostForUpdate" class="App.PostAction" method="getPostByID">
-            <result name="POSTDETAIL">/editpost.jsp</result>
-        </action>
-        <action name="getDetailPost" class="App.PostAction" method="getPostByID">
-            <result name="POSTDETAIL">/postdetail.jsp</result>
-        </action>
-        <action name="UserGetPost" class="App.PostAction" method="getPostbyEmail">
-            <result name="LISTPOSTBYEMAIL">managepost.jsp</result>
-        </action>
-        <action name="getSpecificPost" class="App.PostAction" method="getSpecificPost">
-            <result name="SPECIFICPOST" type="json">/postdetail.jsp</result>
+            <result name="BLOCKSUCCESS">/Admin/admin.jsp</result>
+            <result name="BLOCKFAILED">../Error.jsp</result>
         </action>
         <action name="updatePost" class="App.PostAction" method="updatePost">
             <result name="UPDATEPOSTSUCCESS">/Admin/admin.jsp</result>
@@ -105,6 +116,7 @@
         <action name="adminDeleteTopic" class="App.TopicAction" method="deleteTopic">
             <result name="DELETETOPICSUCCESS">/Admin/admin.jsp</result>
         </action>
+        
         <!-- Admin manage category -->
         <action name ="adminDeleteCategory" class="App.CategoryAction" method="deleteCategory">
             <result name="DELETECATEGORYSUCCESS">/Admin/admin.jsp</result>
@@ -118,15 +130,12 @@
             <result name="UPDATECATEGORYSUCCESS" type="json">/Admin/admin.jsp</result>
             <result name="UPDATECATEGORYFAILED" type="json">/Admin/admin.jsp</result>
         </action>
-        <action name="adminGetCategoryInTopic" class="App.CategoryAction" method="getDataByTopic">
-            <result name="LISTCATEGORYINTOPIC" type="json">/Admin/admin.jsp</result>
-        </action>
+        
         <action name="adminGetCategoryDetail" class="App.CategoryAction" method="getDataByID">
             <result name="DETAILCATEGORY" type="json">/Admin/admin.jsp</result>
         </action>
-        <action name="adminGetThreadInCategory" class="App.ThreadAction" method="getThreadByCategory">
-            <result name="LISTTHREADINCATEGORY" type="json">/Admin/admin.jsp</result>
-        </action>
+        
+        
         <!-- Admin manage thread -->
         <action name="adminAddThread" class="App.ThreadAction" method="addThread">
             <result name="ADDTHREADSUCCESS" type="json">/Admin/admin.jsp</result>
@@ -144,5 +153,4 @@
             <result name="UPDATETHREADFAILED" type="json">/Admin/admin.jsp</result>
         </action>
     </package>
-    <package name="Admin" namespace="/Admin" extends="struts-default, json-default"></package>
 </struts>

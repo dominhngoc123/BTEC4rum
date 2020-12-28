@@ -651,7 +651,7 @@ function loadPost()
             tmpStr += "</table>";
             tmpStr += "</div>";
             tmpStr += "<div style='text-align: center; margin-top: 22px;'>";
-            tmpStr += "<a class='btn btn-primary' href='CreateNewPost'>Add new</a>";
+            tmpStr += "<a class='btn btn-primary' href='../CreateNewPost'>Add new</a>";
             tmpStr += "</div>";
             tmpStr += "</div>";
             $("#showTable").html(tmpStr);

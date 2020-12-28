@@ -152,11 +152,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public String checkLogin() {
         LoginDataProcess loginDataProcess = new LoginDataProcess();
         User user = loginDataProcess.checkLogin(userEmail);
-        if (user.getAccountEmail() == null) {
+        if (user.getStatus() == null) {
             loginDataProcess.addUser(userEmail, userFullName, "", userAvatar);
-            userRole = "3";
-            userStatus = "1";
-        } else {
+            user = loginDataProcess.checkLogin(userEmail);
+        }        
+        if (user.getStatus().equals("1")) {
             userEmail = user.getAccountEmail();
             adminUsername = user.getUsername();
             adminPassword = user.getPassword();
@@ -170,6 +170,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
             userDescription = user.getUserDescription();
             dateAdded = user.getDateAdded();
             userPhonenumber = user.getUserPhonenumber();
+        }
+        else {
+            return"LOGINFAILED";
         }
         sessionMap.put("accountEmail", userEmail);
         sessionMap.put("adminUsername", adminUsername);
@@ -223,19 +226,16 @@ public class LoginAction extends ActionSupport implements SessionAware {
         return "ADMINLOGINFAILED";
     }
 
-    public String redirectUser()
-    {
+    public String redirectUser() {
         String role = (String) sessionMap.get("userRole");
-        if (role.equals("1"))
-        {
+        if (role.equals("1")) {
             return "ADMIN";
-        }
-        else if (role.equals("2"))
-        {
+        } else if (role.equals("2")) {
             return "MOD";
         }
         return "MEMBER";
     }
+
     public String logOut() {
         sessionMap.invalidate();
         return "LOGOUTSUCCESS";

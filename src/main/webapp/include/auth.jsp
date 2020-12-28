@@ -7,13 +7,4 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--<script type="text/javascript">
-    $(document).ready(function () {
-        var session = $("#session")
-        if (session == null)
-        {
-            alert("Your session is expired. Please login again");
-            
-        }
-    });
-</script>-->
+<input type="hidden" id="0ad941b537a927186263b578e28bfd9b" value="<s:property value="#session.accountEmail"/>"/>

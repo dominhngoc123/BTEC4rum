@@ -53,7 +53,7 @@ public class TopicDataProcess {
                 topic.setTopicID(resultSet.getString(1));
                 topic.setTopicName(resultSet.getString(2));
                 topic.setTopicDescription(resultSet.getString(3));
-                topic.setDateAdded(resultSet.getString(4));
+                topic.setDateAdded(ConvertDate.getDate(resultSet.getString(4)));
                 listTopic.add(topic);
             }
             resultSet.close();
@@ -77,7 +77,7 @@ public class TopicDataProcess {
                 topic.setTopicID(resultSet.getString(1));
                 topic.setTopicName(resultSet.getString(2));
                 topic.setTopicDescription(resultSet.getString(3));
-                topic.setDateAdded(resultSet.getString(4));
+                topic.setDateAdded(ConvertDate.getDate(resultSet.getString(4)));
             }
             resultSet.close();
             preparedStatement.close();
@@ -98,9 +98,9 @@ public class TopicDataProcess {
             {
                 Topic topic = new Topic();
                 topic.setTopicID(resultSet.getString(1));
-                topic.setTopicID(resultSet.getString(2));
-                topic.setTopicID(resultSet.getString(3));
-                topic.setTopicID(resultSet.getString(4));
+                topic.setTopicName(resultSet.getString(2));
+                topic.setTopicDescription(resultSet.getString(3));
+                topic.setDateAdded(resultSet.getString(4));
                 listTopic.add(topic);
             }
             resultSet.close();

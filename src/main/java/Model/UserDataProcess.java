@@ -61,7 +61,7 @@ public class UserDataProcess {
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
                 user.setUserPhonenumber(resultSet.getString(12));
-                user.setDateAdded(resultSet.getString(13));                
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));                
                 listUser.add(user);
             }
             resultSet.close();
@@ -93,7 +93,7 @@ public class UserDataProcess {
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
                 user.setUserPhonenumber(resultSet.getString(12));
-                user.setDateAdded(resultSet.getString(13));                
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));                
                 listUser.add(user);
             }
             resultSet.close();
@@ -125,7 +125,7 @@ public class UserDataProcess {
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
                 user.setUserPhonenumber(resultSet.getString(12));
-                user.setDateAdded(resultSet.getString(13));
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));
             }
             resultSet.close();
             preparedStatement.close();
@@ -224,7 +224,7 @@ public class UserDataProcess {
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
                 user.setUserPhonenumber(resultSet.getString(12));
-                user.setDateAdded(resultSet.getString(13));                
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));                
                 listModerator.add(user);
             }
             resultSet.close();
@@ -257,7 +257,7 @@ public class UserDataProcess {
                 user.setUserGender(resultSet.getString(10));
                 user.setUserDescription(resultSet.getString(11));
                 user.setUserPhonenumber(resultSet.getString(12));
-                user.setDateAdded(resultSet.getString(13));
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));
             }
             resultSet.close();
             preparedStatement.close();

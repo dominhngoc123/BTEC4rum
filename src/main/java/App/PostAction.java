@@ -8,6 +8,7 @@ package App;
 import Entity.Post;
 import Model.PostDataProcess;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,8 +28,9 @@ public class PostAction extends ActionSupport {
     private String approvedDate;
     private Post post;
     private List<Post> listPost;
+    private List<Post> listForumPost;
     private List<Post> listNewPost;
-    private int commentCount;
+    private List<List<String>> commentCount;
 
     public String getPostID() {
         return postID;
@@ -102,12 +104,12 @@ public class PostAction extends ActionSupport {
         this.listPost = listPost;
     }
 
-    public List<Post> getListNewPost() {
-        return listNewPost;
+    public List<Post> getListForumPost() {
+        return listForumPost;
     }
 
-    public void setListNewPost(List<Post> listNewPost) {
-        this.listNewPost = listNewPost;
+    public void setListForumPost(List<Post> listForumPost) {
+        this.listForumPost = listForumPost;
     }
 
     public Post getPost() {
@@ -126,13 +128,22 @@ public class PostAction extends ActionSupport {
         this.approvedDate = approvedDate;
     }
 
-    public int getCommentLevel() {
+    public List<List<String>> getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentLevel(int commentCount) {
+    public void setCommentCount(List<List<String>> commentCount) {
         this.commentCount = commentCount;
     }
+
+    public List<Post> getListNewPost() {
+        return listNewPost;
+    }
+
+    public void setListNewPost(List<Post> listNewPost) {
+        this.listNewPost = listNewPost;
+    }
+    
 
     public PostAction() {
     }
@@ -158,17 +169,33 @@ public class PostAction extends ActionSupport {
         listPost = postDataProcess.getPost();
         return "POSTDATA";
     }
+    
+    public String getForumPost() {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        listForumPost = postDataProcess.getForumDisplayPost();
+        commentCount = new ArrayList<List<String>>();
+        for (Post p: listForumPost)
+        {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(p.getPostID());
+            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+            commentCount.add(tmp);
+        }
+        listNewPost = postDataProcess.getNewPost();
+        return "FORUMPOSTDATA";
+    }
 
     public String getPostByID() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getPostByID(postID);
-        commentCount = listPost.size();
+        listNewPost = postDataProcess.getNewPost();
         return "POSTDETAIL";
     }
 
     public String getPostbyEmail() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getDataByPosterEmail(accountEmail);
+        listNewPost = postDataProcess.getNewPost();
         return "LISTPOSTBYEMAIL";
     }
 
@@ -181,7 +208,7 @@ public class PostAction extends ActionSupport {
     public String updatePost()
     {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.updatePost(postID, status))
+        if (postDataProcess.adminUpdatePost(postID, postTitle, postContent, threadID))
         {
             return "UPDATEPOSTSUCCESS";
         }
@@ -207,4 +234,19 @@ public class PostAction extends ActionSupport {
         }
         return "DELETEPOSTFAILED";
     }
+//    public static void main(String[] args) {
+//        PostDataProcess postDataProcess = new PostDataProcess();
+//        List<Post> listForumPost = postDataProcess.getForumDisplayPost();
+//        List<List<String>> commentCount = new ArrayList<List<String>>();
+//        for (Post p: listForumPost)
+//        {
+//            List<String> tmp = new ArrayList<>();
+//            tmp.add(p.getPostID());
+//            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+//            commentCount.add(tmp);
+//        }
+//        for (int i = 0; i < commentCount.size(); i++) {
+//            System.out.println(commentCount.get(i));
+//        }
+//    }
 }

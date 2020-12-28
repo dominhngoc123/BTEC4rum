@@ -2,12 +2,18 @@
 var c = 0;
 function change_profile() {
     if (c == 0) {
-        document.getElementById("modal-body-profile-left").style.display = "none";
-        document.getElementById("modal-body-profile-right").style.display = "flex";
+        document.getElementById("modal-body-profile-left").classList.remove("showProfile");
+        document.getElementById("modal-body-profile-right").classList.remove("hideProfile");
+
+        document.getElementById("modal-body-profile-left").classList.add("hideProfile");
+        document.getElementById("modal-body-profile-right").classList.add("showProfile");
         c = 1;
     } else {
-        document.getElementById("modal-body-profile-left").style.display = "flex";
-        document.getElementById("modal-body-profile-right").style.display = "none";
+        document.getElementById("modal-body-profile-left").classList.remove("hideProfile");
+        document.getElementById("modal-body-profile-right").classList.remove("showProfile");
+
+        document.getElementById("modal-body-profile-left").classList.add("showProfile");
+        document.getElementById("modal-body-profile-right").classList.add("hideProfile");
         c = 0;
     }
 }
@@ -63,9 +69,22 @@ $('.sclTop').click(function (e) {
 }).fadeOut(0);
 
 $(window).scroll(function () {
-    if ($(this).scrollTop() > 200 && $(this).scrollTop() < $('.footer').offset().top - 700) {
-        var fadeTime = $('.sclTop').css('display', 'block');
+    if ($(this).scrollTop() > 200 && $(this).scrollTop() < $('.footer').offset().top - 750) {
+        $('.sclTop').fadeIn(300);
     } else {
-        $('.sclTop').css('display', 'none');
+        $('.sclTop').fadeOut(300);
     }
 });
+$(window).scroll(function () {
+        if ($(this).scrollTop() < $('.footer').offset().top - 700) {
+            $('.btn_cmt_action').css({
+                'marginRight': '0px',
+                'opacity': '1',
+            });
+        } else {
+            $('.btn_cmt_action').css({
+                'marginRight': '-100px',
+                'opacity': '0',
+            });
+        }
+    });
