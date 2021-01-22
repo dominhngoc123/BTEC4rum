@@ -25,12 +25,41 @@ public class PostAction extends ActionSupport {
     private String dateAdded;
     private String status;
     private int role;
+    private String searchContent;
     private String approvedDate;
     private Post post;
     private List<Post> listPost;
     private List<Post> listForumPost;
     private List<Post> listNewPost;
+    private List<Post> listDetailPost;
     private List<List<String>> commentCount;
+    private List<List<String>> newPostCommentCount;
+    private String searchCategory;
+    private List<Post> listSearchPost;
+
+    public List<Post> getListSearchPost() {
+        return listSearchPost;
+    }
+
+    public void setListSearchPost(List<Post> listSearchPost) {
+        this.listSearchPost = listSearchPost;
+    }
+
+    public String getSearchCategory() {
+        return searchCategory;
+    }
+
+    public void setSearchCategory(String searchCategory) {
+        this.searchCategory = searchCategory;
+    }
+    
+    public String getSearchContent() {
+        return searchContent;
+    }
+
+    public void setSearchContent(String searchContent) {
+        this.searchContent = searchContent;
+    }
 
     public String getPostID() {
         return postID;
@@ -143,7 +172,22 @@ public class PostAction extends ActionSupport {
     public void setListNewPost(List<Post> listNewPost) {
         this.listNewPost = listNewPost;
     }
-    
+
+    public List<Post> getListDetailPost() {
+        return listDetailPost;
+    }
+
+    public void setListDetailPost(List<Post> listDetailPost) {
+        this.listDetailPost = listDetailPost;
+    }
+
+    public List<List<String>> getNewPostCommentCount() {
+        return newPostCommentCount;
+    }
+
+    public void setNewPostCommentCount(List<List<String>> newPostCommentCount) {
+        this.newPostCommentCount = newPostCommentCount;
+    }
 
     public PostAction() {
     }
@@ -169,19 +213,25 @@ public class PostAction extends ActionSupport {
         listPost = postDataProcess.getPost();
         return "POSTDATA";
     }
-    
+
     public String getForumPost() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listForumPost = postDataProcess.getForumDisplayPost();
         commentCount = new ArrayList<List<String>>();
-        for (Post p: listForumPost)
-        {
+        for (Post p : listForumPost) {
             List<String> tmp = new ArrayList<>();
             tmp.add(p.getPostID());
             tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
             commentCount.add(tmp);
         }
+        newPostCommentCount = new ArrayList<List<String>>();
         listNewPost = postDataProcess.getNewPost();
+        for (Post p : listNewPost) {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(p.getPostID());
+            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+            newPostCommentCount.add(tmp);
+        }
         return "FORUMPOSTDATA";
     }
 
@@ -189,13 +239,33 @@ public class PostAction extends ActionSupport {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getPostByID(postID);
         listNewPost = postDataProcess.getNewPost();
+        newPostCommentCount = new ArrayList<List<String>>();
+        for (Post p : listNewPost) {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(p.getPostID());
+            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+            newPostCommentCount.add(tmp);
+        }
         return "POSTDETAIL";
+    }
+
+    public String getPostByIDForDetail() {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        listDetailPost = postDataProcess.getPostByID(postID);
+        return "POSTDETAILBYID";
     }
 
     public String getPostbyEmail() {
         PostDataProcess postDataProcess = new PostDataProcess();
         listPost = postDataProcess.getDataByPosterEmail(accountEmail);
         listNewPost = postDataProcess.getNewPost();
+        newPostCommentCount = new ArrayList<List<String>>();
+        for (Post p : listNewPost) {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(p.getPostID());
+            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+            newPostCommentCount.add(tmp);
+        }
         return "LISTPOSTBYEMAIL";
     }
 
@@ -204,35 +274,43 @@ public class PostAction extends ActionSupport {
         post = postDataProcess.getSpecificPost(postID);
         return "SPECIFICPOST";
     }
-    
-    public String updatePost()
-    {
+
+    public String updatePost() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.adminUpdatePost(postID, postTitle, postContent, threadID))
-        {
+        if (postDataProcess.adminUpdatePost(postID, postTitle, postContent, threadID)) {
             return "UPDATEPOSTSUCCESS";
         }
         return "UPDATEPOSTFAILED";
     }
-    
-    public String updatePostStatus()
-    {
+
+    public String updatePostStatus() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.updatePost(postID, status))
-        {
+        if (postDataProcess.updatePost(postID, status)) {
             return "UPDATEPOSTSTATUSSUCCESS";
         }
         return "UPDATEPOSTSTATUSFAILED";
     }
-    
-    public String deletePost()
-    {
+
+    public String deletePost() {
         PostDataProcess postDataProcess = new PostDataProcess();
-        if (postDataProcess.deletePost(postID))
-        {
+        if (postDataProcess.deletePost(postID)) {
             return "DELETEPOSTSUCCESS";
         }
         return "DELETEPOSTFAILED";
+    }
+    
+    public String searchData()
+    {
+        PostDataProcess postDataProcess = new PostDataProcess();
+        listSearchPost = postDataProcess.searchPost(searchContent);
+        newPostCommentCount = new ArrayList<List<String>>();
+        for (Post p : listSearchPost) {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(p.getPostID());
+            tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
+            newPostCommentCount.add(tmp);
+        }
+        return "SEARCHDATA";
     }
 //    public static void main(String[] args) {
 //        PostDataProcess postDataProcess = new PostDataProcess();

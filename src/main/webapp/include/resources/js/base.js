@@ -57,15 +57,28 @@ $('textarea').each(function () {
 
 // ====================================Limit date for input[type = date]====================================
 var today = new Date();
-var minDate = (today.getFullYear() - 45) + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-var maxDate = (today.getFullYear() - 18) + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+var currentYear = today.getFullYear();
+// nếu ngày nhỏ hơn 10 thì thêm 0 đằng trước
+if (today.getDate() < 10) {
+    var currentDate = "0" + today.getDate();
+} else {
+    var currentDate = today.getDate();
+}
+// nếu tháng nhỏ hơn 10 thì thêm 0 đằng trước
+if (today.getMonth() < 10) {
+    var currentMonth = "0" + (today.getMonth() + 1);
+} else {
+    var currentMonth = (today.getMonth() + 1);
+}
+var minDate = (currentYear - 55) + '-' + (currentMonth) + '-' + currentDate;
+var maxDate = (currentYear - 18) + '-' + (currentMonth) + '-' + currentDate;
+// thêm thuộc tính giới hạn date cho input type = date
 $('input[type=date]').attr('min', minDate);
 $('input[type=date]').attr('max', maxDate);
-
 // ====================================scrollTop====================================
 $('.sclTop').click(function (e) {
     e.preventDefault();
-    $('html, body').animate({ scrollTop: 0 }, 800);
+    $('html, body').animate({scrollTop: 0}, 800);
 }).fadeOut(0);
 
 $(window).scroll(function () {
@@ -75,16 +88,7 @@ $(window).scroll(function () {
         $('.sclTop').fadeOut(300);
     }
 });
-$(window).scroll(function () {
-        if ($(this).scrollTop() < $('.footer').offset().top - 700) {
-            $('.btn_cmt_action').css({
-                'marginRight': '0px',
-                'opacity': '1',
-            });
-        } else {
-            $('.btn_cmt_action').css({
-                'marginRight': '-100px',
-                'opacity': '0',
-            });
-        }
-    });
+//$('.header_bottom-main-nav li a').click(function(){
+//    $('.header_bottom-main-nav li a').removeClass('active');
+//    $(this).addClass('active');
+//})

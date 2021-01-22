@@ -44,9 +44,10 @@ public class PostDataProcess {
 
     public List<Post> getForumDisplayPost() {
         List<Post> listPost = new ArrayList<>();
+        Connection connection = getConnection();
         String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 AND _status = 1 ORDER BY dateAdded DESC";
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             while (resultSet.next()) {
                 Post post = new Post();
@@ -54,9 +55,9 @@ public class PostDataProcess {
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
                 String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
                 tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
                 post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
@@ -64,7 +65,7 @@ public class PostDataProcess {
             }
             resultSet.close();
             statement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,9 +74,10 @@ public class PostDataProcess {
 
     public List<Post> getPost() {
         List<Post> listPost = new ArrayList<>();
+        Connection connection = getConnection();
         String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 ORDER BY dateAdded DESC";
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             while (resultSet.next()) {
                 Post post = new Post();
@@ -83,9 +85,9 @@ public class PostDataProcess {
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
                 String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
                 tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
                 post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
@@ -93,18 +95,19 @@ public class PostDataProcess {
             }
             resultSet.close();
             statement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listPost;
     }
-    public List<Post> getNewPost()
-    {
+
+    public List<Post> getNewPost() {
         List<Post> listPost = new ArrayList<>();
-        String sqlQuery = "SELECT TOP (10) * FROM tblPost WHERE LEN(postID) = 10 AND _status = 1 ORDER BY dateAdded DESC";
+        String sqlQuery = "SELECT TOP (5) * FROM tblPost WHERE LEN(postID) = 10 AND _status = 1 ORDER BY dateAdded DESC";
+        Connection connection = getConnection();
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             while (resultSet.next()) {
                 Post post = new Post();
@@ -112,9 +115,9 @@ public class PostDataProcess {
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
                 String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
                 tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
                 post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(ConvertDate.getDate(resultSet.getString(8)));
@@ -122,7 +125,7 @@ public class PostDataProcess {
             }
             resultSet.close();
             statement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -184,9 +187,10 @@ public class PostDataProcess {
 
     public List<Post> getDataByPosterEmail(String accountEmail) {
         List<Post> listPost = new ArrayList<>();
+        Connection connection = getConnection();
         String sqlQuery = "SELECT * FROM tblPost WHERE accountEmail = ? AND LEN(postID) = 10";
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, accountEmail);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -195,9 +199,9 @@ public class PostDataProcess {
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
                 String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
                 tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
                 post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
@@ -205,7 +209,7 @@ public class PostDataProcess {
             }
             resultSet.close();
             preparedStatement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,75 +218,68 @@ public class PostDataProcess {
 
     public static void main(String[] args) {
         PostDataProcess p = new PostDataProcess();
-        
-        System.out.println(p.getCommentCount("THR01P0001"));
+        System.out.println(p.generatCommentID("THR01P0008"));
     }
 
     public List<Post> getPostByID(String postID) {
         List<Post> listPost = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM tblPost WHERE postID LIKE ? ORDER BY SUBSTRING(postID, 0, 12) ASC";
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
-            preparedStatement.setString(1, "%" + postID + "%");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Post post = new Post();
-                post.setPostID(resultSet.getString(1));
-                post.setPostTitle(resultSet.getNString(2));
-                post.setPostContent(resultSet.getNString(3));
-                String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
-                tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
-                post.setStatus(resultSet.getString(7));
-                post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
-                listPost.add(post);
+        if (postID != null) {
+            Connection connection = getConnection();
+            String sqlQuery = "SELECT * FROM tblPost WHERE postID LIKE ? ORDER BY dateAdded";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+                preparedStatement.setString(1, "%" + postID + "%");
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setPostID(resultSet.getString(1));
+                    post.setPostTitle(resultSet.getNString(2));
+                    post.setPostContent(resultSet.getNString(3));
+                    String tmp = resultSet.getString(4);
+                    post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
+                    tmp = resultSet.getString(5);
+                    post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
+                    post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
+                    post.setStatus(resultSet.getString(7));
+                    post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
+                    listPost.add(post);
+                }
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
-            resultSet.close();
-            preparedStatement.close();
-            getConnection().close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listPost;
     }
 
     public int getCommentCount(String postID) {
-        List<Post> listPost = new ArrayList<>();
+        int commentCount = 0;
         String sqlQuery = "SELECT * FROM tblPost WHERE postID LIKE ? AND LEN(postID) != 10";
+        Connection connection = getConnection();
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, "%" + postID + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Post post = new Post();
-                post.setPostID(resultSet.getString(1));
-                post.setPostTitle(resultSet.getNString(2));
-                post.setPostContent(resultSet.getNString(3));
-                String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
-                tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
-                post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
-                post.setStatus(resultSet.getString(7));
-                post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
-                listPost.add(post);
+                commentCount++;
             }
             resultSet.close();
             preparedStatement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listPost.size();
+        return commentCount;
     }
-    
+
     public Post getSpecificPost(String postID) {
         Post post = new Post();
+        Connection connection = getConnection();
         String sqlQuery = "SELECT * FROM tblPost WHERE postID = ?";
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, postID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -290,23 +287,23 @@ public class PostDataProcess {
                 post.setPostTitle(resultSet.getNString(2));
                 post.setPostContent(resultSet.getNString(3));
                 String tmp = resultSet.getString(4);
-                post.setThread((new ThreadDataProcess()).getDataByID(tmp));
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
                 tmp = resultSet.getString(5);
-                post.setUser((new UserDataProcess()).getDataByEmail(tmp));
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
                 post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
                 post.setStatus(resultSet.getString(7));
                 post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
             }
             resultSet.close();
             preparedStatement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return post;
     }
-    public boolean adminUpdatePost(String postID, String postTitle, String postContent, String threadID)
-    {
+
+    public boolean adminUpdatePost(String postID, String postTitle, String postContent, String threadID) {
         boolean isUpdated = false;
         String sqlQuery = "UPDATE tblPost set postTitle = ?, postContent = ?, threadID = ?, _status = 1 WHERE postID = ?";
         try {
@@ -367,6 +364,38 @@ public class PostDataProcess {
         return isDelete;
     }
 
+    public List<Post> searchPost(String searchString) {
+        List<Post> listPost = new ArrayList<>();
+        Connection connection = getConnection();
+        String sqlQuery = "SELECT * FROM tblPost WHERE LEN(postID) = 10 AND  (postTitle LIKE ? or postContent LIKE ?) ORDER BY dateAdded DESC";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, "%" + searchString + "%");
+            preparedStatement.setString(2, "%" + searchString + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Post post = new Post();
+                post.setPostID(resultSet.getString(1));
+                post.setPostTitle(resultSet.getNString(2));
+                post.setPostContent(resultSet.getNString(3));
+                String tmp = resultSet.getString(4);
+                post.setThread((new ThreadDataProcess()).getDataByID(connection, tmp));
+                tmp = resultSet.getString(5);
+                post.setUser((new UserDataProcess()).getDataByEmail(connection, tmp));
+                post.setDateAdded(ConvertDate.getDateTime(resultSet.getString(6)));
+                post.setStatus(resultSet.getString(7));
+                post.setApprovedDate(ConvertDate.getDateTime(resultSet.getString(8)));
+                listPost.add(post);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listPost;
+    }
     public String generatePostID(String threadID) {
         String newPostID = threadID;
         if (threadID != null) {
@@ -412,16 +441,19 @@ public class PostDataProcess {
     public String generatCommentID(String baseID) {
         String newCommentID = "";
         List<Integer> listOrder = new ArrayList<>();
-        String sql = "SELECT postID FROM tblPost WHERE postID LIKE ? AND LEN(postID) = ?";
+        String sql = "SELECT postID FROM tblPost WHERE postID LIKE ? AND LEN(postID) >= ? AND LEN(postID) <= ?";
         try {
             int baseIDLength = baseID.length();
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
             preparedStatement.setString(1, "%" + baseID + "%");
             preparedStatement.setInt(2, baseIDLength + 2);
+            preparedStatement.setInt(3, baseIDLength + 3);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int tmpNum = 0;
                 String tmp = resultSet.getString(1);
-                int tmpNum = Integer.parseInt(tmp.substring(baseIDLength + 1, baseIDLength + 2));
+                int tmpLength = tmp.length();
+                tmpNum = Integer.parseInt(tmp.substring(baseIDLength + 1, tmpLength));
                 listOrder.add(tmpNum);
             }
             resultSet.close();

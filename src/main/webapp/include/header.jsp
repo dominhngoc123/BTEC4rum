@@ -29,19 +29,18 @@
 </head>
 <header class="header sticky-top unselecttable" id="header">
     <div class="header_top">
-        <div class="header_top-search-box">
-            <a class="header_top-search-box-search-btn" href="#">
+        <form class="header_top-search-box" id="searchBox" action="search-result" method="post">
+            <a id="searchBtn" class="header_top-search-box-search-btn">
                 <i class="fas fa-search header_top-search-box-small-icon"></i>
-            </a>
-            <input class="header_top-search-box-search-txt" type="text" name="" placeholder="Search..." />
-        </div>
+            </a>            
+            <input class="header_top-search-box-search-txt" autocomplete="off" id="searchContent" type="text" name="searchContent" placeholder="Search..." />
+        </form>
         <div class="header_top-user">
             <div class="dropdown show dropdown_color">
                 <a class="btn btn-secondary btn-sm btn_user-color dropdown-toggle user_flex" href="#" role="button"
                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                    style="box-shadow: none;">
-                    <div class="header_top-user-bg"><img src="<s:property value="#session.userAvatar"/>" alt=""
-                                                         class="header_top-user-img"></div>
+                    <div class="header_top-user-bg"><img src="<s:property value="#session.userAvatar"/>" alt="" class="header_top-user-img"/></div>
                     <span class="header_top-user-name"><s:property value="#session.userFullName"/></span>
                 </a>
 

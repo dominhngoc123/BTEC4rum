@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="../include/header.jsp"/>
+    <jsp:include page="../include/auth.jsp"/>
     <link rel="stylesheet" href="include/resources/css/index.css">
     <body class="preloading">
         <jsp:include page="../include/Preloading.jsp"/>
@@ -244,4 +245,5 @@
         }
     </script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="../include/resources/js/Auth.js"></script>
 </html>

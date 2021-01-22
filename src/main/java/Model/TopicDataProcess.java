@@ -87,6 +87,28 @@ public class TopicDataProcess {
         }
         return topic;
     }
+    public Topic getDatabyID(Connection connection, String topicID)
+    {
+        Topic topic = new Topic();
+        String sqlQuery = "SELECT * FROM tblTopic WHERE topicID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, topicID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                topic.setTopicID(resultSet.getString(1));
+                topic.setTopicName(resultSet.getString(2));
+                topic.setTopicDescription(resultSet.getString(3));
+                topic.setDateAdded(ConvertDate.getDate(resultSet.getString(4)));
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TopicDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return topic;
+    }
     public List<Topic> getDatabyName(String topicName)
     {
         List<Topic> listTopic = new ArrayList<>();

@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="BTEC forum - admin page">
-        <link rel="icon" type="image/png" href="include/resources/img/title_logo_BTEC.png" />
+        <link rel="icon" type="image/png" href="../include/resources/img/title_logo_BTEC.png" />
         <title>BTEC forum - admin page</title>
         <meta name="google-signin-client_id" content="861931736148-2ocuuknf09i59bdndlhr8i48f0u1joni.apps.googleusercontent.com">
         <!--===============================================================================================-->

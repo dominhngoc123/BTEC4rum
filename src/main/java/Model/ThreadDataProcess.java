@@ -45,8 +45,9 @@ public class ThreadDataProcess {
     public List<Thread> getData() {
         List<Thread> listThread = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblThread";
+        Connection connection = getConnection();
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             while (resultSet.next()) {
                 Thread thread = new Thread();
@@ -54,13 +55,13 @@ public class ThreadDataProcess {
                 thread.setThreadName(resultSet.getString(2));
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
-                thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
+                thread.setCategory((new CategoryDataProcess()).getDatabyID(connection, tmp));
                 thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
                 listThread.add(thread);
             }
             resultSet.close();
             statement.close();
-            getConnection().close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(ThreadDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,8 +71,9 @@ public class ThreadDataProcess {
     public Thread getDataByID(String threadID) {
         Thread thread = new Thread();
         String sqlQuery = "SELECT * FROM tblThread WHERE threadID = ?";
+        Connection connection = getConnection();
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, threadID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -79,12 +81,34 @@ public class ThreadDataProcess {
                 thread.setThreadName(resultSet.getString(2));
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
-                thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
+                thread.setCategory((new CategoryDataProcess()).getDatabyID(connection, tmp));
                 thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
             }
             resultSet.close();
             preparedStatement.close();
-            getConnection().close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ThreadDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return thread;
+    }
+    public Thread getDataByID(Connection connection, String threadID) {
+        Thread thread = new Thread();
+        String sqlQuery = "SELECT * FROM tblThread WHERE threadID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, threadID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                thread.setThreadID(resultSet.getString(1));
+                thread.setThreadName(resultSet.getString(2));
+                thread.setThreadDescription(resultSet.getString(3));
+                String tmp = resultSet.getString(4);
+                thread.setCategory((new CategoryDataProcess()).getDatabyID(connection, tmp));
+                thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
+            }
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException ex) {
             Logger.getLogger(ThreadDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,8 +118,9 @@ public class ThreadDataProcess {
     public List<Thread> getThreadByCategory(String categoryID) {
         List<Thread> listThread = new ArrayList<>();
         String sqlQuery = "SELECT * FROM tblThread WHERE categoryID = ?";
+        Connection connection = getConnection();
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, categoryID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
@@ -105,10 +130,13 @@ public class ThreadDataProcess {
                 thread.setThreadName(resultSet.getString(2));
                 thread.setThreadDescription(resultSet.getString(3));
                 String tmp = resultSet.getString(4);
-                thread.setCategory((new CategoryDataProcess()).getDatabyID(tmp));
+                thread.setCategory((new CategoryDataProcess()).getDatabyID(connection, tmp));
                 thread.setDateAdded(ConvertDate.getDate(resultSet.getString(5)));
                 listThread.add(thread);
             }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(ThreadDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }

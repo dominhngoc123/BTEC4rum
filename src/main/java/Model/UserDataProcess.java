@@ -74,10 +74,11 @@ public class UserDataProcess {
     }
     public List<User> searchUserByName(String searchContent) {
         List<User> listUser = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM tblAccount WHERE userFullName LIKE '%?%'";
+        String sqlQuery = "SELECT * FROM tblAccount WHERE (userFullName LIKE N? or accountEmail LIKE ?)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
-            preparedStatement.setString(1, searchContent);
+            preparedStatement.setString(1, "%" + searchContent + "%");
+            preparedStatement.setString(2, "%" + searchContent + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
@@ -131,6 +132,36 @@ public class UserDataProcess {
             preparedStatement.close();
             getConnection().close();
             
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+    public User getDataByEmail(Connection connection, String accountEmail)
+    {
+        User user = new User();
+        String sqlQuery = "SELECT * FROM tblAccount WHERE accountEmail = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, accountEmail);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user.setAccountEmail(resultSet.getString(1));
+                user.setUsername(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setUserFullName(resultSet.getString(4));
+                user.setUserAddress(resultSet.getString(5));
+                user.setRole(resultSet.getString(6));
+                user.setStatus(resultSet.getString(7));
+                user.setUserDoB(resultSet.getString(8));
+                user.setUserAvatar(resultSet.getString(9));
+                user.setUserGender(resultSet.getString(10));
+                user.setUserDescription(resultSet.getString(11));
+                user.setUserPhonenumber(resultSet.getString(12));
+                user.setDateAdded(ConvertDate.getDate(resultSet.getString(13)));
+            }
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDataProcess.class.getName()).log(Level.SEVERE, null, ex);
         }

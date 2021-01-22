@@ -32,13 +32,16 @@
             <!-- *Content Right-->
             <div class="content_right">
                 <input type="hidden" value="<s:property value="#session.accountEmail"/>" id="modifierEmail"/>
+                <input type="hidden" id="postID" value="<s:property value="postID"/>">
+                <input type="hidden" id="accountAvatar" value="<s:property value="#session.userAvatar"/>"/>
+                <input type="hidden" id="accountName" value="<s:property value="#session.userFullName"/>"/>
                 <input type="hidden" id="userRole" value="<s:property value="#session.userRole"/>"/>
                 <input type="hidden" id="categoryModerator"/>
                 <!-- Post Container -->
                 <div class="post-container">
                     <s:iterator value="listPost">
-                        <s:if test="postID.length() == 10">                            
-                            <input type="hidden" value="<s:property value="postID"/>" id="postID"/>
+                        <s:if test="postID.length() == 10">
+                            <input type="hidden" id="postTitle" value="<s:property value="postTitle"/>"/>
                             <input type="hidden" value="<s:property value="thread.threadID"/>" id="threadID"/>
                             <input type="hidden" id="categoryID" value="<s:property value="thread.category.categoryID"/>"/>
                             <form id="updatePostForm">
@@ -59,7 +62,6 @@
                                                 </button>
                                                 <div class="dropdown-menu edit-dropdown-menu">
                                                     <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                    <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,12 +76,11 @@
                                         <ul class="post__body-author-text">
                                             <li><span class="post__body-author-name" data-toggle="modal"
                                                       data-target="#profile-modal"><s:property value="user.userFullName"/></span></li>
-                                            <li><span class="post__body-author-time">Posted on
-                                                    <span>10-FEB-2015</span> <span>12:00</span></span></li>
+                                            <li><span class="post__body-author-time"><s:property value="approvedDate"/></li>
                                         </ul>
                                     </div>
                                     <div class="post__body-content">
-                                        <textarea name="" id="editor1" placeholder="Type text content here..." required><s:property value="postContent" escape="false"/></textarea>
+                                        <textarea name="" id="editor1" required><s:property value="postContent" escape="false"/></textarea>
                                     </div>
                                     <br>
                                     <button class="btn btn-jump btn-post btn-shadow btnFade">Update</button>
@@ -106,9 +107,11 @@
                                         <div class="cmt__action-container-avatar">
                                             <img class="cmt__action-avatar" src="<s:property value="#session.userAvatar"/>" alt="">
                                         </div>
-                                        <form action="" method="POST" class="cmt__action-post-area">
+                                        <form class="cmt__action-post-area postComment1">
+                                            <input type="hidden" class="baseCommentID" value="<s:property value="postID"/>">
+                                            <input type="hidden" class="tagEmail" value="<s:property value="user.accountEmail"/>">
                                             <div class="cmt__action-post-area-header">
-                                                <textarea name="" class="form-control auto-textarea edit-txta"
+                                                <textarea id="CMT<s:property value="postID"/>" name="" class="form-control auto-textarea edit-txta"
                                                           placeholder="Write your comment here..." required></textarea>
                                             </div>
                                             <div class=" cmt__action-post-area-bottom">
@@ -120,7 +123,7 @@
                                 <div class="post__footer-comment">
                                     <div class="comments-container">
                                     </s:if>
-                                    <s:elseif test="postID.length() == 12">
+                                    <s:elseif test="postID.length() >= 12 && postID.length() <= 13">
                                         </ul>
                                         </li>
                                         <ul id="comments-list" class="comments-list">
@@ -143,7 +146,6 @@
                                                                 </button>
                                                                 <div class="dropdown-menu edit-dropdown-menu">
                                                                     <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
-                                                                    <a class="dropdown-item edit-dropdown-item" href="#">Report</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -167,8 +169,10 @@
                                                         </div>
                                                         <div class="comment-footer">
                                                             <div class="comment-form">
-                                                                <form action="" method="post">
-                                                                    <textarea class="form-control auto-textarea" name=""
+                                                                <form class="postComment1">
+                                                                    <input type="hidden" class="baseCommentID" value="<s:property value="postID"/>">
+                                                                    <input type="hidden" class="tagEmail" value="<s:property value="user.accountEmail"/>">
+                                                                    <textarea id="CMT<s:property value="postID"/>" class="form-control auto-textarea" name=""
                                                                               placeholder="Write your comment here" required></textarea>
                                                                     <div class="pull-right send-button">
                                                                         <button type="submit"
@@ -200,10 +204,7 @@
                                                                 <i class="fas fa-ellipsis-v"></i>
                                                             </button>
                                                             <div class="dropdown-menu edit-dropdown-menu">
-                                                                <a class="dropdown-item edit-dropdown-item"
-                                                                   href="#">Delete</a>
-                                                                <a class="dropdown-item edit-dropdown-item"
-                                                                   href="#">Report</a>
+                                                                <a class="dropdown-item edit-dropdown-item" href="#">Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -217,8 +218,7 @@
                                                             <br>
                                                         </form>
                                                         <div class="comment-open">
-                                                            <a href="#none" class="btn-like btn-like-ml"
-                                                               style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
+                                                            <a href="#none" class="btn-like btn-like-ml" style="color: #B2BEC3;"><i class="far fa-thumbs-up"></i>
                                                                 <span>2</span></a>
                                                             <a class="btn-reply">
                                                                 <i class="fa fa-reply"></i>
@@ -227,13 +227,12 @@
                                                     </div>
                                                     <div class="comment-footer">
                                                         <div class="comment-form">
-                                                            <form action="" method="post">
-                                                                <textarea class="form-control auto-textarea" name=""
-                                                                          placeholder="Write your comment here"
-                                                                          required></textarea>
+                                                            <form class="postComment1">
+                                                                <input type="hidden" class="baseCommentID" value="<s:property value="postID"/>">
+                                                                <input type="hidden" class="tagEmail" value="<s:property value="user.accountEmail"/>">
+                                                                <textarea id="CMT<s:property value="postID"/>" class="form-control auto-textarea" name="" placeholder="Write your comment here" required></textarea>
                                                                 <div class="pull-right send-button">
-                                                                    <button type="submit"
-                                                                            class="btn-send btn-jump">send</button>
+                                                                    <button type="submit" class="btn-send btn-jump">send</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -330,11 +329,11 @@
                 $(this).toggleClass("liked");
             });
             // =================== bnt Comment ===================
-            $('#post__footer').slideUp();
-            $(".btn-cmt").click(function () {
-                $(this).toggleClass("cmted");
-                $('#post__footer').slideToggle(1000);
-            });
+//            $('#post__footer').slideUp();
+//            $(".btn-cmt").click(function () {
+//                $(this).toggleClass("cmted");
+//                $('#post__footer').slideToggle(1000);
+//            });
             // =================== Comment ===================
             $(document).on('click', '.btn-reply', function (eve) {
                 eve.preventDefault();
@@ -386,6 +385,34 @@
                 });
             }
         });
+        $(document).on("submit", ".postComment1", function ()
+        {
+            event.preventDefault();
+            var baseID = $(this).children(".baseCommentID").val();
+            var tagName = $(this).children(".tagEmail").val();
+            postComment(baseID, tagName);
+            return false;
+        });
+        function postComment(baseCommentID, tagEmail)
+        {
+            event.preventDefault();
+            var postID = $("#postID").val();
+            var postTitle = $("#postTitle").html();
+            var commentContent = document.getElementById("CMT" + baseCommentID).value;
+            if (baseCommentID.length == 14)
+            {
+                baseCommentID = baseCommentID.substring(0, 12);
+            }
+            var accountEmail = $("#modifierEmail").val();
+            var threadID = $("#threadID").val();
+            $.ajax({
+                type: "POST",
+                url: "AddNewComment?postID=" + baseCommentID + "&postTitle=" + postTitle + "&postContent=" + commentContent + "&threadID=" + threadID + "&accountEmail=" + accountEmail,
+                success: function () {
+                    window.location = "getDetailPostForUpdate?postID=" + postID;
+                }
+            });
+        }
         $(document).on("submit", "#updatePostForm", function ()
         {
             event.preventDefault();

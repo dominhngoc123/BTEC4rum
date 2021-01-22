@@ -27,7 +27,16 @@ public class UserAction extends ActionSupport {
     private int userGender;
     private String userDescription;
     private String dateAdded;
+    private String searchContent;
     private List<User> listAllUser;
+
+    public String getSearchContent() {
+        return searchContent;
+    }
+
+    public void setSearchContent(String searchContent) {
+        this.searchContent = searchContent;
+    }
 
     public String getAccountEmail() {
         return accountEmail;
@@ -141,5 +150,12 @@ public class UserAction extends ActionSupport {
             return "BLOCKSUCCESS";
         }
         return "BLOCKFAILED";
+    }
+    
+    public String searchData()
+    {
+        UserDataProcess userDataProcess = new UserDataProcess();
+        listAllUser = userDataProcess.searchUserByName(searchContent);
+        return "SEARCHDATA";
     }
 }

@@ -34,6 +34,9 @@
         <action name="getDetailPost" class="App.PostAction" method="getPostByID">
             <result name="POSTDETAIL">/postdetail.jsp</result>
         </action>
+        <action name="getDetailPostJson" class="App.PostAction" method="getPostByIDForDetail">
+            <result name="POSTDETAILBYID" type="json">/postdetail.jsp</result>
+        </action>
         <action name="getModerator" class="App.CategoryAction" method="getModerator">
             <result name="MODERATOR" type="json">/newpost.jsp</result>
         </action>
@@ -60,6 +63,15 @@
         </action>
         <action name="getSpecificPost" class="App.PostAction" method="getSpecificPost">
             <result name="SPECIFICPOST" type="json">/postdetail.jsp</result>
+        </action>
+        <action name ="search-result" class="App.PostAction" method="searchData">
+            <result name="SEARCHDATA">/searchdetail.jsp</result>
+        </action>
+        <action name="searchPost" class="App.PostAction" method="searchData">
+            <result name="SEARCHDATA" type="json">/searchdetail.jsp</result>
+        </action>
+        <action name="searchUser" class="App.UserAction" method="searchData">
+            <result name="SEARCHDATA" type="json">/searchdetail.jsp</result>
         </action>
     </package>
     <package name="Admin" namespace="/Admin" extends="struts-default, json-default">
