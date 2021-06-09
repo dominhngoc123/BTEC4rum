@@ -91,7 +91,7 @@
                 </button>
             </div>
             <div class="modal-body modal-body-profile modal-body-profile-update">
-                <form action="" method="POST">
+                <form id="updateProfileModal" action="" method="POST">
                     <div class="form-row-update-profile">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
@@ -117,13 +117,13 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="validationDefault04">Description</label>
                                     <input type="text" class="form-control form-control-sm" value="<s:property value="#session.userDescription"/>" id="validationDefault04"
-                                            required>
+                                       required>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationDefault05">Phone Number</label>
                                 <input type="number" class="form-control form-control-sm" id="validationDefault05"
                                        min="100000000" onKeyPress="if (this.value.length == 10)
-                                           return false;" value="<s:property value="#session.userPhonenumber"/>">
+                                                   return false;" value="<s:property value="#session.userPhonenumber"/>">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationDefault07">Avatar</label>
@@ -168,4 +168,4 @@
             </div>
         </div>
     </div>
-</div>  
+</div>                               

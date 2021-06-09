@@ -51,13 +51,6 @@
     <script src="include/resources/js/base.js"></script>
     <script src="include/resources/js/searchdetail.js"></script>
     <script type="text/javascript">
-        $("#searchBox").on("submit", function ()
-        {
-            event.preventDefault();
-            var searchContent = $(this).children("#postID").val();
-            alert(searchContent);
-            return false;
-        });
     </script>
     <script src="include/resources/js/Auth.js"></script>
 </html>

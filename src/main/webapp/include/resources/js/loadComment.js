@@ -108,7 +108,7 @@ type: "GET",
                         tmpStr += "</button>";
                         tmpStr += "<div class='dropdown-menu edit-dropdown-menu'>";
                         tmpStr += "<a class='dropdown-item edit-dropdown-item' href='#'>Delete</a>";
-                        tmpStr += "<button value='" + this['postID'] + "' class='dropdown-item edit-dropdown-item editComment'>Update</button>";
+                        tmpStr += "<button value='" + this['postID'] + "' class='dropdown-item edit-dropdown-item x'>Update</button>";
                         tmpStr += "<a class='dropdown-item edit-dropdown-item' href='#'>Report</a>";
                         tmpStr += "</div>";
                         tmpStr += "</div>";

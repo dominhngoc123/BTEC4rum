@@ -16,7 +16,7 @@
         <div class="newPost_container_list">
             <s:iterator value="listNewPost" var="newPostLoop">
                 <div class="newPost_container">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAJXiFFfvFmV53VYjhdlBAFK0gSxpZJn7onw&usqp=CAU" alt="">
+                    <img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/161514479_3632682703497536_7173785231369513145_n.png?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=gWAIditEiUgAX91tD51&_nc_ht=scontent.fhan2-2.fna&oh=be4021f6e257dff29f521584ecfe37da&oe=607B93B9" alt="">
                     <div class="newPost_content">
                         <div class="newPost_content_header">
                             <a href="getDetailPost?postID=<s:property value="postID"/>"><s:property value="postTitle"/></a>

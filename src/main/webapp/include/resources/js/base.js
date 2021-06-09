@@ -92,3 +92,11 @@ $(window).scroll(function () {
 //    $('.header_bottom-main-nav li a').removeClass('active');
 //    $(this).addClass('active');
 //})
+$(document).on('submit', 'updateProfileModal', function () {
+    event.preventDefault();
+    $("#update-profile-modal").modal("hide");
+    alert("OK");
+});
+$(".sltTopic11").on("click", function () {
+    alert("OK");
+})

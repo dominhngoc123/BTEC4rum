@@ -3,21 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(".deletePostBtn").click(function () {
-    var check = confirm("Do you want to delete this post?");
-    if (check)
-    {
-        var postID = $(this).val();
-        alert(postID);
-    }
+$(document).ajaxComplete(function () {
+    $(".deletePostBtn").click(function () {
+        var check = confirm("Do you want to delete this post?");
+        if (check)
+        {
+            var postID = $(this).val();
+            alert(postID);
+        }
+    });
 });
-$(".deleteCommentBtn").click(function () {
-    var check = confirm("Do you want to delete this comment?");
-    if (check)
-    {
+$(document).ajaxComplete(function () {
+    $(".deleteCommentBtn").click(function () {
+        var check = confirm("Do you want to delete this comment?");
+        if (check)
+        {
+            var postID = $(this).val();
+            console.log(postID);
+        }
+    });
+});
+$(document).ajaxComplete(function () {
+    $(".editComment").on("click", function () {
         var postID = $(this).val();
-        alert(postID);
-    }
+        $.ajax({
+            type: "POST",
+            url: "getSpecificPost?postID=" + postID,
+            success: function (data) {
+                $("#cmtAuthor").html(data['post'].user.userFullName);
+                $("#cmtApprovedDate").html(data['post'].approvedDate);
+                $("#cmtContent").html(data['post'].postContent);
+                $("#modalEdit_cmt").modal("show");
+            }
+        });
+    })
 });
 $(document).ajaxComplete(function () {
     $(".editPost").click(function () {
@@ -37,19 +56,8 @@ $(document).ajaxComplete(function () {
         });
     });
 });
-$(".editComment").click(function () {
-    var postID = $(this).val();
-    $.ajax({
-        type: "POST",
-        url: "getSpecificPost?postID=" + postID,
-        success: function (data) {
-            $("#cmtAuthor").html(data['post'].user.userFullName);
-            $("#cmtApprovedDate").html(data['post'].approvedDate);
-            $("#cmtContent").html(data['post'].postContent);
-            $("#modalEdit_cmt").modal("show");
-        }
-    });
-});
+
+
 function loadContent(postID)
 {
     $.ajax({

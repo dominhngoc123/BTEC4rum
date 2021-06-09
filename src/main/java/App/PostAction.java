@@ -34,8 +34,17 @@ public class PostAction extends ActionSupport {
     private List<Post> listDetailPost;
     private List<List<String>> commentCount;
     private List<List<String>> newPostCommentCount;
+    private List<List<String>> searchPostCommentCount;
     private String searchCategory;
     private List<Post> listSearchPost;
+
+    public List<List<String>> getSearchPostCommentCount() {
+        return searchPostCommentCount;
+    }
+
+    public void setSearchPostCommentCount(List<List<String>> searchPostCommentCount) {
+        this.searchPostCommentCount = searchPostCommentCount;
+    }
 
     public List<Post> getListSearchPost() {
         return listSearchPost;
@@ -303,12 +312,12 @@ public class PostAction extends ActionSupport {
     {
         PostDataProcess postDataProcess = new PostDataProcess();
         listSearchPost = postDataProcess.searchPost(searchContent);
-        newPostCommentCount = new ArrayList<List<String>>();
+        searchPostCommentCount = new ArrayList<List<String>>();
         for (Post p : listSearchPost) {
             List<String> tmp = new ArrayList<>();
             tmp.add(p.getPostID());
             tmp.add(String.valueOf(postDataProcess.getCommentCount(p.getPostID())));
-            newPostCommentCount.add(tmp);
+            searchPostCommentCount.add(tmp);
         }
         return "SEARCHDATA";
     }

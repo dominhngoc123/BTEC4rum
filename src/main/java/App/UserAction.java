@@ -21,15 +21,33 @@ public class UserAction extends ActionSupport {
     private String password;
     private String userFullName;
     private String userAddress;
+    private String userDoB;
     private int role;
     private int status;
     private String userAvatar;
     private int userGender;
+    private String userPhonenumber;
     private String userDescription;
     private String dateAdded;
     private String searchContent;
     private List<User> listAllUser;
 
+    public String getUserPhonenumber() {
+        return userPhonenumber;
+    }
+
+    public void setUserPhonenumber(String userPhonenumber) {
+        this.userPhonenumber = userPhonenumber;
+    }
+
+    public String getUserDoB() {
+        return userDoB;
+    }
+
+    public void setUserDoB(String userDoB) {
+        this.userDoB = userDoB;
+    }
+    
     public String getSearchContent() {
         return searchContent;
     }
@@ -157,5 +175,15 @@ public class UserAction extends ActionSupport {
         UserDataProcess userDataProcess = new UserDataProcess();
         listAllUser = userDataProcess.searchUserByName(searchContent);
         return "SEARCHDATA";
+    }
+    
+    public String updateUser()
+    {
+        UserDataProcess userDataProcess = new UserDataProcess();
+        if (userDataProcess.updateUser(accountEmail, null, null, userFullName, userAddress, role, status, userDoB, userAvatar, userGender, userDescription, userPhonenumber))
+        {
+            return "UPDATEUSERSUCCESS";
+        }
+        return "UPDATEUSERFAILED";
     }
 }

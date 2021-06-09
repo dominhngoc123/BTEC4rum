@@ -68,12 +68,12 @@
             </button>
             <div class="collapse navbar-collapse header_bottom-drop-down" id="navbarResponsive">
                 <ul class="header_bottom-main-nav navbar-nav ml-auto">
-                    <li class="nav-item"><a href="">Information Technology</a></li>
-                    <li class="nav-item"><a href="">Graphic design</a></li>
-                    <li class="nav-item"><a href="">Business administration</a></li>
-                    <li class="nav-item"><a href="">Other</a></li>
-                    <li class="nav-item"><a href="#">Quiz</a></li>
-                    <li class="nav-item"><a href="#">About</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)" data-value="T01" class="sltTopic11">Information Technology</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)" data-value="T02" class="sltTopic11">Graphic design</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)" data-value="T03" class="sltTopic11">Business administration</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)">Other</a></li>
+                    <li class="nav-item"><a href="">Quiz</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)">About</a></li>
                 </ul>
             </div>
         </div>

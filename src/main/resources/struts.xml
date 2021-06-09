@@ -50,7 +50,7 @@
         </action>
         <action name="AddNewComment" class="App.PostAction" method="addNewComment">
             <result name="USERADDCOMMENTSUCCESS" type="redirect">getDetailPost</result>
-            <result name="USERADDPOSTFAILED">/Error.jsp</result>
+            <result name="USERADDCOMMENTFAILED">/Error.jsp</result>
         </action>
         <action name="UserGetPost" class="App.PostAction" method="getPostbyEmail">
             <result name="LISTPOSTBYEMAIL">managepost.jsp</result>
@@ -72,6 +72,14 @@
         </action>
         <action name="searchUser" class="App.UserAction" method="searchData">
             <result name="SEARCHDATA" type="json">/searchdetail.jsp</result>
+        </action>
+        <action name="updatePost" class="App.PostAction" method="updatePost">
+            <result name="UPDATEPOSTSUCCESS" type="redirect">ForumContent</result>
+            <result name="UPDATEPOSTFAILED">/Error.jsp</result>
+        </action>
+        <action name="updateProfile" class="App.PostAction" method="updateUser">
+            <result name="UPDATEUSERSUCCESS" type="redirect">ForumContent</result>
+            <result name="UPDATEUSERFAILED">/Error.jsp</result>
         </action>
     </package>
     <package name="Admin" namespace="/Admin" extends="struts-default, json-default">

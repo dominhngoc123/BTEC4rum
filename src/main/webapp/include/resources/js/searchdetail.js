@@ -27,6 +27,12 @@ $(document).ajaxComplete(function () {
     });
 });
 
+$(document).ajaxComplete(function () {
+    $(".result_body").on("click", function () {
+        var url = $(this).attr("data-href");
+        window.location = url;
+    });
+});
 $(document).ready(function () {
     loadPostData();
 });
@@ -48,7 +54,7 @@ function loadPostData()
                 htmlStr += "</div>";
                 htmlStr += "<ul class='post__body-author-text'>";
                 htmlStr += "<li><span class='post__body-author-name' data-toggle='modal' data-target='#profile-modal'>" + this.user.userFullName + "</span></li>";
-                htmlStr += "<li><span class='post__body-author-time'>Posted on <span>10-FEB-2015</span> <span>12:00</span></span></li>";
+                htmlStr += "<li><span class='post__body-author-time'>Posted on " + this.approvedDate + "</span></li>";
                 htmlStr += "</ul>";
                 htmlStr += "</div>";
                 htmlStr += "<div class='post__header-action'>";
@@ -57,7 +63,7 @@ function loadPostData()
                 htmlStr += "<button type='button'";
                 htmlStr += "class='btn-jump btn-post__header-action dropdown-toggle dropdown-toggle-split'";
                 htmlStr += "data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                htmlStr += "<span class='sr-only'>Toggle Dropleft</span>"
+                htmlStr += "<span class='sr-only'>Toggle Dropleft</span>";
                 htmlStr += "<i class='fas fa-ellipsis-v'></i>";
                 htmlStr += "</button>";
                 htmlStr += "<div class='dropdown-menu edit-dropdown-menu'>";
@@ -69,18 +75,18 @@ function loadPostData()
                 htmlStr += "</div>";
                 htmlStr += "</div>";
                 htmlStr += "</div>";
-                htmlStr += "<div class='result_body' data-href='postdetail.html'>" + this.postTitle + "</div>";
+                htmlStr += "<div class='result_body' data-href='getDetailPost?postID=" + this.postID + "'>" + this.postTitle + "</div>";
                 htmlStr += "<div class='result_footer'>";
                 htmlStr += "<div class='quan_like'>";
                 htmlStr += "<i class='far fa-thumbs-up'></i> <span>12</span>";
                 htmlStr += "</div>";
                 htmlStr += "<div class='quan_comment'>";
                 htmlStr += "<p><span>";
-                for (var i = 0; i < data['newPostCommentCount'].length; i++)
+                for (var i = 0; i < data['searchPostCommentCount'].length; i++)
                 {
-                    if (data['newPostCommentCount'][i][0] == postID)
+                    if (data['searchPostCommentCount'][i][0] == postID)
                     {
-                        htmlStr += data['newPostCommentCount'][i][1];
+                        htmlStr += data['searchPostCommentCount'][i][1];
                         break;
                     }
                 }
@@ -89,7 +95,6 @@ function loadPostData()
                 htmlStr += "</div>";
                 htmlStr += "</div>";
             });
-            console.log(htmlStr);
             $("#content").html(htmlStr);
         }
     });
@@ -102,12 +107,12 @@ function loadUserData(searchContent)
         url: "searchPost?searchContent=" + searchContent,
         success: function (data) {
             var htmlStr = "";
-            $.each(data, function (data) {
+            $.each(data['listAllUser'], function () {
                 htmlStr += "<div class='result_container'>";
                 htmlStr += "<div class='result_header'>";
                 htmlStr += "<div class='post__body-author'>";
                 htmlStr += "<div class='post__body-author-bg-img'>";
-                htmlStr += "<a data-toggle='modal' data-target='#profile-modal'><img src='/resources/img/pic.png' alt=''></a>";
+                htmlStr += "<a data-toggle='modal' data-target='#profile-modal'><img src='" + this.userAvatar + "' alt=''></a>";
                 htmlStr += "</div>";
                 htmlStr += "<ul class='post__body-author-text'>";
                 htmlStr += "<li><span class='post__body-author-name' data-toggle='modal' data-target='#profile-modal'>Doe John</span></li>";

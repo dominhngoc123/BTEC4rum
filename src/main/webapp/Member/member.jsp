@@ -27,7 +27,7 @@
                             <div class="post_container">
                                 <!-- post container left -->
                                 <div class="post_container_left">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAJXiFFfvFmV53VYjhdlBAFK0gSxpZJn7onw&usqp=CAU"
+                                    <img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/161514479_3632682703497536_7173785231369513145_n.png?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=gWAIditEiUgAX91tD51&_nc_ht=scontent.fhan2-2.fna&oh=be4021f6e257dff29f521584ecfe37da&oe=607B93B9"
                                          alt="">
                                 </div>
                                 <!-- post container right -->
