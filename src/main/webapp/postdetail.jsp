@@ -50,7 +50,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="" method="post">
+                        <form id="editPostFrm" action="" method="post">
                             <div class="modal-body">
                                 Post Header 
                                 <div class="post__header">
@@ -110,7 +110,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="" method="post">
+                        <form id="" action="" method="post">
                             <div class="modal-body">
                                 <div class="comment-main-level">
                                     <div class="comment-box">
@@ -179,7 +179,41 @@
                 url: "AddNewComment?postID=" + baseCommentID + "&postTitle=" + postTitle + "&postContent=" + commentContent + "&threadID=" + threadID + "&accountEmail=" + accountEmail,
                 success: function () {
                     loadContent(postID);
-                    window.scrollTo(0,document.body.scrollHeight);
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
+            });
+        }
+        function editPost()
+        {
+            event.preventDefault();
+            var postID = $("#postID").val();
+            var editPostTitle = $("#editPostTitle").val();
+            var editPostContent = encodeURIComponent(CKEDITOR.instances["editor1"].getData());
+            var threadID = $("#threadID").val();
+            $.ajax({
+                type: "POST",
+                url: "updatePost?postID=" + postID + "&postTitle=" + editPostTitle + "&postContent=" + editPostContent + "&threadID=" + threadID,
+                success: function () {
+                    $("#modalEdit_post").modal("hide");
+                    loadContent(postID);
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
+            });
+        }
+        function editComment()
+        {
+            event.preventDefault();
+            var postID = $("#postID").val();
+            var editPostTitle = $("#editPostTitle").val();
+            var editPostContent = encodeURIComponent(CKEDITOR.instances["editor1"].getData());
+            var threadID = $("#threadID").val();
+            $.ajax({
+                type: "POST",
+                url: "updatePost?postID=" + postID + "&postTitle=" + editPostTitle + "&postContent=" + editPostContent + "&threadID=" + threadID,
+                success: function () {
+                    $("#modalEdit_post").modal("hide");
+                    loadContent(postID);
+                    window.scrollTo(0, document.body.scrollHeight);
                 }
             });
         }
@@ -253,7 +287,9 @@
                 eve.preventDefault();
                 $('html, body').animate({scrollTop: $('.post__footer-post-comment').offset().top - 100}, 500);
             });
-
+            $(document).on('submit', '#editPostFrm', function () {
+                editPost();
+            });
         });
     </script>
     <script src="include/resources/js/Auth.js"></script>
