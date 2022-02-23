@@ -1,0 +1,224 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 1, 2020, 3:48:04 PM
+    Author     : Ngoc Do Minh
+*/
+/*! CSS Used from: Embedded */
+body 
+{
+    font-family: "proxima-nova", "proxima nova", "helvetica neue", "helvetica", "arial", sans-serif;
+}
+/*! CSS Used from: https://cloud.digitalocean.com/assets/v2/login/login-5a6f5862e6ab7f5387680966522f3950.css ; media=screen */
+@media screen {
+    .login {
+        background: #ffffff;
+        font-family: "proxima-nova";
+        padding: 0;
+        margin: 0;
+    }
+    .login * {
+        box-sizing: border-box;
+        font-family: "proxima-nova", helvetica;
+    }
+    .login .logo {
+        display: block;
+        height: 145px;
+        padding-top: 40px;
+        margin: 0 auto 30px;
+    }
+    .login a,
+    .login a:visited {
+        text-decoration: underline;
+        color: inherit;
+    }
+    
+    .login .vertical-form {
+        margin: 0 auto;
+        width: 470px;
+        padding: 40px;
+        border-radius: 3px;
+        background: white;
+        box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    }
+    .login .vertical-form legend {
+        text-align: center;
+        font-weight: 300;
+        color: #444;
+        margin: 0 auto 35px;
+        font-size: 55px;
+        line-height: 38px;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    .login .vertical-form legend:after {
+        display: none;
+    }
+    .login .vertical-form ::-webkit-input-placeholder {
+        color: #afafaf;
+        font-size: 17px;
+    }
+    .login .vertical-form input[type='email'],
+    .login .vertical-form input[type='text'],
+    .login .vertical-form input[type='password'],
+    .login .vertical-form input[type='submit'] {
+        background: #fcfcfc;
+        border: 2px solid #e7e7e7;
+        margin: 20px auto;
+        padding: 15px;
+        width: 100%;
+        display: block;
+        border-radius: 3px;
+        font-size: 18px;
+        transition: opacity 0.4s;
+        text-align: left;
+        height: auto;
+        -webkit-appearance: none;
+    }
+    .login .vertical-form input[type='email']:focus,
+    .login .vertical-form input[type='text']:focus,
+    .login .vertical-form input[type='password']:focus,
+    .login .vertical-form input[type='submit']:focus {
+        border-color: #E7E7E7;
+        box-shadow: none;
+        border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .login .vertical-form input[type='submit'] {
+        color: white;
+        background: #ff751a;
+        border: 0;
+        font-weight: 600;
+        font-size: 17px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 0;
+        height: auto;
+        -webkit-appearance: none;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+        transition: 0.5s all;
+    }
+    .login .vertical-form input[type='text'], .login .vertical-form input[type='password']{
+        height: 50px !important;
+    }
+    .login .vertical-form input[type='submit']:hover{
+        -webkit-box-shadow: 0 0 3px 3px rgba(66,133,244,.3);
+        box-shadow: 0 0 3px 3px rgba(66,133,244,.3);
+    }
+    .login .vertical-form input:hover[type='submit'] {
+        background-color: #ff8533;
+        -webkit-transition: background 0.1s;
+        -moz-transition: background 0.1s;
+        -o-transition: background 0.1s;
+        transition: background 0.1s;
+    }
+    .login .vertical-form p {
+        font-size: 17px;
+        line-height: 1.5;
+        text-align: center;
+        margin: 0;
+        margin-top: 10px;
+        color: #666;
+    }
+    .login .vertical-form p a {
+        color: #0069ff;
+        text-decoration: none;
+    }
+    .login .vertical-form p a.google-oauth {
+        position: relative;
+        display: block;
+        color: #444;
+        background: white;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        font-size: 17px;
+        text-align: center;
+        padding: 12px;
+        border-radius: 3px;
+        -webkit-appearance: none;
+    }
+    .login .vertical-form p a.google-oauth:hover {
+        background-color: #dfdfdf;
+        -webkit-transition: background 0.1s;
+        -moz-transition: background 0.1s;
+        -o-transition: background 0.1s;
+        transition: background 0.1s;
+    }
+    .login .vertical-form p img.google-logo {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        bottom: 0;
+        right: 0;
+    }
+    .login .vertical-form.sign-in {
+        padding-bottom: 20px;
+    }
+    .login .vertical-form.sign-in p {
+        padding-top: 8px;
+    }
+    .login .footer {
+        text-align: center;
+        color: white;
+        margin: 20px auto;
+    }
+    .login .footer a {
+        font-weight: 600;
+        border: 0;
+        padding: 0;
+    }
+    .login .footer a:hover {
+        color: #E7F1F9;
+    }
+    .login .footer p {
+        margin-bottom: 40px;
+    }
+    
+    @media screen and (max-width: 550px) {
+        .login .logo {
+            padding-top: 35px;
+            padding-bottom: 5px;
+        }
+        .login .vertical-form {
+            width: 100%;
+            border-radius: 0;
+            padding: 40px 20px;
+        }
+    }
+}
+/*! CSS Used fontfaces */
+@font-face {
+    font-family: proxima-nova;
+    src: url(https://use.typekit.net/af/71f83c/00000000000000003b9b093b/27/l?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n7&v=3) format("woff2"), url(https://use.typekit.net/af/71f83c/00000000000000003b9b093b/27/d?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n7&v=3) format("woff"), url(https://use.typekit.net/af/71f83c/00000000000000003b9b093b/27/a?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n7&v=3) format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(https://use.typekit.net/af/27776b/00000000000000003b9b0939/27/l?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n6&v=3) format("woff2"), url(https://use.typekit.net/af/27776b/00000000000000003b9b0939/27/d?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n6&v=3) format("woff"), url(https://use.typekit.net/af/27776b/00000000000000003b9b0939/27/a?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n6&v=3) format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(https://use.typekit.net/af/4838bd/00000000000000003b9b0934/27/l?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n4&v=3) format("woff2"), url(https://use.typekit.net/af/4838bd/00000000000000003b9b0934/27/d?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n4&v=3) format("woff"), url(https://use.typekit.net/af/4838bd/00000000000000003b9b0934/27/a?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n4&v=3) format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: url(https://use.typekit.net/af/437c3d/00000000000000003b9b0932/27/l?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n3&v=3) format("woff2"), url(https://use.typekit.net/af/437c3d/00000000000000003b9b0932/27/d?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n3&v=3) format("woff"), url(https://use.typekit.net/af/437c3d/00000000000000003b9b0932/27/a?primer=dd94a7c862054d402ee5ff78f948036a3db906a0253925f50cb4c839a47b5d5e&fvd=n3&v=3) format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
